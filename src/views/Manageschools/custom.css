@@ -1,0 +1,30 @@
+.heading-div {
+  width: 82%;
+}
+
+.button-div {
+  width: 18%;
+}
+
+.mdb-datatable table.table thead th {
+  border-top: none;
+  text-align: center;
+}
+
+.mdb-datatable table.table tbody tr td {
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.sortingg {
+  position: relative;
+  cursor: pointer;
+}
+
+.vertical-height {
+  height: 75vh;
+}
+.row1-height {
+  height: 80%;
+}
