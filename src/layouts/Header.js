@@ -51,7 +51,7 @@ const Header = () => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
         // this is for getting the information about the student you need to display
         const res = await axios.get(
-          `http://localhost:3001/api/v1/users/${authState.id}`,
+          `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

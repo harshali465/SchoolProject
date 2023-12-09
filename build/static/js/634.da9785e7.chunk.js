@@ -1,2 +1,1399 @@
-"use strict";(self.webpackChunkhoustonschoolfront=self.webpackChunkhoustonschoolfront||[]).push([[634],{4634:function(e,a,t){t.r(a);var n=t(3433),o=t(4165),i=t(5861),r=t(4942),s=t(1413),l=t(9439),d=t(2791),c=t(8983),u=t(9513),m=t.n(u),h=t(4332),p=(t(4846),t(1323),t(6772),t(2957),t(1243)),f=(t(8639),t(184)),b=function(e){var a=e.value,t=e.onClick,n=e.labelName;return(0,f.jsx)(c.jO,{type:"text",id:"dateselect",placeholder:"Adaat date",label:n,onClick:t,value:a})};a.default=function(){(0,u.registerLocale)("sa",h.Z);var e=localStorage.getItem("accessToken"),a=(0,d.useState)({name:"",category:"",responseType:"",customField:[{fieldTitle:"",fieldType:"",options:[]}],isSurat:"",isRemark:"",isImageUpload:"",applicableTo:"",isCompulsory:"",startDate:new Date,endDate:new Date,class:"",repetation:"",repeatDays:[]}),t=(0,l.Z)(a,2),x=t[0],y=t[1],v=(0,d.useState)(!1),g=(0,l.Z)(v,2),j=g[0],C=g[1],k=(0,d.useState)(!1),w=(0,l.Z)(k,2),T=w[0],Z=w[1],N=(0,d.useState)(!1),D=(0,l.Z)(N,2),M=D[0],P=D[1],S=(0,d.useState)(!1),W=(0,l.Z)(S,2),E=W[0],F=W[1],R=function(e){var a=e.target,t=a.name,n=a.value;y("yesno"==t?(0,s.Z)((0,s.Z)({},x),{},{responseType:"yesno"}):"custom"===t?(0,s.Z)((0,s.Z)({},x),{},{responseType:"custom"}):"remarkbox"===t?(0,s.Z)((0,s.Z)({},x),{},{responseType:"remarkbox"}):"image"===t?(0,s.Z)((0,s.Z)({},x),{},{responseType:"image"}):"male"===t?(0,s.Z)((0,s.Z)({},x),{},{applicableTo:"male"}):"female"===t?(0,s.Z)((0,s.Z)({},x),{},{applicableTo:"female"}):"both"===t?(0,s.Z)((0,s.Z)({},x),{},{applicableTo:"both"}):"isCompulsoryYes"===t?(0,s.Z)((0,s.Z)({},x),{},{isCompulsory:!0}):"isCompulsoryNo"===t?(0,s.Z)((0,s.Z)({},x),{},{isCompulsory:!1}):(0,s.Z)((0,s.Z)({},x),{},(0,r.Z)({},t,n)))},I=function(){var e=(0,i.Z)((0,o.Z)().mark((function e(a){return(0,o.Z)().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:a.preventDefault(),!1===a.currentTarget.checkValidity()?P(!0):(console.log("form is valid and good to ship"),F(!0));case 3:case"end":return e.stop()}}),e)})));return function(a){return e.apply(this,arguments)}}(),X=function(){var a=(0,i.Z)((0,o.Z)().mark((function a(){var t;return(0,o.Z)().wrap((function(a){for(;;)switch(a.prev=a.next){case 0:return console.log(x),a.next=3,p.Z.post("http://localhost:3001/api/v1/aadat",{name:x.name,category:x.category,responseType:x.responseType,customField:x.customField,isSurat:x.isSurat,isRemark:x.isRemark,isImageUpload:x.isImageUpload,applicableTo:x.applicableTo,isCompulsory:x.isCompulsory,startDate:x.startDate,endDate:x.endDate,repetation:x.repetation,repeatDays:x.repeatDays,class:x.class},{headers:{Authorization:"Bearer ".concat(e)}});case 3:return t=a.sent,a.next=6,p.Z.get("http://localhost:3001/api/v1/users",{headers:{Authorization:"Bearer ".concat(e)},params:{role:"student",class:x.class}});case 6:a.sent,F(!1),console.log(t),A();case 10:case"end":return a.stop()}}),a)})));return function(){return a.apply(this,arguments)}}(),A=function(){P(!1),y({name:"",category:"",responseType:"",customField:[],isSurat:"",isRemark:"",isImageUpload:"",applicableTo:"",isCompulsory:"",startDate:"",endDate:"",repetation:"",repeatDays:[]})},L=(0,d.useState)([]),z=(0,l.Z)(L,2),Y=z[0],B=z[1];(0,d.useEffect)((function(){var a=function(){var a=(0,i.Z)((0,o.Z)().mark((function a(){var t;return(0,o.Z)().wrap((function(a){for(;;)switch(a.prev=a.next){case 0:return a.prev=0,a.next=3,p.Z.get("http://localhost:3001/api/v1/categories",{headers:{Authorization:"Bearer ".concat(e)}});case 3:t=a.sent,console.log(t.data.data.docs),B(t.data.data.docs),a.next=11;break;case 8:a.prev=8,a.t0=a.catch(0),console.error("Error fetching users:",a.t0);case 11:case"end":return a.stop()}}),a,null,[[0,8]])})));return function(){return a.apply(this,arguments)}}();a()}),[]);var O=(0,d.useState)("dropdown"),q=(0,l.Z)(O,2),U=(q[0],q[1],function(e,a,t){y((function(o){var i=(0,s.Z)({},o),r=(0,n.Z)(i.customField),l=(0,s.Z)({},r[e]);if("labelName"===a)l.fieldTitle=t;else if("fieldName"===a)l.fieldType=t;else if(a.startsWith("option")){var d=parseInt(a.replace("option",""),10)-1;l.options||(l.options=[]),l.options[d]=t}return r[e]=l,i.customField=r,i}))}),V=function(e){var a=(0,s.Z)({},x);a.customField[e].options.push(""),y(a)};return(0,f.jsx)(f.Fragment,{children:(0,f.jsxs)(c.KB,{fluid:!0,className:"container overflow-auto",children:[(0,f.jsxs)(c.Tk,{backdrop:"static",visible:E,onClose:function(){return F(!1)},"aria-labelledby":"StaticBackdropExampleLabel",children:[(0,f.jsx)(c.p0,{children:(0,f.jsx)(c.fl,{id:"StaticBackdropExampleLabel",children:"Form submission"})}),(0,f.jsx)(c.sD,{children:"Are you sure you wish to sumbit this form?"}),(0,f.jsxs)(c.Ym,{children:[(0,f.jsx)(c.u5,{color:"secondary",onClick:function(){return F(!1)},children:"Close"}),(0,f.jsx)(c.u5,{color:"primary",onClick:X,children:"Yes!"})]})]}),(0,f.jsx)("div",{className:"display-5 text-center pb-3 font-weight-bold",children:"Adaat"}),(0,f.jsxs)(c.KB,{fluid:!0,children:[(0,f.jsx)("div",{className:"display-6 text-center pb-3 border-bottom",children:"Adaat information"}),(0,f.jsxs)(c.lx,{className:"row needs-validation",noValidate:!0,validated:M,onSubmit:I,children:[(0,f.jsxs)(c.rb,{children:[(0,f.jsxs)(c.b7,{md:6,className:"d-flex flex-column align-items-center col1",children:[(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsxs)(c.LX,{"aria-describedby":"validationCustom07Feedback",feedbackInvalid:"Please select a valid Mentor.",id:"validationCustom07",label:"Categories",name:"category",required:!0,value:x.category,onChange:R,children:[(0,f.jsx)("option",{selected:"",disabled:"",value:"",children:"Choose..."}),Y.map((function(e){return(0,f.jsx)("option",{value:e._id,children:e.name})}))]})}),(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsx)(c.jO,{type:"text",feedbackValid:"Looks good!",id:"validationCustom01",label:"Adaat name",placeholder:"Please enter adaat name",name:"name",required:!0,value:x.name,onChange:R})}),(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsxs)(c.rb,{children:[(0,f.jsx)(c.b7,{md:6,children:(0,f.jsx)("p",{children:"Response type:"})}),(0,f.jsxs)(c.b7,{md:6,children:[(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"yes/no tab",name:"yesno",checked:"yesno"===x.responseType,onChange:R}),(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"custom",name:"custom",checked:!(!j||"custom"!==x.responseType),onChange:function(e){C(e.target.checked),R(e)}}),j&&(0,f.jsxs)("div",{className:" card p-2 mt-2",children:[(0,f.jsx)(c.jO,{type:"text",id:"labelName",placeholder:"Please enter name"}),(0,f.jsxs)("div",{className:"d-flex flex-column p-2",children:[(0,f.jsx)(c.EC,{type:"radio",name:"exampleRadios",id:"exampleRadios2",value:"option2",label:"for boys"}),(0,f.jsx)(c.EC,{type:"radio",name:"exampleRadios",id:"exampleRadios2",value:"option2",label:"for girls"}),(0,f.jsx)(c.EC,{type:"radio",name:"exampleRadios",id:"exampleRadios2",value:"option2",label:"for both"})]})]}),(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"remark box",name:"remarkbox",checked:"remarkbox"===x.responseType,onChange:R}),(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"image",name:"image",checked:!(!T||"image"!==x.responseType),onChange:function(e){Z(e.target.checked),R(e)},className:"mb-2"}),T&&(0,f.jsx)("div",{className:"card",children:(0,f.jsxs)(c.LX,{"aria-describedby":"yo",feedbackInvalid:"Please select number.",id:"imageNo",name:"imageNo",children:[(0,f.jsx)("option",{selected:"",disabled:"",value:"",children:"Please select number"}),(0,f.jsx)("option",{children:"1"}),(0,f.jsx)("option",{children:"2"}),(0,f.jsx)("option",{children:"3"})]})})]})]})}),(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsxs)(c.rb,{children:[(0,f.jsx)(c.b7,{md:6,children:(0,f.jsx)("p",{children:"Applicable for:"})}),(0,f.jsxs)(c.b7,{md:6,children:[(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"boys only",name:"male",checked:"male"===x.applicableTo,onChange:R}),(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"girls only",name:"female",checked:"female"===x.applicableTo,onChange:R}),(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"boys and girls",name:"both",checked:"both"===x.applicableTo,onChange:R})]})]})}),(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsxs)(c.LX,{"aria-describedby":"validationCustom07Feedback",feedbackInvalid:"Please select a valid Mentor.",id:"validationCustom07",label:"Class",name:"class",required:!0,value:x.class,onChange:R,children:[(0,f.jsx)("option",{selected:"",disabled:"",value:"",children:"Choose..."}),(0,f.jsx)("option",{children:"Grade 1"}),(0,f.jsx)("option",{children:"Grade 2"}),(0,f.jsx)("option",{children:"Grade 3"})]})}),(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsxs)(c.rb,{children:[(0,f.jsx)(c.b7,{md:6,children:(0,f.jsx)("p",{children:"Compulsary?"})}),(0,f.jsxs)(c.b7,{md:6,children:[(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"yes",name:"isCompulsoryYes",checked:!0===x.isCompulsory,onChange:R}),(0,f.jsx)(c.EC,{id:"flexCheckDefault",label:"no",name:"isCompulsoryNo",checked:!1===x.isCompulsory,onChange:R})]})]})})]}),(0,f.jsxs)(c.b7,{md:6,className:"d-flex flex-column align-items-center col2",children:[(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsx)(c.xH,{children:(0,f.jsxs)(c.sl,{children:[x.customField.map((function(e,a){return(0,f.jsxs)("div",{className:"pt-3",children:[(0,f.jsx)(c.tj,{className:"text-center",children:"Custom field"}),(0,f.jsx)(c.jO,{type:"text",id:"labelName",label:"Label name",placeholder:"Please enter name",value:e.fieldTitle,onChange:function(e){return U(a,"labelName",e.target.value)}}),(0,f.jsxs)(c.LX,{id:"validationCustom07",label:"Field Name",name:"fieldName",value:e.fieldType,onChange:function(e){return U(a,"fieldName",e.target.value)},children:[(0,f.jsx)("option",{selected:"",disabled:"",value:"",children:"Choose..."}),(0,f.jsx)("option",{children:"dropdown"}),(0,f.jsx)("option",{children:"checkbox"})]}),(0,f.jsx)("div",{className:"pt-3",children:(0,f.jsx)(c.jO,{type:"text",id:"value1option",placeholder:"value 1",onChange:function(e){return U(a,"option1",e.target.value)}})}),(0,f.jsx)("div",{className:"pt-3",children:(0,f.jsx)(c.jO,{type:"text",id:"value2option",placeholder:"value 2",onChange:function(e){return U(a,"option2",e.target.value)}})}),(0,f.jsx)("button",{className:"btn btn-sm btn-danger",onClick:function(){return function(e){var a=x.customField.filter((function(a,t){return t!==e}));y((0,s.Z)((0,s.Z)({},x),{},{customField:a}))}(a)},children:"Remove"}),(0,f.jsx)("button",{className:"btn btn-sm btn-primary float-right",onClick:V,children:"add more"})]},a)})),(0,f.jsx)("div",{className:"pt-2",children:(0,f.jsx)("button",{className:"btn btn-sm btn-dark float-right",onClick:function(){y((0,s.Z)((0,s.Z)({},x),{},{customField:[].concat((0,n.Z)(x.customField),[{fieldTitle:"",fieldType:"",options:[]}])}))},children:"+"})})]})})}),(0,f.jsx)(c.b7,{className:"",children:(0,f.jsx)(m(),{locale:"sa",label:"Start date",name:"startDate",dateFormat:"dd/MM/yyyy",selected:x.startDate,popperPlacement:"top-end",onChange:function(e){return y((0,s.Z)((0,s.Z)({},x),{},{startDate:e}))},customInput:(0,f.jsx)(b,{labelName:"Start date"})})}),(0,f.jsx)(c.b7,{className:"",children:(0,f.jsx)(m(),{locale:"sa",label:"End date",dateFormat:"dd/MM/yyyy",selected:x.endDate,popperPlacement:"top-end",onChange:function(e){return y((0,s.Z)((0,s.Z)({},x),{},{endDate:e}))},customInput:(0,f.jsx)(b,{labelName:"End date"})})}),(0,f.jsx)(c.b7,{className:"pt-4",children:(0,f.jsxs)(c.LX,{"aria-describedby":"validationCustom07Feedback",feedbackInvalid:"Please select a valid Mentor.",id:"validationCustom07",label:"repetation",name:"repetation",required:!0,value:x.repetation,onChange:R,children:[(0,f.jsx)("option",{selected:"",disabled:"",value:"",children:"Choose..."}),(0,f.jsx)("option",{value:"norepeat",children:"Does not repeat"}),(0,f.jsx)("option",{value:"daily",children:"Daily"}),(0,f.jsx)("option",{value:"weekly",children:"Weekly on Thursday"}),(0,f.jsx)("option",{value:"monthly",children:"Monthly on fourth Thursday"}),(0,f.jsx)("option",{value:"yearly",children:"Anually on June 22"}),(0,f.jsx)("option",{value:"everyweekday",children:"Every weekday"}),(0,f.jsx)("option",{children:"Custom"})]})})]})]}),(0,f.jsxs)("div",{className:"buttons text-center pt-3",children:[(0,f.jsx)(c.u5,{color:"primary",type:"submit",children:"Submit form"}),(0,f.jsx)(c.u5,{color:"dark",type:"reset",onClick:A,children:"Reset form"})]})]})]})]})})}},4332:function(e,a,t){t.d(a,{Z:function(){return m}});var n={lessThanXSeconds:{one:"\u0623\u0642\u0644 \u0645\u0646 \u062b\u0627\u0646\u064a\u0629 \u0648\u0627\u062d\u062f\u0629",two:"\u0623\u0642\u0644 \u0645\u0646 \u062b\u0627\u0646\u062a\u064a\u0646",threeToTen:"\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062b\u0648\u0627\u0646\u064a",other:"\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062b\u0627\u0646\u064a\u0629"},xSeconds:{one:"\u062b\u0627\u0646\u064a\u0629 \u0648\u0627\u062d\u062f\u0629",two:"\u062b\u0627\u0646\u062a\u064a\u0646",threeToTen:"{{count}} \u062b\u0648\u0627\u0646\u064a",other:"{{count}} \u062b\u0627\u0646\u064a\u0629"},halfAMinute:"\u0646\u0635\u0641 \u062f\u0642\u064a\u0642\u0629",lessThanXMinutes:{one:"\u0623\u0642\u0644 \u0645\u0646 \u062f\u0642\u064a\u0642\u0629",two:"\u0623\u0642\u0644 \u0645\u0646 \u062f\u0642\u064a\u0642\u062a\u064a\u0646",threeToTen:"\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062f\u0642\u0627\u0626\u0642",other:"\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062f\u0642\u064a\u0642\u0629"},xMinutes:{one:"\u062f\u0642\u064a\u0642\u0629 \u0648\u0627\u062d\u062f\u0629",two:"\u062f\u0642\u064a\u0642\u062a\u064a\u0646",threeToTen:"{{count}} \u062f\u0642\u0627\u0626\u0642",other:"{{count}} \u062f\u0642\u064a\u0642\u0629"},aboutXHours:{one:"\u0633\u0627\u0639\u0629 \u0648\u0627\u062d\u062f\u0629 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",two:"\u0633\u0627\u0639\u062a\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",threeToTen:"{{count}} \u0633\u0627\u0639\u0627\u062a \u062a\u0642\u0631\u064a\u0628\u0627\u064b",other:"{{count}} \u0633\u0627\u0639\u0629 \u062a\u0642\u0631\u064a\u0628\u0627\u064b"},xHours:{one:"\u0633\u0627\u0639\u0629 \u0648\u0627\u062d\u062f\u0629",two:"\u0633\u0627\u0639\u062a\u064a\u0646",threeToTen:"{{count}} \u0633\u0627\u0639\u0627\u062a",other:"{{count}} \u0633\u0627\u0639\u0629"},xDays:{one:"\u064a\u0648\u0645 \u0648\u0627\u062d\u062f",two:"\u064a\u0648\u0645\u064a\u0646",threeToTen:"{{count}} \u0623\u064a\u0627\u0645",other:"{{count}} \u064a\u0648\u0645"},aboutXWeeks:{one:"\u0623\u0633\u0628\u0648\u0639 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",two:"\u0623\u0633\u0628\u0648\u0639\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",threeToTen:"{{count}} \u0623\u0633\u0627\u0628\u064a\u0639 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",other:"{{count}} \u0623\u0633\u0628\u0648\u0639 \u062a\u0642\u0631\u064a\u0628\u0627\u064b"},xWeeks:{one:"\u0623\u0633\u0628\u0648\u0639 \u0648\u0627\u062d\u062f",two:"\u0623\u0633\u0628\u0648\u0639\u064a\u0646",threeToTen:"{{count}} \u0623\u0633\u0627\u0628\u064a\u0639",other:"{{count}} \u0623\u0633\u0628\u0648\u0639"},aboutXMonths:{one:"\u0634\u0647\u0631 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",two:"\u0634\u0647\u0631\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",threeToTen:"{{count}} \u0623\u0634\u0647\u0631 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",other:"{{count}} \u0634\u0647\u0631 \u062a\u0642\u0631\u064a\u0628\u0627\u064b"},xMonths:{one:"\u0634\u0647\u0631 \u0648\u0627\u062d\u062f",two:"\u0634\u0647\u0631\u064a\u0646",threeToTen:"{{count}} \u0623\u0634\u0647\u0631",other:"{{count}} \u0634\u0647\u0631"},aboutXYears:{one:"\u0639\u0627\u0645 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",two:"\u0639\u0627\u0645\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",threeToTen:"{{count}} \u0623\u0639\u0648\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",other:"{{count}} \u0639\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b"},xYears:{one:"\u0639\u0627\u0645 \u0648\u0627\u062d\u062f",two:"\u0639\u0627\u0645\u064a\u0646",threeToTen:"{{count}} \u0623\u0639\u0648\u0627\u0645",other:"{{count}} \u0639\u0627\u0645"},overXYears:{one:"\u0623\u0643\u062b\u0631 \u0645\u0646 \u0639\u0627\u0645",two:"\u0623\u0643\u062b\u0631 \u0645\u0646 \u0639\u0627\u0645\u064a\u0646",threeToTen:"\u0623\u0643\u062b\u0631 \u0645\u0646 {{count}} \u0623\u0639\u0648\u0627\u0645",other:"\u0623\u0643\u062b\u0631 \u0645\u0646 {{count}} \u0639\u0627\u0645"},almostXYears:{one:"\u0639\u0627\u0645 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",two:"\u0639\u0627\u0645\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",threeToTen:"{{count}} \u0623\u0639\u0648\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",other:"{{count}} \u0639\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b"}},o=function(e,a,t){var o,i=n[e];return o="string"===typeof i?i:1===a?i.one:2===a?i.two:a<=10?i.threeToTen.replace("{{count}}",String(a)):i.other.replace("{{count}}",String(a)),null!==t&&void 0!==t&&t.addSuffix?t.comparison&&t.comparison>0?"\u0641\u064a \u062e\u0644\u0627\u0644 "+o:"\u0645\u0646\u0630 "+o:o},i=t(6840),r={date:(0,i.Z)({formats:{full:"EEEE, MMMM do, y",long:"MMMM do, y",medium:"MMM d, y",short:"MM/dd/yyyy"},defaultWidth:"full"}),time:(0,i.Z)({formats:{full:"h:mm:ss a zzzz",long:"h:mm:ss a z",medium:"h:mm:ss a",short:"h:mm a"},defaultWidth:"full"}),dateTime:(0,i.Z)({formats:{full:"{{date}} '\u0639\u0646\u062f' {{time}}",long:"{{date}} '\u0639\u0646\u062f' {{time}}",medium:"{{date}}, {{time}}",short:"{{date}}, {{time}}"},defaultWidth:"full"})},s={lastWeek:"'\u0623\u062e\u0631' eeee '\u0639\u0646\u062f' p",yesterday:"'\u0623\u0645\u0633 \u0639\u0646\u062f' p",today:"'\u0627\u0644\u064a\u0648\u0645 \u0639\u0646\u062f' p",tomorrow:"'\u063a\u062f\u0627\u064b \u0639\u0646\u062f' p",nextWeek:"eeee '\u0639\u0646\u062f' p",other:"P"},l=function(e,a,t,n){return s[e]},d=t(7325),c={ordinalNumber:function(e){return String(e)},era:(0,d.Z)({values:{narrow:["\u0642","\u0628"],abbreviated:["\u0642.\u0645.","\u0628.\u0645."],wide:["\u0642\u0628\u0644 \u0627\u0644\u0645\u064a\u0644\u0627\u062f","\u0628\u0639\u062f \u0627\u0644\u0645\u064a\u0644\u0627\u062f"]},defaultWidth:"wide"}),quarter:(0,d.Z)({values:{narrow:["1","2","3","4"],abbreviated:["\u06311","\u06312","\u06313","\u06314"],wide:["\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u0623\u0648\u0644","\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u062b\u0627\u0646\u064a","\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u062b\u0627\u0644\u062b","\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u0631\u0627\u0628\u0639"]},defaultWidth:"wide",argumentCallback:function(e){return e-1}}),month:(0,d.Z)({values:{narrow:["\u064a","\u0641","\u0645","\u0623","\u0645","\u064a","\u064a","\u0623","\u0633","\u0623","\u0646","\u062f"],abbreviated:["\u064a\u0646\u0627","\u0641\u0628\u0631","\u0645\u0627\u0631\u0633","\u0623\u0628\u0631\u064a\u0644","\u0645\u0627\u064a\u0648","\u064a\u0648\u0646\u0640","\u064a\u0648\u0644\u0640","\u0623\u063a\u0633\u0640","\u0633\u0628\u062a\u0640","\u0623\u0643\u062a\u0640","\u0646\u0648\u0641\u0640","\u062f\u064a\u0633\u0640"],wide:["\u064a\u0646\u0627\u064a\u0631","\u0641\u0628\u0631\u0627\u064a\u0631","\u0645\u0627\u0631\u0633","\u0623\u0628\u0631\u064a\u0644","\u0645\u0627\u064a\u0648","\u064a\u0648\u0646\u064a\u0648","\u064a\u0648\u0644\u064a\u0648","\u0623\u063a\u0633\u0637\u0633","\u0633\u0628\u062a\u0645\u0628\u0631","\u0623\u0643\u062a\u0648\u0628\u0631","\u0646\u0648\u0641\u0645\u0628\u0631","\u062f\u064a\u0633\u0645\u0628\u0631"]},defaultWidth:"wide"}),day:(0,d.Z)({values:{narrow:["\u062d","\u0646","\u062b","\u0631","\u062e","\u062c","\u0633"],short:["\u0623\u062d\u062f","\u0627\u062b\u0646\u064a\u0646","\u062b\u0644\u0627\u062b\u0627\u0621","\u0623\u0631\u0628\u0639\u0627\u0621","\u062e\u0645\u064a\u0633","\u062c\u0645\u0639\u0629","\u0633\u0628\u062a"],abbreviated:["\u0623\u062d\u062f","\u0627\u062b\u0646\u0640","\u062b\u0644\u0627","\u0623\u0631\u0628\u0640","\u062e\u0645\u064a\u0640","\u062c\u0645\u0639\u0629","\u0633\u0628\u062a"],wide:["\u0627\u0644\u0623\u062d\u062f","\u0627\u0644\u0627\u062b\u0646\u064a\u0646","\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621","\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621","\u0627\u0644\u062e\u0645\u064a\u0633","\u0627\u0644\u062c\u0645\u0639\u0629","\u0627\u0644\u0633\u0628\u062a"]},defaultWidth:"wide"}),dayPeriod:(0,d.Z)({values:{narrow:{am:"\u0635",pm:"\u0645",midnight:"\u0646",noon:"\u0638",morning:"\u0635\u0628\u0627\u062d\u0627\u064b",afternoon:"\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",evening:"\u0645\u0633\u0627\u0621\u0627\u064b",night:"\u0644\u064a\u0644\u0627\u064b"},abbreviated:{am:"\u0635",pm:"\u0645",midnight:"\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",noon:"\u0638\u0647\u0631",morning:"\u0635\u0628\u0627\u062d\u0627\u064b",afternoon:"\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",evening:"\u0645\u0633\u0627\u0621\u0627\u064b",night:"\u0644\u064a\u0644\u0627\u064b"},wide:{am:"\u0635",pm:"\u0645",midnight:"\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",noon:"\u0638\u0647\u0631",morning:"\u0635\u0628\u0627\u062d\u0627\u064b",afternoon:"\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",evening:"\u0645\u0633\u0627\u0621\u0627\u064b",night:"\u0644\u064a\u0644\u0627\u064b"}},defaultWidth:"wide",formattingValues:{narrow:{am:"\u0635",pm:"\u0645",midnight:"\u0646",noon:"\u0638",morning:"\u0641\u064a \u0627\u0644\u0635\u0628\u0627\u062d",afternoon:"\u0628\u0639\u062f \u0627\u0644\u0638\u0640\u0647\u0631",evening:"\u0641\u064a \u0627\u0644\u0645\u0633\u0627\u0621",night:"\u0641\u064a \u0627\u0644\u0644\u064a\u0644"},abbreviated:{am:"\u0635",pm:"\u0645",midnight:"\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",noon:"\u0638\u0647\u0631",morning:"\u0641\u064a \u0627\u0644\u0635\u0628\u0627\u062d",afternoon:"\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",evening:"\u0641\u064a \u0627\u0644\u0645\u0633\u0627\u0621",night:"\u0641\u064a \u0627\u0644\u0644\u064a\u0644"},wide:{am:"\u0635",pm:"\u0645",midnight:"\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",noon:"\u0638\u0647\u0631",morning:"\u0635\u0628\u0627\u062d\u0627\u064b",afternoon:"\u0628\u0639\u062f \u0627\u0644\u0638\u0640\u0647\u0631",evening:"\u0641\u064a \u0627\u0644\u0645\u0633\u0627\u0621",night:"\u0641\u064a \u0627\u0644\u0644\u064a\u0644"}},defaultFormattingWidth:"wide"})},u=t(6884),m={code:"ar-SA",formatDistance:o,formatLong:r,formatRelative:l,localize:c,match:{ordinalNumber:(0,t(586).Z)({matchPattern:/^(\d+)(th|st|nd|rd)?/i,parsePattern:/\d+/i,valueCallback:function(e){return parseInt(e,10)}}),era:(0,u.Z)({matchPatterns:{narrow:/^(\u0642|\u0628)/i,abbreviated:/^(\u0642\.?\s?\u0645\.?|\u0642\.?\s?\u0645\.?\s?|a\.?\s?d\.?|c\.?\s?)/i,wide:/^(\u0642\u0628\u0644 \u0627\u0644\u0645\u064a\u0644\u0627\u062f|\u0642\u0628\u0644 \u0627\u0644\u0645\u064a\u0644\u0627\u062f|\u0628\u0639\u062f \u0627\u0644\u0645\u064a\u0644\u0627\u062f|\u0628\u0639\u062f \u0627\u0644\u0645\u064a\u0644\u0627\u062f)/i},defaultMatchWidth:"wide",parsePatterns:{any:[/^\u0642\u0628\u0644/i,/^\u0628\u0639\u062f/i]},defaultParseWidth:"any"}),quarter:(0,u.Z)({matchPatterns:{narrow:/^[1234]/i,abbreviated:/^\u0631[1234]/i,wide:/^\u0627\u0644\u0631\u0628\u0639 [1234]/i},defaultMatchWidth:"wide",parsePatterns:{any:[/1/i,/2/i,/3/i,/4/i]},defaultParseWidth:"any",valueCallback:function(e){return e+1}}),month:(0,u.Z)({matchPatterns:{narrow:/^[\u064a\u0641\u0645\u0623\u0645\u0633\u0646\u062f]/i,abbreviated:/^(\u064a\u0646|\u0641|\u0645\u0627\u0631|\u0623\u0628|\u0645\u0627\u064a|\u064a\u0648\u0646|\u064a\u0648\u0644|\u0623\u063a|\u0633|\u0623\u0643|\u0646|\u062f)/i,wide:/^(\u064a\u0646|\u0641|\u0645\u0627\u0631|\u0623\u0628|\u0645\u0627\u064a|\u064a\u0648\u0646|\u064a\u0648\u0644|\u0623\u063a|\u0633|\u0623\u0643|\u0646|\u062f)/i},defaultMatchWidth:"wide",parsePatterns:{narrow:[/^\u064a/i,/^\u0641/i,/^\u0645/i,/^\u0623/i,/^\u0645/i,/^\u064a/i,/^\u064a/i,/^\u0623/i,/^\u0633/i,/^\u0623/i,/^\u0646/i,/^\u062f/i],any:[/^\u064a\u0646/i,/^\u0641/i,/^\u0645\u0627\u0631/i,/^\u0623\u0628/i,/^\u0645\u0627\u064a/i,/^\u064a\u0648\u0646/i,/^\u064a\u0648\u0644/i,/^\u0623\u063a/i,/^\u0633/i,/^\u0623\u0643/i,/^\u0646/i,/^\u062f/i]},defaultParseWidth:"any"}),day:(0,u.Z)({matchPatterns:{narrow:/^[\u062d\u0646\u062b\u0631\u062e\u062c\u0633]/i,short:/^(\u0623\u062d\u062f|\u0627\u062b\u0646\u064a\u0646|\u062b\u0644\u0627\u062b\u0627\u0621|\u0623\u0631\u0628\u0639\u0627\u0621|\u062e\u0645\u064a\u0633|\u062c\u0645\u0639\u0629|\u0633\u0628\u062a)/i,abbreviated:/^(\u0623\u062d\u062f|\u0627\u062b\u0646|\u062b\u0644\u0627|\u0623\u0631\u0628|\u062e\u0645\u064a|\u062c\u0645\u0639\u0629|\u0633\u0628\u062a)/i,wide:/^(\u0627\u0644\u0623\u062d\u062f|\u0627\u0644\u0627\u062b\u0646\u064a\u0646|\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621|\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621|\u0627\u0644\u062e\u0645\u064a\u0633|\u0627\u0644\u062c\u0645\u0639\u0629|\u0627\u0644\u0633\u0628\u062a)/i},defaultMatchWidth:"wide",parsePatterns:{narrow:[/^\u062d/i,/^\u0646/i,/^\u062b/i,/^\u0631/i,/^\u062e/i,/^\u062c/i,/^\u0633/i],wide:[/^\u0627\u0644\u0623\u062d\u062f/i,/^\u0627\u0644\u0627\u062b\u0646\u064a\u0646/i,/^\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621/i,/^\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621/i,/^\u0627\u0644\u062e\u0645\u064a\u0633/i,/^\u0627\u0644\u062c\u0645\u0639\u0629/i,/^\u0627\u0644\u0633\u0628\u062a/i],any:[/^\u0623\u062d/i,/^\u0627\u062b/i,/^\u062b/i,/^\u0623\u0631/i,/^\u062e/i,/^\u062c/i,/^\u0633/i]},defaultParseWidth:"any"}),dayPeriod:(0,u.Z)({matchPatterns:{narrow:/^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,any:/^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i},defaultMatchWidth:"any",parsePatterns:{any:{am:/^a/i,pm:/^p/i,midnight:/^mi/i,noon:/^no/i,morning:/morning/i,afternoon:/afternoon/i,evening:/evening/i,night:/night/i}},defaultParseWidth:"any"})},options:{weekStartsOn:0,firstWeekContainsDate:1}}}}]);
+"use strict";
+(self.webpackChunkhoustonschoolfront =
+  self.webpackChunkhoustonschoolfront || []).push([
+  [634],
+  {
+    4634: function (e, a, t) {
+      t.r(a);
+      var n = t(3433),
+        o = t(4165),
+        i = t(5861),
+        r = t(4942),
+        s = t(1413),
+        l = t(9439),
+        d = t(2791),
+        c = t(8983),
+        u = t(9513),
+        m = t.n(u),
+        h = t(4332),
+        p = (t(4846), t(1323), t(6772), t(2957), t(1243)),
+        f = (t(8639), t(184)),
+        b = function (e) {
+          var a = e.value,
+            t = e.onClick,
+            n = e.labelName;
+          return (0, f.jsx)(c.jO, {
+            type: "text",
+            id: "dateselect",
+            placeholder: "Adaat date",
+            label: n,
+            onClick: t,
+            value: a,
+          });
+        };
+      a.default = function () {
+        (0, u.registerLocale)("sa", h.Z);
+        var e = localStorage.getItem("accessToken"),
+          a = (0, d.useState)({
+            name: "",
+            category: "",
+            responseType: "",
+            customField: [{ fieldTitle: "", fieldType: "", options: [] }],
+            isSurat: "",
+            isRemark: "",
+            isImageUpload: "",
+            applicableTo: "",
+            isCompulsory: "",
+            startDate: new Date(),
+            endDate: new Date(),
+            class: "",
+            repetation: "",
+            repeatDays: [],
+          }),
+          t = (0, l.Z)(a, 2),
+          x = t[0],
+          y = t[1],
+          v = (0, d.useState)(!1),
+          g = (0, l.Z)(v, 2),
+          j = g[0],
+          C = g[1],
+          k = (0, d.useState)(!1),
+          w = (0, l.Z)(k, 2),
+          T = w[0],
+          Z = w[1],
+          N = (0, d.useState)(!1),
+          D = (0, l.Z)(N, 2),
+          M = D[0],
+          P = D[1],
+          S = (0, d.useState)(!1),
+          W = (0, l.Z)(S, 2),
+          E = W[0],
+          F = W[1],
+          R = function (e) {
+            var a = e.target,
+              t = a.name,
+              n = a.value;
+            y(
+              "yesno" == t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { responseType: "yesno" })
+                : "custom" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { responseType: "custom" })
+                : "remarkbox" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { responseType: "remarkbox" })
+                : "image" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { responseType: "image" })
+                : "male" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { applicableTo: "male" })
+                : "female" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { applicableTo: "female" })
+                : "both" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { applicableTo: "both" })
+                : "isCompulsoryYes" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { isCompulsory: !0 })
+                : "isCompulsoryNo" === t
+                ? (0, s.Z)((0, s.Z)({}, x), {}, { isCompulsory: !1 })
+                : (0, s.Z)((0, s.Z)({}, x), {}, (0, r.Z)({}, t, n))
+            );
+          },
+          I = (function () {
+            var e = (0, i.Z)(
+              (0, o.Z)().mark(function e(a) {
+                return (0, o.Z)().wrap(function (e) {
+                  for (;;)
+                    switch ((e.prev = e.next)) {
+                      case 0:
+                        a.preventDefault(),
+                          !1 === a.currentTarget.checkValidity()
+                            ? P(!0)
+                            : (console.log("form is valid and good to ship"),
+                              F(!0));
+                      case 3:
+                      case "end":
+                        return e.stop();
+                    }
+                }, e);
+              })
+            );
+            return function (a) {
+              return e.apply(this, arguments);
+            };
+          })(),
+          X = (function () {
+            var a = (0, i.Z)(
+              (0, o.Z)().mark(function a() {
+                var t;
+                return (0, o.Z)().wrap(function (a) {
+                  for (;;)
+                    switch ((a.prev = a.next)) {
+                      case 0:
+                        return (
+                          console.log(x),
+                          (a.next = 3),
+                          p.Z.post(
+                            "http://18.118.42.224:3001/api/v1/aadat",
+                            {
+                              name: x.name,
+                              category: x.category,
+                              responseType: x.responseType,
+                              customField: x.customField,
+                              isSurat: x.isSurat,
+                              isRemark: x.isRemark,
+                              isImageUpload: x.isImageUpload,
+                              applicableTo: x.applicableTo,
+                              isCompulsory: x.isCompulsory,
+                              startDate: x.startDate,
+                              endDate: x.endDate,
+                              repetation: x.repetation,
+                              repeatDays: x.repeatDays,
+                              class: x.class,
+                            },
+                            { headers: { Authorization: "Bearer ".concat(e) } }
+                          )
+                        );
+                      case 3:
+                        return (
+                          (t = a.sent),
+                          (a.next = 6),
+                          p.Z.get("http://18.118.42.224:3001/api/v1/users", {
+                            headers: { Authorization: "Bearer ".concat(e) },
+                            params: { role: "student", class: x.class },
+                          })
+                        );
+                      case 6:
+                        a.sent, F(!1), console.log(t), A();
+                      case 10:
+                      case "end":
+                        return a.stop();
+                    }
+                }, a);
+              })
+            );
+            return function () {
+              return a.apply(this, arguments);
+            };
+          })(),
+          A = function () {
+            P(!1),
+              y({
+                name: "",
+                category: "",
+                responseType: "",
+                customField: [],
+                isSurat: "",
+                isRemark: "",
+                isImageUpload: "",
+                applicableTo: "",
+                isCompulsory: "",
+                startDate: "",
+                endDate: "",
+                repetation: "",
+                repeatDays: [],
+              });
+          },
+          L = (0, d.useState)([]),
+          z = (0, l.Z)(L, 2),
+          Y = z[0],
+          B = z[1];
+        (0, d.useEffect)(function () {
+          var a = (function () {
+            var a = (0, i.Z)(
+              (0, o.Z)().mark(function a() {
+                var t;
+                return (0, o.Z)().wrap(
+                  function (a) {
+                    for (;;)
+                      switch ((a.prev = a.next)) {
+                        case 0:
+                          return (
+                            (a.prev = 0),
+                            (a.next = 3),
+                            p.Z.get(
+                              "http://18.118.42.224:3001/api/v1/categories",
+                              {
+                                headers: { Authorization: "Bearer ".concat(e) },
+                              }
+                            )
+                          );
+                        case 3:
+                          (t = a.sent),
+                            console.log(t.data.data.docs),
+                            B(t.data.data.docs),
+                            (a.next = 11);
+                          break;
+                        case 8:
+                          (a.prev = 8),
+                            (a.t0 = a.catch(0)),
+                            console.error("Error fetching users:", a.t0);
+                        case 11:
+                        case "end":
+                          return a.stop();
+                      }
+                  },
+                  a,
+                  null,
+                  [[0, 8]]
+                );
+              })
+            );
+            return function () {
+              return a.apply(this, arguments);
+            };
+          })();
+          a();
+        }, []);
+        var O = (0, d.useState)("dropdown"),
+          q = (0, l.Z)(O, 2),
+          U =
+            (q[0],
+            q[1],
+            function (e, a, t) {
+              y(function (o) {
+                var i = (0, s.Z)({}, o),
+                  r = (0, n.Z)(i.customField),
+                  l = (0, s.Z)({}, r[e]);
+                if ("labelName" === a) l.fieldTitle = t;
+                else if ("fieldName" === a) l.fieldType = t;
+                else if (a.startsWith("option")) {
+                  var d = parseInt(a.replace("option", ""), 10) - 1;
+                  l.options || (l.options = []), (l.options[d] = t);
+                }
+                return (r[e] = l), (i.customField = r), i;
+              });
+            }),
+          V = function (e) {
+            var a = (0, s.Z)({}, x);
+            a.customField[e].options.push(""), y(a);
+          };
+        return (0, f.jsx)(f.Fragment, {
+          children: (0, f.jsxs)(c.KB, {
+            fluid: !0,
+            className: "container overflow-auto",
+            children: [
+              (0, f.jsxs)(c.Tk, {
+                backdrop: "static",
+                visible: E,
+                onClose: function () {
+                  return F(!1);
+                },
+                "aria-labelledby": "StaticBackdropExampleLabel",
+                children: [
+                  (0, f.jsx)(c.p0, {
+                    children: (0, f.jsx)(c.fl, {
+                      id: "StaticBackdropExampleLabel",
+                      children: "Form submission",
+                    }),
+                  }),
+                  (0, f.jsx)(c.sD, {
+                    children: "Are you sure you wish to sumbit this form?",
+                  }),
+                  (0, f.jsxs)(c.Ym, {
+                    children: [
+                      (0, f.jsx)(c.u5, {
+                        color: "secondary",
+                        onClick: function () {
+                          return F(!1);
+                        },
+                        children: "Close",
+                      }),
+                      (0, f.jsx)(c.u5, {
+                        color: "primary",
+                        onClick: X,
+                        children: "Yes!",
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              (0, f.jsx)("div", {
+                className: "display-5 text-center pb-3 font-weight-bold",
+                children: "Adaat",
+              }),
+              (0, f.jsxs)(c.KB, {
+                fluid: !0,
+                children: [
+                  (0, f.jsx)("div", {
+                    className: "display-6 text-center pb-3 border-bottom",
+                    children: "Adaat information",
+                  }),
+                  (0, f.jsxs)(c.lx, {
+                    className: "row needs-validation",
+                    noValidate: !0,
+                    validated: M,
+                    onSubmit: I,
+                    children: [
+                      (0, f.jsxs)(c.rb, {
+                        children: [
+                          (0, f.jsxs)(c.b7, {
+                            md: 6,
+                            className:
+                              "d-flex flex-column align-items-center col1",
+                            children: [
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsxs)(c.LX, {
+                                  "aria-describedby":
+                                    "validationCustom07Feedback",
+                                  feedbackInvalid:
+                                    "Please select a valid Mentor.",
+                                  id: "validationCustom07",
+                                  label: "Categories",
+                                  name: "category",
+                                  required: !0,
+                                  value: x.category,
+                                  onChange: R,
+                                  children: [
+                                    (0, f.jsx)("option", {
+                                      selected: "",
+                                      disabled: "",
+                                      value: "",
+                                      children: "Choose...",
+                                    }),
+                                    Y.map(function (e) {
+                                      return (0,
+                                      f.jsx)("option", { value: e._id, children: e.name });
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsx)(c.jO, {
+                                  type: "text",
+                                  feedbackValid: "Looks good!",
+                                  id: "validationCustom01",
+                                  label: "Adaat name",
+                                  placeholder: "Please enter adaat name",
+                                  name: "name",
+                                  required: !0,
+                                  value: x.name,
+                                  onChange: R,
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsxs)(c.rb, {
+                                  children: [
+                                    (0, f.jsx)(c.b7, {
+                                      md: 6,
+                                      children: (0, f.jsx)("p", {
+                                        children: "Response type:",
+                                      }),
+                                    }),
+                                    (0, f.jsxs)(c.b7, {
+                                      md: 6,
+                                      children: [
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "yes/no tab",
+                                          name: "yesno",
+                                          checked: "yesno" === x.responseType,
+                                          onChange: R,
+                                        }),
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "custom",
+                                          name: "custom",
+                                          checked: !(
+                                            !j || "custom" !== x.responseType
+                                          ),
+                                          onChange: function (e) {
+                                            C(e.target.checked), R(e);
+                                          },
+                                        }),
+                                        j &&
+                                          (0, f.jsxs)("div", {
+                                            className: " card p-2 mt-2",
+                                            children: [
+                                              (0, f.jsx)(c.jO, {
+                                                type: "text",
+                                                id: "labelName",
+                                                placeholder:
+                                                  "Please enter name",
+                                              }),
+                                              (0, f.jsxs)("div", {
+                                                className:
+                                                  "d-flex flex-column p-2",
+                                                children: [
+                                                  (0, f.jsx)(c.EC, {
+                                                    type: "radio",
+                                                    name: "exampleRadios",
+                                                    id: "exampleRadios2",
+                                                    value: "option2",
+                                                    label: "for boys",
+                                                  }),
+                                                  (0, f.jsx)(c.EC, {
+                                                    type: "radio",
+                                                    name: "exampleRadios",
+                                                    id: "exampleRadios2",
+                                                    value: "option2",
+                                                    label: "for girls",
+                                                  }),
+                                                  (0, f.jsx)(c.EC, {
+                                                    type: "radio",
+                                                    name: "exampleRadios",
+                                                    id: "exampleRadios2",
+                                                    value: "option2",
+                                                    label: "for both",
+                                                  }),
+                                                ],
+                                              }),
+                                            ],
+                                          }),
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "remark box",
+                                          name: "remarkbox",
+                                          checked:
+                                            "remarkbox" === x.responseType,
+                                          onChange: R,
+                                        }),
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "image",
+                                          name: "image",
+                                          checked: !(
+                                            !T || "image" !== x.responseType
+                                          ),
+                                          onChange: function (e) {
+                                            Z(e.target.checked), R(e);
+                                          },
+                                          className: "mb-2",
+                                        }),
+                                        T &&
+                                          (0, f.jsx)("div", {
+                                            className: "card",
+                                            children: (0, f.jsxs)(c.LX, {
+                                              "aria-describedby": "yo",
+                                              feedbackInvalid:
+                                                "Please select number.",
+                                              id: "imageNo",
+                                              name: "imageNo",
+                                              children: [
+                                                (0, f.jsx)("option", {
+                                                  selected: "",
+                                                  disabled: "",
+                                                  value: "",
+                                                  children:
+                                                    "Please select number",
+                                                }),
+                                                (0, f.jsx)("option", {
+                                                  children: "1",
+                                                }),
+                                                (0, f.jsx)("option", {
+                                                  children: "2",
+                                                }),
+                                                (0, f.jsx)("option", {
+                                                  children: "3",
+                                                }),
+                                              ],
+                                            }),
+                                          }),
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsxs)(c.rb, {
+                                  children: [
+                                    (0, f.jsx)(c.b7, {
+                                      md: 6,
+                                      children: (0, f.jsx)("p", {
+                                        children: "Applicable for:",
+                                      }),
+                                    }),
+                                    (0, f.jsxs)(c.b7, {
+                                      md: 6,
+                                      children: [
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "boys only",
+                                          name: "male",
+                                          checked: "male" === x.applicableTo,
+                                          onChange: R,
+                                        }),
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "girls only",
+                                          name: "female",
+                                          checked: "female" === x.applicableTo,
+                                          onChange: R,
+                                        }),
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "boys and girls",
+                                          name: "both",
+                                          checked: "both" === x.applicableTo,
+                                          onChange: R,
+                                        }),
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsxs)(c.LX, {
+                                  "aria-describedby":
+                                    "validationCustom07Feedback",
+                                  feedbackInvalid:
+                                    "Please select a valid Mentor.",
+                                  id: "validationCustom07",
+                                  label: "Class",
+                                  name: "class",
+                                  required: !0,
+                                  value: x.class,
+                                  onChange: R,
+                                  children: [
+                                    (0, f.jsx)("option", {
+                                      selected: "",
+                                      disabled: "",
+                                      value: "",
+                                      children: "Choose...",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      children: "Grade 1",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      children: "Grade 2",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      children: "Grade 3",
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsxs)(c.rb, {
+                                  children: [
+                                    (0, f.jsx)(c.b7, {
+                                      md: 6,
+                                      children: (0, f.jsx)("p", {
+                                        children: "Compulsary?",
+                                      }),
+                                    }),
+                                    (0, f.jsxs)(c.b7, {
+                                      md: 6,
+                                      children: [
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "yes",
+                                          name: "isCompulsoryYes",
+                                          checked: !0 === x.isCompulsory,
+                                          onChange: R,
+                                        }),
+                                        (0, f.jsx)(c.EC, {
+                                          id: "flexCheckDefault",
+                                          label: "no",
+                                          name: "isCompulsoryNo",
+                                          checked: !1 === x.isCompulsory,
+                                          onChange: R,
+                                        }),
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                              }),
+                            ],
+                          }),
+                          (0, f.jsxs)(c.b7, {
+                            md: 6,
+                            className:
+                              "d-flex flex-column align-items-center col2",
+                            children: [
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsx)(c.xH, {
+                                  children: (0, f.jsxs)(c.sl, {
+                                    children: [
+                                      x.customField.map(function (e, a) {
+                                        return (0, f.jsxs)(
+                                          "div",
+                                          {
+                                            className: "pt-3",
+                                            children: [
+                                              (0, f.jsx)(c.tj, {
+                                                className: "text-center",
+                                                children: "Custom field",
+                                              }),
+                                              (0, f.jsx)(c.jO, {
+                                                type: "text",
+                                                id: "labelName",
+                                                label: "Label name",
+                                                placeholder:
+                                                  "Please enter name",
+                                                value: e.fieldTitle,
+                                                onChange: function (e) {
+                                                  return U(
+                                                    a,
+                                                    "labelName",
+                                                    e.target.value
+                                                  );
+                                                },
+                                              }),
+                                              (0, f.jsxs)(c.LX, {
+                                                id: "validationCustom07",
+                                                label: "Field Name",
+                                                name: "fieldName",
+                                                value: e.fieldType,
+                                                onChange: function (e) {
+                                                  return U(
+                                                    a,
+                                                    "fieldName",
+                                                    e.target.value
+                                                  );
+                                                },
+                                                children: [
+                                                  (0, f.jsx)("option", {
+                                                    selected: "",
+                                                    disabled: "",
+                                                    value: "",
+                                                    children: "Choose...",
+                                                  }),
+                                                  (0, f.jsx)("option", {
+                                                    children: "dropdown",
+                                                  }),
+                                                  (0, f.jsx)("option", {
+                                                    children: "checkbox",
+                                                  }),
+                                                ],
+                                              }),
+                                              (0, f.jsx)("div", {
+                                                className: "pt-3",
+                                                children: (0, f.jsx)(c.jO, {
+                                                  type: "text",
+                                                  id: "value1option",
+                                                  placeholder: "value 1",
+                                                  onChange: function (e) {
+                                                    return U(
+                                                      a,
+                                                      "option1",
+                                                      e.target.value
+                                                    );
+                                                  },
+                                                }),
+                                              }),
+                                              (0, f.jsx)("div", {
+                                                className: "pt-3",
+                                                children: (0, f.jsx)(c.jO, {
+                                                  type: "text",
+                                                  id: "value2option",
+                                                  placeholder: "value 2",
+                                                  onChange: function (e) {
+                                                    return U(
+                                                      a,
+                                                      "option2",
+                                                      e.target.value
+                                                    );
+                                                  },
+                                                }),
+                                              }),
+                                              (0, f.jsx)("button", {
+                                                className:
+                                                  "btn btn-sm btn-danger",
+                                                onClick: function () {
+                                                  return (function (e) {
+                                                    var a =
+                                                      x.customField.filter(
+                                                        function (a, t) {
+                                                          return t !== e;
+                                                        }
+                                                      );
+                                                    y(
+                                                      (0, s.Z)(
+                                                        (0, s.Z)({}, x),
+                                                        {},
+                                                        { customField: a }
+                                                      )
+                                                    );
+                                                  })(a);
+                                                },
+                                                children: "Remove",
+                                              }),
+                                              (0, f.jsx)("button", {
+                                                className:
+                                                  "btn btn-sm btn-primary float-right",
+                                                onClick: V,
+                                                children: "add more",
+                                              }),
+                                            ],
+                                          },
+                                          a
+                                        );
+                                      }),
+                                      (0, f.jsx)("div", {
+                                        className: "pt-2",
+                                        children: (0, f.jsx)("button", {
+                                          className:
+                                            "btn btn-sm btn-dark float-right",
+                                          onClick: function () {
+                                            y(
+                                              (0, s.Z)(
+                                                (0, s.Z)({}, x),
+                                                {},
+                                                {
+                                                  customField: [].concat(
+                                                    (0, n.Z)(x.customField),
+                                                    [
+                                                      {
+                                                        fieldTitle: "",
+                                                        fieldType: "",
+                                                        options: [],
+                                                      },
+                                                    ]
+                                                  ),
+                                                }
+                                              )
+                                            );
+                                          },
+                                          children: "+",
+                                        }),
+                                      }),
+                                    ],
+                                  }),
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "",
+                                children: (0, f.jsx)(m(), {
+                                  locale: "sa",
+                                  label: "Start date",
+                                  name: "startDate",
+                                  dateFormat: "dd/MM/yyyy",
+                                  selected: x.startDate,
+                                  popperPlacement: "top-end",
+                                  onChange: function (e) {
+                                    return y(
+                                      (0, s.Z)(
+                                        (0, s.Z)({}, x),
+                                        {},
+                                        { startDate: e }
+                                      )
+                                    );
+                                  },
+                                  customInput: (0, f.jsx)(b, {
+                                    labelName: "Start date",
+                                  }),
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "",
+                                children: (0, f.jsx)(m(), {
+                                  locale: "sa",
+                                  label: "End date",
+                                  dateFormat: "dd/MM/yyyy",
+                                  selected: x.endDate,
+                                  popperPlacement: "top-end",
+                                  onChange: function (e) {
+                                    return y(
+                                      (0, s.Z)(
+                                        (0, s.Z)({}, x),
+                                        {},
+                                        { endDate: e }
+                                      )
+                                    );
+                                  },
+                                  customInput: (0, f.jsx)(b, {
+                                    labelName: "End date",
+                                  }),
+                                }),
+                              }),
+                              (0, f.jsx)(c.b7, {
+                                className: "pt-4",
+                                children: (0, f.jsxs)(c.LX, {
+                                  "aria-describedby":
+                                    "validationCustom07Feedback",
+                                  feedbackInvalid:
+                                    "Please select a valid Mentor.",
+                                  id: "validationCustom07",
+                                  label: "repetation",
+                                  name: "repetation",
+                                  required: !0,
+                                  value: x.repetation,
+                                  onChange: R,
+                                  children: [
+                                    (0, f.jsx)("option", {
+                                      selected: "",
+                                      disabled: "",
+                                      value: "",
+                                      children: "Choose...",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      value: "norepeat",
+                                      children: "Does not repeat",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      value: "daily",
+                                      children: "Daily",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      value: "weekly",
+                                      children: "Weekly on Thursday",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      value: "monthly",
+                                      children: "Monthly on fourth Thursday",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      value: "yearly",
+                                      children: "Anually on June 22",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      value: "everyweekday",
+                                      children: "Every weekday",
+                                    }),
+                                    (0, f.jsx)("option", {
+                                      children: "Custom",
+                                    }),
+                                  ],
+                                }),
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                      (0, f.jsxs)("div", {
+                        className: "buttons text-center pt-3",
+                        children: [
+                          (0, f.jsx)(c.u5, {
+                            color: "primary",
+                            type: "submit",
+                            children: "Submit form",
+                          }),
+                          (0, f.jsx)(c.u5, {
+                            color: "dark",
+                            type: "reset",
+                            onClick: A,
+                            children: "Reset form",
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
+        });
+      };
+    },
+    4332: function (e, a, t) {
+      t.d(a, {
+        Z: function () {
+          return m;
+        },
+      });
+      var n = {
+          lessThanXSeconds: {
+            one: "\u0623\u0642\u0644 \u0645\u0646 \u062b\u0627\u0646\u064a\u0629 \u0648\u0627\u062d\u062f\u0629",
+            two: "\u0623\u0642\u0644 \u0645\u0646 \u062b\u0627\u0646\u062a\u064a\u0646",
+            threeToTen:
+              "\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062b\u0648\u0627\u0646\u064a",
+            other:
+              "\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062b\u0627\u0646\u064a\u0629",
+          },
+          xSeconds: {
+            one: "\u062b\u0627\u0646\u064a\u0629 \u0648\u0627\u062d\u062f\u0629",
+            two: "\u062b\u0627\u0646\u062a\u064a\u0646",
+            threeToTen: "{{count}} \u062b\u0648\u0627\u0646\u064a",
+            other: "{{count}} \u062b\u0627\u0646\u064a\u0629",
+          },
+          halfAMinute: "\u0646\u0635\u0641 \u062f\u0642\u064a\u0642\u0629",
+          lessThanXMinutes: {
+            one: "\u0623\u0642\u0644 \u0645\u0646 \u062f\u0642\u064a\u0642\u0629",
+            two: "\u0623\u0642\u0644 \u0645\u0646 \u062f\u0642\u064a\u0642\u062a\u064a\u0646",
+            threeToTen:
+              "\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062f\u0642\u0627\u0626\u0642",
+            other:
+              "\u0623\u0642\u0644 \u0645\u0646 {{count}} \u062f\u0642\u064a\u0642\u0629",
+          },
+          xMinutes: {
+            one: "\u062f\u0642\u064a\u0642\u0629 \u0648\u0627\u062d\u062f\u0629",
+            two: "\u062f\u0642\u064a\u0642\u062a\u064a\u0646",
+            threeToTen: "{{count}} \u062f\u0642\u0627\u0626\u0642",
+            other: "{{count}} \u062f\u0642\u064a\u0642\u0629",
+          },
+          aboutXHours: {
+            one: "\u0633\u0627\u0639\u0629 \u0648\u0627\u062d\u062f\u0629 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            two: "\u0633\u0627\u0639\u062a\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            threeToTen:
+              "{{count}} \u0633\u0627\u0639\u0627\u062a \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            other:
+              "{{count}} \u0633\u0627\u0639\u0629 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+          },
+          xHours: {
+            one: "\u0633\u0627\u0639\u0629 \u0648\u0627\u062d\u062f\u0629",
+            two: "\u0633\u0627\u0639\u062a\u064a\u0646",
+            threeToTen: "{{count}} \u0633\u0627\u0639\u0627\u062a",
+            other: "{{count}} \u0633\u0627\u0639\u0629",
+          },
+          xDays: {
+            one: "\u064a\u0648\u0645 \u0648\u0627\u062d\u062f",
+            two: "\u064a\u0648\u0645\u064a\u0646",
+            threeToTen: "{{count}} \u0623\u064a\u0627\u0645",
+            other: "{{count}} \u064a\u0648\u0645",
+          },
+          aboutXWeeks: {
+            one: "\u0623\u0633\u0628\u0648\u0639 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            two: "\u0623\u0633\u0628\u0648\u0639\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            threeToTen:
+              "{{count}} \u0623\u0633\u0627\u0628\u064a\u0639 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            other:
+              "{{count}} \u0623\u0633\u0628\u0648\u0639 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+          },
+          xWeeks: {
+            one: "\u0623\u0633\u0628\u0648\u0639 \u0648\u0627\u062d\u062f",
+            two: "\u0623\u0633\u0628\u0648\u0639\u064a\u0646",
+            threeToTen: "{{count}} \u0623\u0633\u0627\u0628\u064a\u0639",
+            other: "{{count}} \u0623\u0633\u0628\u0648\u0639",
+          },
+          aboutXMonths: {
+            one: "\u0634\u0647\u0631 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            two: "\u0634\u0647\u0631\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            threeToTen:
+              "{{count}} \u0623\u0634\u0647\u0631 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            other:
+              "{{count}} \u0634\u0647\u0631 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+          },
+          xMonths: {
+            one: "\u0634\u0647\u0631 \u0648\u0627\u062d\u062f",
+            two: "\u0634\u0647\u0631\u064a\u0646",
+            threeToTen: "{{count}} \u0623\u0634\u0647\u0631",
+            other: "{{count}} \u0634\u0647\u0631",
+          },
+          aboutXYears: {
+            one: "\u0639\u0627\u0645 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            two: "\u0639\u0627\u0645\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            threeToTen:
+              "{{count}} \u0623\u0639\u0648\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            other:
+              "{{count}} \u0639\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+          },
+          xYears: {
+            one: "\u0639\u0627\u0645 \u0648\u0627\u062d\u062f",
+            two: "\u0639\u0627\u0645\u064a\u0646",
+            threeToTen: "{{count}} \u0623\u0639\u0648\u0627\u0645",
+            other: "{{count}} \u0639\u0627\u0645",
+          },
+          overXYears: {
+            one: "\u0623\u0643\u062b\u0631 \u0645\u0646 \u0639\u0627\u0645",
+            two: "\u0623\u0643\u062b\u0631 \u0645\u0646 \u0639\u0627\u0645\u064a\u0646",
+            threeToTen:
+              "\u0623\u0643\u062b\u0631 \u0645\u0646 {{count}} \u0623\u0639\u0648\u0627\u0645",
+            other:
+              "\u0623\u0643\u062b\u0631 \u0645\u0646 {{count}} \u0639\u0627\u0645",
+          },
+          almostXYears: {
+            one: "\u0639\u0627\u0645 \u0648\u0627\u062d\u062f \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            two: "\u0639\u0627\u0645\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            threeToTen:
+              "{{count}} \u0623\u0639\u0648\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+            other:
+              "{{count}} \u0639\u0627\u0645 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
+          },
+        },
+        o = function (e, a, t) {
+          var o,
+            i = n[e];
+          return (
+            (o =
+              "string" === typeof i
+                ? i
+                : 1 === a
+                ? i.one
+                : 2 === a
+                ? i.two
+                : a <= 10
+                ? i.threeToTen.replace("{{count}}", String(a))
+                : i.other.replace("{{count}}", String(a))),
+            null !== t && void 0 !== t && t.addSuffix
+              ? t.comparison && t.comparison > 0
+                ? "\u0641\u064a \u062e\u0644\u0627\u0644 " + o
+                : "\u0645\u0646\u0630 " + o
+              : o
+          );
+        },
+        i = t(6840),
+        r = {
+          date: (0, i.Z)({
+            formats: {
+              full: "EEEE, MMMM do, y",
+              long: "MMMM do, y",
+              medium: "MMM d, y",
+              short: "MM/dd/yyyy",
+            },
+            defaultWidth: "full",
+          }),
+          time: (0, i.Z)({
+            formats: {
+              full: "h:mm:ss a zzzz",
+              long: "h:mm:ss a z",
+              medium: "h:mm:ss a",
+              short: "h:mm a",
+            },
+            defaultWidth: "full",
+          }),
+          dateTime: (0, i.Z)({
+            formats: {
+              full: "{{date}} '\u0639\u0646\u062f' {{time}}",
+              long: "{{date}} '\u0639\u0646\u062f' {{time}}",
+              medium: "{{date}}, {{time}}",
+              short: "{{date}}, {{time}}",
+            },
+            defaultWidth: "full",
+          }),
+        },
+        s = {
+          lastWeek: "'\u0623\u062e\u0631' eeee '\u0639\u0646\u062f' p",
+          yesterday: "'\u0623\u0645\u0633 \u0639\u0646\u062f' p",
+          today: "'\u0627\u0644\u064a\u0648\u0645 \u0639\u0646\u062f' p",
+          tomorrow: "'\u063a\u062f\u0627\u064b \u0639\u0646\u062f' p",
+          nextWeek: "eeee '\u0639\u0646\u062f' p",
+          other: "P",
+        },
+        l = function (e, a, t, n) {
+          return s[e];
+        },
+        d = t(7325),
+        c = {
+          ordinalNumber: function (e) {
+            return String(e);
+          },
+          era: (0, d.Z)({
+            values: {
+              narrow: ["\u0642", "\u0628"],
+              abbreviated: ["\u0642.\u0645.", "\u0628.\u0645."],
+              wide: [
+                "\u0642\u0628\u0644 \u0627\u0644\u0645\u064a\u0644\u0627\u062f",
+                "\u0628\u0639\u062f \u0627\u0644\u0645\u064a\u0644\u0627\u062f",
+              ],
+            },
+            defaultWidth: "wide",
+          }),
+          quarter: (0, d.Z)({
+            values: {
+              narrow: ["1", "2", "3", "4"],
+              abbreviated: ["\u06311", "\u06312", "\u06313", "\u06314"],
+              wide: [
+                "\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u0623\u0648\u0644",
+                "\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u062b\u0627\u0646\u064a",
+                "\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u062b\u0627\u0644\u062b",
+                "\u0627\u0644\u0631\u0628\u0639 \u0627\u0644\u0631\u0627\u0628\u0639",
+              ],
+            },
+            defaultWidth: "wide",
+            argumentCallback: function (e) {
+              return e - 1;
+            },
+          }),
+          month: (0, d.Z)({
+            values: {
+              narrow: [
+                "\u064a",
+                "\u0641",
+                "\u0645",
+                "\u0623",
+                "\u0645",
+                "\u064a",
+                "\u064a",
+                "\u0623",
+                "\u0633",
+                "\u0623",
+                "\u0646",
+                "\u062f",
+              ],
+              abbreviated: [
+                "\u064a\u0646\u0627",
+                "\u0641\u0628\u0631",
+                "\u0645\u0627\u0631\u0633",
+                "\u0623\u0628\u0631\u064a\u0644",
+                "\u0645\u0627\u064a\u0648",
+                "\u064a\u0648\u0646\u0640",
+                "\u064a\u0648\u0644\u0640",
+                "\u0623\u063a\u0633\u0640",
+                "\u0633\u0628\u062a\u0640",
+                "\u0623\u0643\u062a\u0640",
+                "\u0646\u0648\u0641\u0640",
+                "\u062f\u064a\u0633\u0640",
+              ],
+              wide: [
+                "\u064a\u0646\u0627\u064a\u0631",
+                "\u0641\u0628\u0631\u0627\u064a\u0631",
+                "\u0645\u0627\u0631\u0633",
+                "\u0623\u0628\u0631\u064a\u0644",
+                "\u0645\u0627\u064a\u0648",
+                "\u064a\u0648\u0646\u064a\u0648",
+                "\u064a\u0648\u0644\u064a\u0648",
+                "\u0623\u063a\u0633\u0637\u0633",
+                "\u0633\u0628\u062a\u0645\u0628\u0631",
+                "\u0623\u0643\u062a\u0648\u0628\u0631",
+                "\u0646\u0648\u0641\u0645\u0628\u0631",
+                "\u062f\u064a\u0633\u0645\u0628\u0631",
+              ],
+            },
+            defaultWidth: "wide",
+          }),
+          day: (0, d.Z)({
+            values: {
+              narrow: [
+                "\u062d",
+                "\u0646",
+                "\u062b",
+                "\u0631",
+                "\u062e",
+                "\u062c",
+                "\u0633",
+              ],
+              short: [
+                "\u0623\u062d\u062f",
+                "\u0627\u062b\u0646\u064a\u0646",
+                "\u062b\u0644\u0627\u062b\u0627\u0621",
+                "\u0623\u0631\u0628\u0639\u0627\u0621",
+                "\u062e\u0645\u064a\u0633",
+                "\u062c\u0645\u0639\u0629",
+                "\u0633\u0628\u062a",
+              ],
+              abbreviated: [
+                "\u0623\u062d\u062f",
+                "\u0627\u062b\u0646\u0640",
+                "\u062b\u0644\u0627",
+                "\u0623\u0631\u0628\u0640",
+                "\u062e\u0645\u064a\u0640",
+                "\u062c\u0645\u0639\u0629",
+                "\u0633\u0628\u062a",
+              ],
+              wide: [
+                "\u0627\u0644\u0623\u062d\u062f",
+                "\u0627\u0644\u0627\u062b\u0646\u064a\u0646",
+                "\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621",
+                "\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621",
+                "\u0627\u0644\u062e\u0645\u064a\u0633",
+                "\u0627\u0644\u062c\u0645\u0639\u0629",
+                "\u0627\u0644\u0633\u0628\u062a",
+              ],
+            },
+            defaultWidth: "wide",
+          }),
+          dayPeriod: (0, d.Z)({
+            values: {
+              narrow: {
+                am: "\u0635",
+                pm: "\u0645",
+                midnight: "\u0646",
+                noon: "\u0638",
+                morning: "\u0635\u0628\u0627\u062d\u0627\u064b",
+                afternoon: "\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",
+                evening: "\u0645\u0633\u0627\u0621\u0627\u064b",
+                night: "\u0644\u064a\u0644\u0627\u064b",
+              },
+              abbreviated: {
+                am: "\u0635",
+                pm: "\u0645",
+                midnight: "\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",
+                noon: "\u0638\u0647\u0631",
+                morning: "\u0635\u0628\u0627\u062d\u0627\u064b",
+                afternoon: "\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",
+                evening: "\u0645\u0633\u0627\u0621\u0627\u064b",
+                night: "\u0644\u064a\u0644\u0627\u064b",
+              },
+              wide: {
+                am: "\u0635",
+                pm: "\u0645",
+                midnight: "\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",
+                noon: "\u0638\u0647\u0631",
+                morning: "\u0635\u0628\u0627\u062d\u0627\u064b",
+                afternoon: "\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",
+                evening: "\u0645\u0633\u0627\u0621\u0627\u064b",
+                night: "\u0644\u064a\u0644\u0627\u064b",
+              },
+            },
+            defaultWidth: "wide",
+            formattingValues: {
+              narrow: {
+                am: "\u0635",
+                pm: "\u0645",
+                midnight: "\u0646",
+                noon: "\u0638",
+                morning: "\u0641\u064a \u0627\u0644\u0635\u0628\u0627\u062d",
+                afternoon:
+                  "\u0628\u0639\u062f \u0627\u0644\u0638\u0640\u0647\u0631",
+                evening: "\u0641\u064a \u0627\u0644\u0645\u0633\u0627\u0621",
+                night: "\u0641\u064a \u0627\u0644\u0644\u064a\u0644",
+              },
+              abbreviated: {
+                am: "\u0635",
+                pm: "\u0645",
+                midnight: "\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",
+                noon: "\u0638\u0647\u0631",
+                morning: "\u0641\u064a \u0627\u0644\u0635\u0628\u0627\u062d",
+                afternoon: "\u0628\u0639\u062f \u0627\u0644\u0638\u0647\u0631",
+                evening: "\u0641\u064a \u0627\u0644\u0645\u0633\u0627\u0621",
+                night: "\u0641\u064a \u0627\u0644\u0644\u064a\u0644",
+              },
+              wide: {
+                am: "\u0635",
+                pm: "\u0645",
+                midnight: "\u0646\u0635\u0641 \u0627\u0644\u0644\u064a\u0644",
+                noon: "\u0638\u0647\u0631",
+                morning: "\u0635\u0628\u0627\u062d\u0627\u064b",
+                afternoon:
+                  "\u0628\u0639\u062f \u0627\u0644\u0638\u0640\u0647\u0631",
+                evening: "\u0641\u064a \u0627\u0644\u0645\u0633\u0627\u0621",
+                night: "\u0641\u064a \u0627\u0644\u0644\u064a\u0644",
+              },
+            },
+            defaultFormattingWidth: "wide",
+          }),
+        },
+        u = t(6884),
+        m = {
+          code: "ar-SA",
+          formatDistance: o,
+          formatLong: r,
+          formatRelative: l,
+          localize: c,
+          match: {
+            ordinalNumber: (0, t(586).Z)({
+              matchPattern: /^(\d+)(th|st|nd|rd)?/i,
+              parsePattern: /\d+/i,
+              valueCallback: function (e) {
+                return parseInt(e, 10);
+              },
+            }),
+            era: (0, u.Z)({
+              matchPatterns: {
+                narrow: /^(\u0642|\u0628)/i,
+                abbreviated:
+                  /^(\u0642\.?\s?\u0645\.?|\u0642\.?\s?\u0645\.?\s?|a\.?\s?d\.?|c\.?\s?)/i,
+                wide: /^(\u0642\u0628\u0644 \u0627\u0644\u0645\u064a\u0644\u0627\u062f|\u0642\u0628\u0644 \u0627\u0644\u0645\u064a\u0644\u0627\u062f|\u0628\u0639\u062f \u0627\u0644\u0645\u064a\u0644\u0627\u062f|\u0628\u0639\u062f \u0627\u0644\u0645\u064a\u0644\u0627\u062f)/i,
+              },
+              defaultMatchWidth: "wide",
+              parsePatterns: {
+                any: [/^\u0642\u0628\u0644/i, /^\u0628\u0639\u062f/i],
+              },
+              defaultParseWidth: "any",
+            }),
+            quarter: (0, u.Z)({
+              matchPatterns: {
+                narrow: /^[1234]/i,
+                abbreviated: /^\u0631[1234]/i,
+                wide: /^\u0627\u0644\u0631\u0628\u0639 [1234]/i,
+              },
+              defaultMatchWidth: "wide",
+              parsePatterns: { any: [/1/i, /2/i, /3/i, /4/i] },
+              defaultParseWidth: "any",
+              valueCallback: function (e) {
+                return e + 1;
+              },
+            }),
+            month: (0, u.Z)({
+              matchPatterns: {
+                narrow: /^[\u064a\u0641\u0645\u0623\u0645\u0633\u0646\u062f]/i,
+                abbreviated:
+                  /^(\u064a\u0646|\u0641|\u0645\u0627\u0631|\u0623\u0628|\u0645\u0627\u064a|\u064a\u0648\u0646|\u064a\u0648\u0644|\u0623\u063a|\u0633|\u0623\u0643|\u0646|\u062f)/i,
+                wide: /^(\u064a\u0646|\u0641|\u0645\u0627\u0631|\u0623\u0628|\u0645\u0627\u064a|\u064a\u0648\u0646|\u064a\u0648\u0644|\u0623\u063a|\u0633|\u0623\u0643|\u0646|\u062f)/i,
+              },
+              defaultMatchWidth: "wide",
+              parsePatterns: {
+                narrow: [
+                  /^\u064a/i,
+                  /^\u0641/i,
+                  /^\u0645/i,
+                  /^\u0623/i,
+                  /^\u0645/i,
+                  /^\u064a/i,
+                  /^\u064a/i,
+                  /^\u0623/i,
+                  /^\u0633/i,
+                  /^\u0623/i,
+                  /^\u0646/i,
+                  /^\u062f/i,
+                ],
+                any: [
+                  /^\u064a\u0646/i,
+                  /^\u0641/i,
+                  /^\u0645\u0627\u0631/i,
+                  /^\u0623\u0628/i,
+                  /^\u0645\u0627\u064a/i,
+                  /^\u064a\u0648\u0646/i,
+                  /^\u064a\u0648\u0644/i,
+                  /^\u0623\u063a/i,
+                  /^\u0633/i,
+                  /^\u0623\u0643/i,
+                  /^\u0646/i,
+                  /^\u062f/i,
+                ],
+              },
+              defaultParseWidth: "any",
+            }),
+            day: (0, u.Z)({
+              matchPatterns: {
+                narrow: /^[\u062d\u0646\u062b\u0631\u062e\u062c\u0633]/i,
+                short:
+                  /^(\u0623\u062d\u062f|\u0627\u062b\u0646\u064a\u0646|\u062b\u0644\u0627\u062b\u0627\u0621|\u0623\u0631\u0628\u0639\u0627\u0621|\u062e\u0645\u064a\u0633|\u062c\u0645\u0639\u0629|\u0633\u0628\u062a)/i,
+                abbreviated:
+                  /^(\u0623\u062d\u062f|\u0627\u062b\u0646|\u062b\u0644\u0627|\u0623\u0631\u0628|\u062e\u0645\u064a|\u062c\u0645\u0639\u0629|\u0633\u0628\u062a)/i,
+                wide: /^(\u0627\u0644\u0623\u062d\u062f|\u0627\u0644\u0627\u062b\u0646\u064a\u0646|\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621|\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621|\u0627\u0644\u062e\u0645\u064a\u0633|\u0627\u0644\u062c\u0645\u0639\u0629|\u0627\u0644\u0633\u0628\u062a)/i,
+              },
+              defaultMatchWidth: "wide",
+              parsePatterns: {
+                narrow: [
+                  /^\u062d/i,
+                  /^\u0646/i,
+                  /^\u062b/i,
+                  /^\u0631/i,
+                  /^\u062e/i,
+                  /^\u062c/i,
+                  /^\u0633/i,
+                ],
+                wide: [
+                  /^\u0627\u0644\u0623\u062d\u062f/i,
+                  /^\u0627\u0644\u0627\u062b\u0646\u064a\u0646/i,
+                  /^\u0627\u0644\u062b\u0644\u0627\u062b\u0627\u0621/i,
+                  /^\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621/i,
+                  /^\u0627\u0644\u062e\u0645\u064a\u0633/i,
+                  /^\u0627\u0644\u062c\u0645\u0639\u0629/i,
+                  /^\u0627\u0644\u0633\u0628\u062a/i,
+                ],
+                any: [
+                  /^\u0623\u062d/i,
+                  /^\u0627\u062b/i,
+                  /^\u062b/i,
+                  /^\u0623\u0631/i,
+                  /^\u062e/i,
+                  /^\u062c/i,
+                  /^\u0633/i,
+                ],
+              },
+              defaultParseWidth: "any",
+            }),
+            dayPeriod: (0, u.Z)({
+              matchPatterns: {
+                narrow:
+                  /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
+                any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i,
+              },
+              defaultMatchWidth: "any",
+              parsePatterns: {
+                any: {
+                  am: /^a/i,
+                  pm: /^p/i,
+                  midnight: /^mi/i,
+                  noon: /^no/i,
+                  morning: /morning/i,
+                  afternoon: /afternoon/i,
+                  evening: /evening/i,
+                  night: /night/i,
+                },
+              },
+              defaultParseWidth: "any",
+            }),
+          },
+          options: { weekStartsOn: 0, firstWeekContainsDate: 1 },
+        };
+    },
+  },
+]);
 //# sourceMappingURL=634.da9785e7.chunk.js.map

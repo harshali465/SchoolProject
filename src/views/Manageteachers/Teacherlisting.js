@@ -38,14 +38,17 @@ function StudentTable() {
       // const token =
       //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU";
 
-      const response = await axios.get("http://localhost:3001/api/v1/users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          role: "teacher",
-        },
-      });
+      const response = await axios.get(
+        "http://18.118.42.224:3001/api/v1/users",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            role: "teacher",
+          },
+        }
+      );
 
       console.log(response);
       setdummystudents(response.data.data.docs);
@@ -101,7 +104,7 @@ function StudentTable() {
 
     try {
       const response = await axios.patch(
-        "http://localhost:3001/api/v1/users/student",
+        "http://18.118.42.224:3001/api/v1/users/student",
         {
           ids: collecIds,
           active: true,
@@ -125,7 +128,7 @@ function StudentTable() {
 
     try {
       const response = await axios.patch(
-        "http://localhost:3001/api/v1/users/student",
+        "http://18.118.42.224:3001/api/v1/users/student",
         {
           ids: collecIds,
           active: false,
@@ -148,7 +151,7 @@ function StudentTable() {
 
     try {
       const response = await axios.delete(
-        "http://localhost:3001/api/v1/users/student",
+        "http://18.118.42.224:3001/api/v1/users/student",
         {
           data: { ids: collecIds },
           headers: { Authorization: `Bearer ${token}` },

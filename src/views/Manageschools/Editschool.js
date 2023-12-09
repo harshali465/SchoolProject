@@ -38,7 +38,7 @@ function Editschool() {
 
   const fetchinitdata = async (schoolidd) => {
     const response = await axios.get(
-      `http://localhost:3001/api/v1/schools/get/${schoolidd}`,
+      `http://18.118.42.224:3001/api/v1/schools/get/${schoolidd}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ function Editschool() {
     } else {
       console.log("form is valid and good to ship");
       const response = await axios.put(
-        `http://localhost:3001/api/v1/schools/update/${id}`,
+        `http://18.118.42.224:3001/api/v1/schools/update/${id}`,
         {
           schoolLogo: formData.schoolLogo,
           schoolName: formData.schoolName,

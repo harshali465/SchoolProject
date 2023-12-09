@@ -13,7 +13,7 @@ function AddCategory() {
 
   const handleChange = async () => {
     await axios.post(
-      "http://localhost:3001/api/v1/categories",
+      "http://18.118.42.224:3001/api/v1/categories",
       { name: catName },
       {
         headers: {

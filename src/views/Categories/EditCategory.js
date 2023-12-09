@@ -21,7 +21,7 @@ function EditCategory() {
   const getUser = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/v1/categories/${id}`,
+        `http://18.118.42.224:3001/api/v1/categories/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -41,7 +41,7 @@ function EditCategory() {
 
   const handleChange = async () => {
     await axios.patch(
-      `http://localhost:3001/api/v1/categories/${id}`,
+      `http://18.118.42.224:3001/api/v1/categories/${id}`,
       { name: catName },
       {
         headers: {

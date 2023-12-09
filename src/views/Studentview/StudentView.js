@@ -63,7 +63,7 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://localhost:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ function StudentView() {
       setstudent(res.data.data);
       // this is the call where you are retrieving all the adaats for the student for repetation- daily
       const response = await axios.get(
-        "http://localhost:3001/api/v1/aadat/getAllDailyAadat",
+        "http://18.118.42.224:3001/api/v1/aadat/getAllDailyAadat",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -166,7 +166,7 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://localhost:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -177,7 +177,7 @@ function StudentView() {
       setstudent(res.data.data);
       // this is the call where you are retrieving all the adaats for the student for repetation- daily
       const response = await axios.get(
-        "http://localhost:3001/api/v1/aadat/getAllDailyAadat",
+        "http://18.118.42.224:3001/api/v1/aadat/getAllDailyAadat",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -267,7 +267,7 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://localhost:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -278,7 +278,7 @@ function StudentView() {
       setstudent(res.data.data);
       // this is the call where you are retrieving all the adaats for the student for repetation- daily
       const response = await axios.get(
-        "http://localhost:3001/api/v1/aadat/getAllDailyAadat",
+        "http://18.118.42.224:3001/api/v1/aadat/getAllDailyAadat",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -348,7 +348,7 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://localhost:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -359,7 +359,7 @@ function StudentView() {
       setstudent(res.data.data);
       // this is the call where you are retrieving all the adaats for the student for repetation- daily
       const response = await axios.get(
-        "http://localhost:3001/api/v1/aadat/getAllDailyAadat",
+        "http://18.118.42.224:3001/api/v1/aadat/getAllDailyAadat",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -421,7 +421,7 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://localhost:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -435,7 +435,7 @@ function StudentView() {
       setstudent(res.data.data);
       // this is the call where you are retrieving all the adaats for the student for repetation- daily
       const response = await axios.get(
-        "http://localhost:3001/api/v1/aadat/getAllDailyAadat",
+        "http://18.118.42.224:3001/api/v1/aadat/getAllDailyAadat",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -755,7 +755,7 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
 
       const dataForToday = await axios.get(
-        `http://localhost:3001/api/v1/aadatdata/sumbitresponse?student=${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/aadatdata/sumbitresponse?student=${authState.id}`,
 
         {
           headers: {
@@ -789,7 +789,7 @@ function StudentView() {
         setformData(filteredData);
       } else {
         const response = await axios.post(
-          `http://localhost:3001/api/v1/aadatdata/sumbitresponse`,
+          `http://18.118.42.224:3001/api/v1/aadatdata/sumbitresponse`,
 
           {
             student: authState.id,

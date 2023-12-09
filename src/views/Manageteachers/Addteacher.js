@@ -99,7 +99,7 @@ function Addstudent() {
   const handleFormSubmission = async () => {
     console.log(formData);
     const response = await axios.post(
-      "http://localhost:3001/api/v1/users/student",
+      "http://18.118.42.224:3001/api/v1/users/student",
 
       {
         firstName: formData.firstName,

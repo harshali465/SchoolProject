@@ -210,7 +210,7 @@ function AddAdaat() {
   const handleFormSubmission = async () => {
     console.log(formData);
     const response = await axios.post(
-      "http://localhost:3001/api/v1/aadat",
+      "http://18.118.42.224:3001/api/v1/aadat",
 
       {
         name: formData.name,
@@ -241,7 +241,7 @@ function AddAdaat() {
       }
     );
     // retrieving all the students to make a new aadatData instance
-    const res = await axios.get("http://localhost:3001/api/v1/users", {
+    const res = await axios.get("http://18.118.42.224:3001/api/v1/users", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -290,7 +290,7 @@ function AddAdaat() {
     const getCats = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/v1/categories",
+          "http://18.118.42.224:3001/api/v1/categories",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -44,7 +44,7 @@ const Register = () => {
 
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/v1/users/signup",
+          "http://18.118.42.224:3001/api/v1/users/signup",
           {
             name: formData.name,
             email: formData.email,

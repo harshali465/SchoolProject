@@ -35,11 +35,14 @@ function CategoryListing() {
   const getUsers = async () => {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await axios.get("http://localhost:3001/api/v1/aadat", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "http://18.118.42.224:3001/api/v1/aadat",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       console.log(response.data.data.docs);
       setdummystudents(response.data.data.docs);
@@ -93,7 +96,7 @@ function CategoryListing() {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.delete(
-        "http://localhost:3001/api/v1/aadat",
+        "http://18.118.42.224:3001/api/v1/aadat",
         {
           data: { ids: collecIds },
           headers: { Authorization: `Bearer ${token}` },

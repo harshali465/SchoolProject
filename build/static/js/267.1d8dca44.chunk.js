@@ -1,2 +1,508 @@
-"use strict";(self.webpackChunkhoustonschoolfront=self.webpackChunkhoustonschoolfront||[]).push([[267],{7267:function(e,t,n){n.r(t);var a=n(3433),c=n(1413),s=n(9439),i=n(4165),r=n(5861),l=n(2791),d=n(7689),o=(n(6048),n(8983)),u=n(1243),h=(n(1323),n(6772),n(2957),n(184));t.default=function(){var e=function(){var e=(0,r.Z)((0,i.Z)().mark((function e(){var t,n;return(0,i.Z)().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return e.prev=0,t=localStorage.getItem("accessToken"),e.next=4,u.Z.get("http://localhost:3001/api/v1/miqaat",{headers:{Authorization:"Bearer ".concat(t)}});case 4:n=e.sent,console.log(n.data.data.docs),f(n.data.data.docs),e.next=12;break;case 9:e.prev=9,e.t0=e.catch(0),console.error("Error fetching users:",e.t0);case 12:case"end":return e.stop()}}),e,null,[[0,9]])})));return function(){return e.apply(this,arguments)}}();(0,l.useEffect)((function(){e()}),[]);var t=(0,d.s0)(),n=(0,l.useState)([]),x=(0,s.Z)(n,2),m=x[0],f=x[1],j=(0,l.useState)([]),p=(0,s.Z)(j,2),v=p[0],b=(p[1],(0,l.useState)(!1)),N=(0,s.Z)(b,2),k=N[0],Z=N[1],C=(0,l.useState)(!1),I=(0,s.Z)(C,2),y=I[0],g=I[1],S=(0,l.useState)([]),w=(0,s.Z)(S,2),z=w[0],M=w[1],E=function(){var e=(0,r.Z)((0,i.Z)().mark((function e(t){var n;return(0,i.Z)().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:!1===(n=(0,a.Z)(m))[t].selected?M([].concat((0,a.Z)(z),[n[t]._id])):M((function(e){return e.filter((function(e){return e!==n[t]._id}))})),n[t].selected=!n[t].selected,f(n);case 4:case"end":return e.stop()}}),e)})));return function(t){return e.apply(this,arguments)}}(),q=function(){var t=(0,r.Z)((0,i.Z)().mark((function t(){var n;return(0,i.Z)().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU",t.prev=1,t.next=4,u.Z.delete("http://localhost:3001/api/v1/miqaat",{data:{ids:z},headers:{Authorization:"Bearer ".concat("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU")}});case 4:n=t.sent,console.log(n.data),Z(!1),t.next=12;break;case 9:t.prev=9,t.t0=t.catch(1),console.error(t.t0);case 12:e();case 13:case"end":return t.stop()}}),t,null,[[1,9]])})));return function(){return t.apply(this,arguments)}}(),T=(0,l.useState)(""),A=(0,s.Z)(T,2),D=A[0],J=A[1],O=(0,l.useState)(""),Y=(0,s.Z)(O,2),U=Y[0],_=Y[1],G=(0,l.useState)(!1),L=(0,s.Z)(G,2),Q=(L[0],L[1],(0,l.useState)("")),X=(0,s.Z)(Q,2),B=(X[0],X[1],(0,l.useState)("")),R=(0,s.Z)(B,2),V=(R[0],R[1],(0,l.useState)("")),F=(0,s.Z)(V,2),P=(F[0],F[1],(0,l.useState)(v.length)),H=(0,s.Z)(P,2),K=H[0],W=H[1],$=(0,l.useState)(1),ee=(0,s.Z)($,2),te=ee[0],ne=ee[1],ae=function(e){ne(e)},ce=(te-1)*K,se=ce+K,ie=(v.slice(ce,se),Math.ceil(v.length/K));return(0,h.jsxs)("div",{children:[(0,h.jsxs)(o.Tk,{backdrop:"static",visible:k,onClose:function(){Z(!1),M([])},"aria-labelledby":"StaticBackdropExampleLabel",children:[(0,h.jsx)(o.p0,{children:(0,h.jsx)(o.fl,{id:"StaticBackdropExampleLabel",children:"Delete Miqaat"})}),(0,h.jsx)(o.sD,{children:"Are you sure you wish to delete this Miqaat?"}),(0,h.jsxs)(o.Ym,{children:[(0,h.jsx)(o.u5,{color:"secondary",onClick:function(){Z(!1),M([])},children:"Close"}),(0,h.jsx)(o.u5,{color:"primary",onClick:function(){return q()},children:"Yes!"})]})]}),(0,h.jsxs)("div",{className:"mb-2",children:[(0,h.jsxs)("div",{className:"row pb-5",children:[(0,h.jsx)("div",{className:"col-md-6 ",children:(0,h.jsx)("div",{className:"display-6 pb-3 float-end",children:"Miqaat listing"})}),(0,h.jsx)("div",{className:"col-md-6 ",children:(0,h.jsx)("button",{className:"btn btn-primary float-end",onClick:function(){t("/addmiqaat")},children:"Add Miqaat"})})]}),(0,h.jsx)("div",{className:"filters d-flex",children:(0,h.jsx)("input",{className:"form-control",type:"text",placeholder:"Search by keyword",value:D,onChange:function(e){return J(e.target.value)}})})]}),(0,h.jsxs)("div",{className:"pb-4 d-flex justify-content-start align-items-center",children:[(0,h.jsx)("div",{className:"p-2",children:(0,h.jsx)(o.EC,{type:"radio",id:"flexCheckDefault",label:"Active",checked:""!==U&&!!U,onClick:function(){_(!0)}})}),(0,h.jsx)("div",{className:"p-2",children:(0,h.jsx)(o.EC,{type:"radio",id:"flexCheckDefault",label:"Inactive",checked:""!==U&&!U,onClick:function(){_(!1)}})}),""!==U&&(0,h.jsx)("button",{className:"btn btn-dark btn-md ",onClick:function(){_("")},children:"Show all"}),(0,h.jsx)("button",{className:"btn btn-dark btn-md ",onClick:function(){Z(!k)},children:"Delete Selected"})]}),(0,h.jsxs)("table",{className:"table table-bordered",children:[(0,h.jsx)("thead",{children:(0,h.jsxs)("tr",{children:[(0,h.jsx)("th",{className:"text-center",children:(0,h.jsx)("input",{type:"checkbox",checked:y,onChange:function(){if(M([]),y)M([]);else{var e=m.map((function(e){return e._id}));M(e)}g(!y),f((function(e){return e.map((function(e){return(0,c.Z)((0,c.Z)({},e),{},{selected:!y})}))}))}})}),(0,h.jsx)("th",{className:"text-center",children:"Name of Miqaat"}),(0,h.jsx)("th",{className:"text-center",children:"Description"}),(0,h.jsx)("th",{className:"text-center",children:"Miqaat Date(English)"}),(0,h.jsx)("th",{className:"text-center",children:"Miqaat Date(arabic)"}),(0,h.jsx)("th",{className:"text-center",children:"Status"}),(0,h.jsx)("th",{className:"text-center",children:"Action"})]})}),(0,h.jsx)("tbody",{children:m.filter((function(e){return function(e){var t=e.name.toLowerCase().includes(D.toLowerCase()),n=""===U||e.active===U;return t&&n}(e)})).map((function(e,n){return(0,h.jsxs)("tr",{children:[(0,h.jsx)("td",{className:"text-center align-middle",children:(0,h.jsx)("input",{type:"checkbox",checked:e.selected,onChange:function(){return E(n)}})}),(0,h.jsx)("td",{className:"text-center align-middle",children:e.name}),(0,h.jsx)("td",{className:"text-center align-middle",children:e.description}),(0,h.jsx)("td",{className:"text-center align-middle",children:"dummy date"}),(0,h.jsx)("td",{className:"text-center align-middle",children:"dummy date"}),(0,h.jsx)("td",{className:"text-center align-middle",children:e.active?"active":"inactive"}),(0,h.jsxs)("td",{className:"text-center align-middle",children:[(0,h.jsx)("button",{className:"btn btn-primary btn-md",onClick:function(){var n;n=e._id,t("/editmiqaat",{state:{miqid:n}})},children:"Edit"}),(0,h.jsx)("button",{className:"btn btn-dark btn-md",onClick:function(){M([]),M([e._id]),Z(!0)},children:"Delete"})]})]},n)}))})]}),(0,h.jsx)("div",{className:"pagination",children:(0,h.jsxs)(o.E7,{"aria-label":"Page navigation",children:[(0,h.jsx)(o.tn,{onClick:function(){return ae(te-1)},disabled:1===te,children:"Previous"}),Array.from({length:ie},(function(e,t){return(0,h.jsx)(o.tn,{active:te===t+1,onClick:function(){return ae(t+1)},children:t+1},t)})),(0,h.jsx)(o.tn,{onClick:function(){return ae(te+1)},disabled:te===Math.ceil(v.length/K),children:"Next"}),(0,h.jsxs)("div",{className:"d-flex",children:[(0,h.jsx)(o.tn,{children:"Entries:"}),(0,h.jsx)(o.tn,{children:(0,h.jsxs)("select",{value:K,onChange:function(e){return W(e.target.value)},children:[(0,h.jsx)("option",{value:"2",children:"2"}),(0,h.jsx)("option",{value:"4",children:"4"}),(0,h.jsx)("option",{value:v.length,children:"all"})]})})]})]})})]})}}}]);
+"use strict";
+(self.webpackChunkhoustonschoolfront =
+  self.webpackChunkhoustonschoolfront || []).push([
+  [267],
+  {
+    7267: function (e, t, n) {
+      n.r(t);
+      var a = n(3433),
+        c = n(1413),
+        s = n(9439),
+        i = n(4165),
+        r = n(5861),
+        l = n(2791),
+        d = n(7689),
+        o = (n(6048), n(8983)),
+        u = n(1243),
+        h = (n(1323), n(6772), n(2957), n(184));
+      t.default = function () {
+        var e = (function () {
+          var e = (0, r.Z)(
+            (0, i.Z)().mark(function e() {
+              var t, n;
+              return (0, i.Z)().wrap(
+                function (e) {
+                  for (;;)
+                    switch ((e.prev = e.next)) {
+                      case 0:
+                        return (
+                          (e.prev = 0),
+                          (t = localStorage.getItem("accessToken")),
+                          (e.next = 4),
+                          u.Z.get("http://18.118.42.224:3001/api/v1/miqaat", {
+                            headers: { Authorization: "Bearer ".concat(t) },
+                          })
+                        );
+                      case 4:
+                        (n = e.sent),
+                          console.log(n.data.data.docs),
+                          f(n.data.data.docs),
+                          (e.next = 12);
+                        break;
+                      case 9:
+                        (e.prev = 9),
+                          (e.t0 = e.catch(0)),
+                          console.error("Error fetching users:", e.t0);
+                      case 12:
+                      case "end":
+                        return e.stop();
+                    }
+                },
+                e,
+                null,
+                [[0, 9]]
+              );
+            })
+          );
+          return function () {
+            return e.apply(this, arguments);
+          };
+        })();
+        (0, l.useEffect)(function () {
+          e();
+        }, []);
+        var t = (0, d.s0)(),
+          n = (0, l.useState)([]),
+          x = (0, s.Z)(n, 2),
+          m = x[0],
+          f = x[1],
+          j = (0, l.useState)([]),
+          p = (0, s.Z)(j, 2),
+          v = p[0],
+          b = (p[1], (0, l.useState)(!1)),
+          N = (0, s.Z)(b, 2),
+          k = N[0],
+          Z = N[1],
+          C = (0, l.useState)(!1),
+          I = (0, s.Z)(C, 2),
+          y = I[0],
+          g = I[1],
+          S = (0, l.useState)([]),
+          w = (0, s.Z)(S, 2),
+          z = w[0],
+          M = w[1],
+          E = (function () {
+            var e = (0, r.Z)(
+              (0, i.Z)().mark(function e(t) {
+                var n;
+                return (0, i.Z)().wrap(function (e) {
+                  for (;;)
+                    switch ((e.prev = e.next)) {
+                      case 0:
+                        !1 === (n = (0, a.Z)(m))[t].selected
+                          ? M([].concat((0, a.Z)(z), [n[t]._id]))
+                          : M(function (e) {
+                              return e.filter(function (e) {
+                                return e !== n[t]._id;
+                              });
+                            }),
+                          (n[t].selected = !n[t].selected),
+                          f(n);
+                      case 4:
+                      case "end":
+                        return e.stop();
+                    }
+                }, e);
+              })
+            );
+            return function (t) {
+              return e.apply(this, arguments);
+            };
+          })(),
+          q = (function () {
+            var t = (0, r.Z)(
+              (0, i.Z)().mark(function t() {
+                var n;
+                return (0, i.Z)().wrap(
+                  function (t) {
+                    for (;;)
+                      switch ((t.prev = t.next)) {
+                        case 0:
+                          return (
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU",
+                            (t.prev = 1),
+                            (t.next = 4),
+                            u.Z.delete(
+                              "http://18.118.42.224:3001/api/v1/miqaat",
+                              {
+                                data: { ids: z },
+                                headers: {
+                                  Authorization: "Bearer ".concat(
+                                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU"
+                                  ),
+                                },
+                              }
+                            )
+                          );
+                        case 4:
+                          (n = t.sent),
+                            console.log(n.data),
+                            Z(!1),
+                            (t.next = 12);
+                          break;
+                        case 9:
+                          (t.prev = 9),
+                            (t.t0 = t.catch(1)),
+                            console.error(t.t0);
+                        case 12:
+                          e();
+                        case 13:
+                        case "end":
+                          return t.stop();
+                      }
+                  },
+                  t,
+                  null,
+                  [[1, 9]]
+                );
+              })
+            );
+            return function () {
+              return t.apply(this, arguments);
+            };
+          })(),
+          T = (0, l.useState)(""),
+          A = (0, s.Z)(T, 2),
+          D = A[0],
+          J = A[1],
+          O = (0, l.useState)(""),
+          Y = (0, s.Z)(O, 2),
+          U = Y[0],
+          _ = Y[1],
+          G = (0, l.useState)(!1),
+          L = (0, s.Z)(G, 2),
+          Q = (L[0], L[1], (0, l.useState)("")),
+          X = (0, s.Z)(Q, 2),
+          B = (X[0], X[1], (0, l.useState)("")),
+          R = (0, s.Z)(B, 2),
+          V = (R[0], R[1], (0, l.useState)("")),
+          F = (0, s.Z)(V, 2),
+          P = (F[0], F[1], (0, l.useState)(v.length)),
+          H = (0, s.Z)(P, 2),
+          K = H[0],
+          W = H[1],
+          $ = (0, l.useState)(1),
+          ee = (0, s.Z)($, 2),
+          te = ee[0],
+          ne = ee[1],
+          ae = function (e) {
+            ne(e);
+          },
+          ce = (te - 1) * K,
+          se = ce + K,
+          ie = (v.slice(ce, se), Math.ceil(v.length / K));
+        return (0, h.jsxs)("div", {
+          children: [
+            (0, h.jsxs)(o.Tk, {
+              backdrop: "static",
+              visible: k,
+              onClose: function () {
+                Z(!1), M([]);
+              },
+              "aria-labelledby": "StaticBackdropExampleLabel",
+              children: [
+                (0, h.jsx)(o.p0, {
+                  children: (0, h.jsx)(o.fl, {
+                    id: "StaticBackdropExampleLabel",
+                    children: "Delete Miqaat",
+                  }),
+                }),
+                (0, h.jsx)(o.sD, {
+                  children: "Are you sure you wish to delete this Miqaat?",
+                }),
+                (0, h.jsxs)(o.Ym, {
+                  children: [
+                    (0, h.jsx)(o.u5, {
+                      color: "secondary",
+                      onClick: function () {
+                        Z(!1), M([]);
+                      },
+                      children: "Close",
+                    }),
+                    (0, h.jsx)(o.u5, {
+                      color: "primary",
+                      onClick: function () {
+                        return q();
+                      },
+                      children: "Yes!",
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            (0, h.jsxs)("div", {
+              className: "mb-2",
+              children: [
+                (0, h.jsxs)("div", {
+                  className: "row pb-5",
+                  children: [
+                    (0, h.jsx)("div", {
+                      className: "col-md-6 ",
+                      children: (0, h.jsx)("div", {
+                        className: "display-6 pb-3 float-end",
+                        children: "Miqaat listing",
+                      }),
+                    }),
+                    (0, h.jsx)("div", {
+                      className: "col-md-6 ",
+                      children: (0, h.jsx)("button", {
+                        className: "btn btn-primary float-end",
+                        onClick: function () {
+                          t("/addmiqaat");
+                        },
+                        children: "Add Miqaat",
+                      }),
+                    }),
+                  ],
+                }),
+                (0, h.jsx)("div", {
+                  className: "filters d-flex",
+                  children: (0, h.jsx)("input", {
+                    className: "form-control",
+                    type: "text",
+                    placeholder: "Search by keyword",
+                    value: D,
+                    onChange: function (e) {
+                      return J(e.target.value);
+                    },
+                  }),
+                }),
+              ],
+            }),
+            (0, h.jsxs)("div", {
+              className: "pb-4 d-flex justify-content-start align-items-center",
+              children: [
+                (0, h.jsx)("div", {
+                  className: "p-2",
+                  children: (0, h.jsx)(o.EC, {
+                    type: "radio",
+                    id: "flexCheckDefault",
+                    label: "Active",
+                    checked: "" !== U && !!U,
+                    onClick: function () {
+                      _(!0);
+                    },
+                  }),
+                }),
+                (0, h.jsx)("div", {
+                  className: "p-2",
+                  children: (0, h.jsx)(o.EC, {
+                    type: "radio",
+                    id: "flexCheckDefault",
+                    label: "Inactive",
+                    checked: "" !== U && !U,
+                    onClick: function () {
+                      _(!1);
+                    },
+                  }),
+                }),
+                "" !== U &&
+                  (0, h.jsx)("button", {
+                    className: "btn btn-dark btn-md ",
+                    onClick: function () {
+                      _("");
+                    },
+                    children: "Show all",
+                  }),
+                (0, h.jsx)("button", {
+                  className: "btn btn-dark btn-md ",
+                  onClick: function () {
+                    Z(!k);
+                  },
+                  children: "Delete Selected",
+                }),
+              ],
+            }),
+            (0, h.jsxs)("table", {
+              className: "table table-bordered",
+              children: [
+                (0, h.jsx)("thead", {
+                  children: (0, h.jsxs)("tr", {
+                    children: [
+                      (0, h.jsx)("th", {
+                        className: "text-center",
+                        children: (0, h.jsx)("input", {
+                          type: "checkbox",
+                          checked: y,
+                          onChange: function () {
+                            if ((M([]), y)) M([]);
+                            else {
+                              var e = m.map(function (e) {
+                                return e._id;
+                              });
+                              M(e);
+                            }
+                            g(!y),
+                              f(function (e) {
+                                return e.map(function (e) {
+                                  return (0,
+                                  c.Z)((0, c.Z)({}, e), {}, { selected: !y });
+                                });
+                              });
+                          },
+                        }),
+                      }),
+                      (0, h.jsx)("th", {
+                        className: "text-center",
+                        children: "Name of Miqaat",
+                      }),
+                      (0, h.jsx)("th", {
+                        className: "text-center",
+                        children: "Description",
+                      }),
+                      (0, h.jsx)("th", {
+                        className: "text-center",
+                        children: "Miqaat Date(English)",
+                      }),
+                      (0, h.jsx)("th", {
+                        className: "text-center",
+                        children: "Miqaat Date(arabic)",
+                      }),
+                      (0, h.jsx)("th", {
+                        className: "text-center",
+                        children: "Status",
+                      }),
+                      (0, h.jsx)("th", {
+                        className: "text-center",
+                        children: "Action",
+                      }),
+                    ],
+                  }),
+                }),
+                (0, h.jsx)("tbody", {
+                  children: m
+                    .filter(function (e) {
+                      return (function (e) {
+                        var t = e.name.toLowerCase().includes(D.toLowerCase()),
+                          n = "" === U || e.active === U;
+                        return t && n;
+                      })(e);
+                    })
+                    .map(function (e, n) {
+                      return (0, h.jsxs)(
+                        "tr",
+                        {
+                          children: [
+                            (0, h.jsx)("td", {
+                              className: "text-center align-middle",
+                              children: (0, h.jsx)("input", {
+                                type: "checkbox",
+                                checked: e.selected,
+                                onChange: function () {
+                                  return E(n);
+                                },
+                              }),
+                            }),
+                            (0, h.jsx)("td", {
+                              className: "text-center align-middle",
+                              children: e.name,
+                            }),
+                            (0, h.jsx)("td", {
+                              className: "text-center align-middle",
+                              children: e.description,
+                            }),
+                            (0, h.jsx)("td", {
+                              className: "text-center align-middle",
+                              children: "dummy date",
+                            }),
+                            (0, h.jsx)("td", {
+                              className: "text-center align-middle",
+                              children: "dummy date",
+                            }),
+                            (0, h.jsx)("td", {
+                              className: "text-center align-middle",
+                              children: e.active ? "active" : "inactive",
+                            }),
+                            (0, h.jsxs)("td", {
+                              className: "text-center align-middle",
+                              children: [
+                                (0, h.jsx)("button", {
+                                  className: "btn btn-primary btn-md",
+                                  onClick: function () {
+                                    var n;
+                                    (n = e._id),
+                                      t("/editmiqaat", { state: { miqid: n } });
+                                  },
+                                  children: "Edit",
+                                }),
+                                (0, h.jsx)("button", {
+                                  className: "btn btn-dark btn-md",
+                                  onClick: function () {
+                                    M([]), M([e._id]), Z(!0);
+                                  },
+                                  children: "Delete",
+                                }),
+                              ],
+                            }),
+                          ],
+                        },
+                        n
+                      );
+                    }),
+                }),
+              ],
+            }),
+            (0, h.jsx)("div", {
+              className: "pagination",
+              children: (0, h.jsxs)(o.E7, {
+                "aria-label": "Page navigation",
+                children: [
+                  (0, h.jsx)(o.tn, {
+                    onClick: function () {
+                      return ae(te - 1);
+                    },
+                    disabled: 1 === te,
+                    children: "Previous",
+                  }),
+                  Array.from({ length: ie }, function (e, t) {
+                    return (0, h.jsx)(
+                      o.tn,
+                      {
+                        active: te === t + 1,
+                        onClick: function () {
+                          return ae(t + 1);
+                        },
+                        children: t + 1,
+                      },
+                      t
+                    );
+                  }),
+                  (0, h.jsx)(o.tn, {
+                    onClick: function () {
+                      return ae(te + 1);
+                    },
+                    disabled: te === Math.ceil(v.length / K),
+                    children: "Next",
+                  }),
+                  (0, h.jsxs)("div", {
+                    className: "d-flex",
+                    children: [
+                      (0, h.jsx)(o.tn, { children: "Entries:" }),
+                      (0, h.jsx)(o.tn, {
+                        children: (0, h.jsxs)("select", {
+                          value: K,
+                          onChange: function (e) {
+                            return W(e.target.value);
+                          },
+                          children: [
+                            (0, h.jsx)("option", { value: "2", children: "2" }),
+                            (0, h.jsx)("option", { value: "4", children: "4" }),
+                            (0, h.jsx)("option", {
+                              value: v.length,
+                              children: "all",
+                            }),
+                          ],
+                        }),
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            }),
+          ],
+        });
+      };
+    },
+  },
+]);
 //# sourceMappingURL=267.1d8dca44.chunk.js.map

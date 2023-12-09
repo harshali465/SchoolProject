@@ -32,7 +32,7 @@
 //   }, [schools]);
 
 //   const getallshools = async () => {
-//     const res = await axios.get("http://localhost:3001/api/v1/schools/getall");
+//     const res = await axios.get("http://18.118.42.224:3001/api/v1/schools/getall");
 //     setschools(res.data.school);
 //   };
 
@@ -99,7 +99,7 @@
 //     try {
 //       console.log(id);
 //       const response = await axios.delete(
-//         `http://localhost:3001/api/v1/schools/delete/${id}`
+//         `http://18.118.42.224:3001/api/v1/schools/delete/${id}`
 //       );
 //       setschools(schools.filter((school) => school._id !== id));
 //       console.log(response.data);
@@ -316,7 +316,7 @@ function SchoolTable() {
       //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU";
 
       const response = await axios.get(
-        "http://localhost:3001/api/v1/schools/getall",
+        "http://18.118.42.224:3001/api/v1/schools/getall",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -378,7 +378,7 @@ function SchoolTable() {
 
     try {
       const response = await axios.delete(
-        "http://localhost:3001/api/v1/schools/delete",
+        "http://18.118.42.224:3001/api/v1/schools/delete",
         {
           data: { ids: collecIds },
           headers: { Authorization: `Bearer ${token}` },

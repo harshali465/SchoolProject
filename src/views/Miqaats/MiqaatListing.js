@@ -35,11 +35,14 @@ function MiqaatListing() {
   const getUsers = async () => {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await axios.get("http://localhost:3001/api/v1/miqaat", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "http://18.118.42.224:3001/api/v1/miqaat",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       console.log(response.data.data.docs);
       setdummystudents(response.data.data.docs);
@@ -95,7 +98,7 @@ function MiqaatListing() {
 
     try {
       const response = await axios.delete(
-        "http://localhost:3001/api/v1/miqaat",
+        "http://18.118.42.224:3001/api/v1/miqaat",
         {
           data: { ids: collecIds },
           headers: { Authorization: `Bearer ${token}` },

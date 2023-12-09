@@ -62,7 +62,7 @@ function AddMiqaat() {
   const getMiqaat = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/v1/miqaat/${id}`,
+        `http://18.118.42.224:3001/api/v1/miqaat/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -145,7 +145,7 @@ function AddMiqaat() {
   const handleFormSubmission = async () => {
     console.log(formData);
     const response = await axios.post(
-      "http://localhost:3001/api/v1/miqaat",
+      "http://18.118.42.224:3001/api/v1/miqaat",
 
       {
         name: formData.name,
