@@ -7,6 +7,7 @@ import routes from "../../routes/Router";
 import { useContext } from "react";
 import { AuthContext } from "../../helpers/AuthContext";
 import StudentView from "../../views/Studentview/StudentView";
+import Login from "../../views/Login";
 
 const AppContent = () => {
   const { authState } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const AppContent = () => {
               />
             );
           })}
+
           {/* <Route path="/" element={<Navigate to="Dashboard" replace />} /> */}
         </Routes>
       </Suspense>

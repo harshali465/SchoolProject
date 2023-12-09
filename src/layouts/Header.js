@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Navbar,
@@ -6,6 +6,7 @@ import {
   Nav,
   NavItem,
   NavbarBrand,
+  NavbarText,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -14,14 +15,23 @@ import {
   Button,
 } from "reactstrap";
 import { ReactComponent as LogoWhite } from "../assets/images/logos/xtremelogowhite.svg";
-import user1 from "../assets/images/users/user1.jpg";
+import user1 from "../assets/images/users/user4.jpg";
+import { AuthContext } from "../helpers/AuthContext";
+import { useContext } from "react";
+import axios from "axios";
 
 const Header = () => {
+  const { authState, setAuthState } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [dropdownOpen1, setDropdownOpen1] = React.useState(false);
+  const [displayName, setdisplayName] = useState(authState.name);
+  const [father, setfather] = useState("");
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggle1 = () => setDropdownOpen1((prevState) => !prevState);
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
@@ -33,9 +43,37 @@ const Header = () => {
     localStorage.removeItem("accessToken");
     navigate("/login");
   };
+  const [siblings, setSiblings] = useState([]);
+  useEffect(() => {
+    const userInhead = async () => {
+      try {
+        const token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
+        // this is for getting the information about the student you need to display
+        const res = await axios.get(
+          `http://localhost:3001/api/v1/users/${authState.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(res.data.data.siblings);
+        setSiblings(res.data.data.siblings);
+        setfather(
+          res.data.data.familyDetails.fatherFirstName +
+            " " +
+            res.data.data.familyDetails.fatherLastName
+        );
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    userInhead();
+  }, [authState.id, authState.name]);
 
   return (
-    <Navbar color="primary" dark expand="md">
+    <Navbar color="white" dark expand="md">
       <div className="d-flex align-items-center">
         <NavbarBrand href="/" className="d-lg-none">
           <LogoWhite />
@@ -48,6 +86,16 @@ const Header = () => {
           <i className="bi bi-list"></i>
         </Button>
       </div>
+      {/* <NavbarText className="text-center" style={{ color: "black" }}>
+        Welcome to Houston School
+      </NavbarText> */}
+
+      <span
+        className="text-center"
+        style={{ color: "black", fontSize: "20px" }}
+      >
+        Welcome to <strong>Madrasah Ezziyah Houston</strong>
+      </span>
       <div className="hstack gap-2">
         <Button
           color="primary"
@@ -62,10 +110,9 @@ const Header = () => {
           )}
         </Button>
       </div>
-
       <Collapse navbar isOpen={isOpen}>
         <Nav className="me-auto" navbar>
-          <NavItem>
+          {/* <NavItem>
             <Link to="/starter" className="nav-link">
               Starter
             </Link>
@@ -74,9 +121,9 @@ const Header = () => {
             <Link to="/about" className="nav-link">
               About
             </Link>
-          </NavItem>
+          </NavItem> */}
           <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav>
+            {/* <DropdownToggle caret nav>
               DD Menu
             </DropdownToggle>
             <DropdownMenu end>
@@ -84,25 +131,60 @@ const Header = () => {
               <DropdownItem>Option 2</DropdownItem>
               <DropdownItem divider />
               <DropdownItem>Reset</DropdownItem>
-            </DropdownMenu>
+            </DropdownMenu> */}
           </UncontrolledDropdown>
         </Nav>
+        <Dropdown isOpen={dropdownOpen1} toggle={toggle1}>
+          <DropdownToggle color="white">
+            {authState.name && authState.name + " " + authState.lastname}
+          </DropdownToggle>
+          <DropdownMenu>
+            {siblings &&
+              siblings.map((sib, index) => (
+                <DropdownItem
+                  key={index}
+                  onClick={() => {
+                    setAuthState({
+                      id: sib._id,
+                      name: sib.firstName,
+                      lastname: sib.lastName,
+                    });
+                  }}
+                >
+                  {sib.firstName + " " + sib.lastName}
+                </DropdownItem>
+              ))}
+          </DropdownMenu>
+        </Dropdown>
+        <div
+          className="mx-2 pl-2 pr-2"
+          style={{
+            borderLeft: "1px solid black",
+            height: "30px",
+          }}
+        />
+
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle color="primary">
+          <DropdownToggle color="white">
             <img
               src={user1}
               alt="profile"
               className="rounded-circle"
               width="30"
             ></img>
+            <div>
+              {authState.fatherName
+                ? authState.fatherName + " " + authState.fatherLastName
+                : father}
+            </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header>Info</DropdownItem>
+            {/* <DropdownItem header>Info</DropdownItem>
             <DropdownItem>My Account</DropdownItem>
             <DropdownItem>Edit Profile</DropdownItem>
             <DropdownItem divider />
             <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
+            <DropdownItem>Inbox</DropdownItem> */}
             <DropdownItem onClick={logout}>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>

@@ -6,9 +6,9 @@ import { AuthContext } from "../helpers/AuthContext";
 
 const navigationStu = [
   {
-    title: "View report",
+    title: "Daily Update Form",
     href: "/studentview",
-    icon: "bi bi-speedometer2",
+    icon: "bi bi-thermometer-low",
   },
 ];
 
@@ -69,9 +69,26 @@ const Sidebar = () => {
   let location = useLocation();
 
   return (
-    <div className="p-3">
-      <div className="d-flex align-items-center">
-        <Logo />
+    <div className="p-3" style={{ backgroundColor: "#135F77", height: "100%" }}>
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ height: "3.5rem" }}
+      >
+        <a className="text-center">
+          <div
+            style={{
+              fontSize: "1.2rem",
+              fontWeight: "800",
+              textAlign: "center",
+              textTransform: "uppercase",
+              letterSpacing: ".05rem",
+              margin: "auto",
+              color: "whitesmoke",
+            }}
+          >
+            myaadat
+          </div>
+        </a>
 
         <span className="ms-auto d-lg-none">
           <Button
@@ -101,19 +118,34 @@ const Sidebar = () => {
                 </NavItem>
               ))
             : navigationStu.map((navi, index) => (
-                <NavItem key={index} className="sidenav-bg">
-                  <Link
-                    to={navi.href}
-                    className={
-                      location.pathname === navi.href
-                        ? "text-primary nav-link py-3"
-                        : "nav-link text-secondary py-3"
-                    }
-                  >
-                    <i className={navi.icon}></i>
-                    <span className="ms-3 d-inline-block">{navi.title}</span>
-                  </Link>
-                </NavItem>
+                <>
+                  <div
+                    className="border-bottom"
+                    style={{ backgroundColor: "#dee2e62e" }}
+                  ></div>
+                  <NavItem key={index} className="sidenav-bg">
+                    <Link
+                      to={navi.href}
+                      className={
+                        location.pathname === navi.href
+                          ? "text-primary nav-link py-3"
+                          : "nav-link text-secondary py-3"
+                      }
+                    >
+                      <i className={navi.icon} style={{ color: "white" }}></i>
+                      <span
+                        className="ms-3 d-inline-block"
+                        style={{ color: "white" }}
+                      >
+                        {navi.title}
+                      </span>
+                    </Link>
+                  </NavItem>
+                  <div
+                    className="border-bottom"
+                    style={{ backgroundColor: "#dee2e62e" }}
+                  ></div>
+                </>
               ))}
         </Nav>
       </div>

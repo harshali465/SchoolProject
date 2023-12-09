@@ -32,6 +32,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Addstudent() {
+  const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,8 +40,8 @@ function Addstudent() {
 
   const getUser = async () => {
     try {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU";
+      // const token =
+      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU";
 
       const response = await axios.get(
         `http://localhost:3001/api/v1/users/${studentid}`,
@@ -84,7 +85,6 @@ function Addstudent() {
     getUser();
   }, []);
 
-  const token = localStorage.getItem("accessToken");
   const [formData, setFormData] = useState({
     profilePic: "",
     firstName: "",

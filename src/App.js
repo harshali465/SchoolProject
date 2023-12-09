@@ -72,6 +72,7 @@ const App = () => {
     name: "",
     class: "",
     id: "",
+    fatherName: "",
   });
 
   return (

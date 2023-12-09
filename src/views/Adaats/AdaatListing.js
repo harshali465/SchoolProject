@@ -34,9 +34,7 @@ import "mdbreact/dist/css/mdb.css";
 function CategoryListing() {
   const getUsers = async () => {
     try {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU";
-
+      const token = localStorage.getItem("accessToken");
       const response = await axios.get("http://localhost:3001/api/v1/aadat", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -92,9 +90,7 @@ function CategoryListing() {
   };
 
   const deleteSelected = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTY5OTQzMjE5NiwiZXhwIjoxNzAyMDI0MTk2fQ.Gn_VwncOvLdq9728FXSIESpmSw8J7Nu5d0AyezbwoOU";
-
+    const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.delete(
         "http://localhost:3001/api/v1/aadat",

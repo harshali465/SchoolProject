@@ -60,12 +60,12 @@ function AddAdaat() {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
-    responseType: "",
+    responseType: [],
     customField: [
       {
         fieldTitle: "",
         fieldType: "",
-        options: [],
+        options: ["", ""],
       },
     ],
     isSurat: "",
@@ -74,16 +74,30 @@ function AddAdaat() {
     applicableTo: "",
     isCompulsory: "",
     startDate: new Date(),
-    endDate: new Date(),
+    endDate: "",
     class: "",
     repetation: "",
+    isImageUpload: "",
     repeatDays: [],
+    responsetypeCustomField: [
+      {
+        cusresTitle: "",
+        cusresType: "",
+        cusresValue: [""],
+      },
+    ],
+    repeatDays: [],
+    repeatMonths: [],
+    repeatDateForMonth: new Date(),
+    repeatDateForYear: new Date(),
+    customDate: new Date(),
   });
 
   const [showCustomOptions, setShowCustomOptions] = useState(false);
   const [pop1, setpop1] = useState(false);
   const [validated, setValidated] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [repeatPop1, setrepeatPop1] = useState(false);
 
   const handleCheckboxChange = (e) => {
     setShowCustomOptions(e.target.checked);
@@ -94,55 +108,80 @@ function AddAdaat() {
     handleChange(e);
   };
 
-  const handleChange = (event) => {
+  const handleChange2 = (event) => {
     const { name, value } = event.target;
-    if (name == "yesno") {
-      setFormData({
-        ...formData,
-        responseType: "yesno",
-      });
-    } else if (name === "custom") {
-      setFormData({
-        ...formData,
-        responseType: "custom",
-      });
-    } else if (name === "remarkbox") {
-      setFormData({
-        ...formData,
-        responseType: "remarkbox",
-      });
-    } else if (name === "image") {
-      setFormData({
-        ...formData,
-        responseType: "image",
-      });
-    } else if (name === "male") {
-      setFormData({
-        ...formData,
+    if (name === "male") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         applicableTo: "male",
-      });
+      }));
     } else if (name === "female") {
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         applicableTo: "female",
-      });
+      }));
     } else if (name === "both") {
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         applicableTo: "both",
-      });
+      }));
     } else if (name === "isCompulsoryYes") {
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         isCompulsory: true,
-      });
+      }));
     } else if (name === "isCompulsoryNo") {
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         isCompulsory: false,
-      });
+      }));
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, checked, value } = event.target;
+
+    if (checked) {
+      if (name === "custom") {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          responseType: [...prevFormData.responseType, name],
+        }));
+        setShowCustomOptions(true); // Show additional options when "custom" is checked
+      } else if (name === "image") {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          responseType: [...prevFormData.responseType, name],
+        }));
+        setpop1(true); // Show image options when "image" is checked
+      } else {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          responseType: [...prevFormData.responseType, name],
+        }));
+      }
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        responseType: prevFormData.responseType.filter((type) => type !== name),
+      }));
+
+      if (name === "custom") {
+        setShowCustomOptions(false); // Hide additional options when "custom" is unchecked
+      } else if (name === "image") {
+        setpop1(false); // Hide image options when "image" is unchecked
+      }
+    }
+    if (
+      name !== "custom" &&
+      name !== "image" &&
+      name !== "yesno" &&
+      name !== "remarkbox" // Add more conditions for other responseType fields if needed
+    ) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
     }
   };
 
@@ -158,6 +197,15 @@ function AddAdaat() {
       setVisible(true);
     }
   };
+
+  // useEffect(() => {
+  //   if (showCustomOptions === false) {
+  //     setFormData((prevFormData) => ({
+  //       ...prevFormData,
+  //       responsetypeCustomField: [],
+  //     }));
+  //   }
+  // }, [showCustomOptions]);
 
   const handleFormSubmission = async () => {
     console.log(formData);
@@ -179,6 +227,12 @@ function AddAdaat() {
         repetation: formData.repetation,
         repeatDays: formData.repeatDays,
         class: formData.class,
+        responsetypeCustomField: formData.responsetypeCustomField,
+        repeatDays: formData.repeatDays,
+        repeatMonths: formData.repeatMonths,
+        repeatDateForMonth: formData.repeatDateForMonth,
+        repeatDateForYear: formData.repeatDateForYear,
+        customDate: formData.customDate,
       },
       {
         headers: {
@@ -220,6 +274,12 @@ function AddAdaat() {
       endDate: "",
       repetation: "",
       repeatDays: [],
+      responsetypeCustomField: [],
+      repeatDays: [],
+      repeatMonths: [],
+      repeatDateForMonth: "",
+      repeatDateForYear: "",
+      customDate: "",
     });
   };
 
@@ -301,7 +361,7 @@ function AddAdaat() {
         {
           fieldTitle: "",
           fieldType: "",
-          options: [],
+          options: ["", ""],
         },
       ],
     });
@@ -347,9 +407,85 @@ function AddAdaat() {
   };
 
   const addMoreOptions = (index) => {
-    const updatedFormData = { ...formData };
-    updatedFormData.customField[index].options.push("");
-    setFormData(updatedFormData);
+    const updatedCustomField = [...formData.customField];
+
+    // Check if options array exists, if not, initialize it
+    if (!updatedCustomField[index].options) {
+      updatedCustomField[index].options = [];
+    }
+
+    updatedCustomField[index].options.push(""); // Push an empty string for a new option
+
+    setFormData({
+      ...formData,
+      customField: updatedCustomField,
+    });
+  };
+  const addMoreOptionsRes = () => {
+    const updatedCustomField = [...formData.responsetypeCustomField];
+
+    // Check if options array exists, if not, initialize it
+    if (!updatedCustomField[0].cusresValue) {
+      updatedCustomField[0].cusresValue = [];
+    }
+
+    updatedCustomField[0].cusresValue.push(""); // Push an empty string for a new option
+
+    setFormData({
+      ...formData,
+      responsetypeCustomField: updatedCustomField,
+    });
+  };
+
+  const handleOptionChange = (fieldIndex, optionIndex, value) => {
+    const updatedCustomField = [...formData.customField];
+
+    updatedCustomField[fieldIndex].options[optionIndex] = value;
+
+    setFormData({
+      ...formData,
+      customField: updatedCustomField,
+    });
+  };
+
+  // repetation days
+  const handleRepChange = (e) => {
+    const { name, checked } = e.target;
+    let updatedRepeatDays = [...formData.repeatDays]; // Create a copy of repeatDays array
+
+    if (checked) {
+      // If checkbox is checked, add the day to the array
+      updatedRepeatDays = [...updatedRepeatDays, name];
+    } else {
+      // If checkbox is unchecked, remove the day from the array
+      updatedRepeatDays = updatedRepeatDays.filter((day) => day !== name);
+    }
+
+    // Update the state with the new array of selected days
+    setFormData({
+      ...formData,
+      repeatDays: updatedRepeatDays,
+    });
+  };
+
+  // repeat months
+  const handleRepmonthChange = (e) => {
+    const { name, checked } = e.target;
+    let updatedRepeatDays = [...formData.repeatMonths]; // Create a copy of repeatDays array
+
+    if (checked) {
+      // If checkbox is checked, add the day to the array
+      updatedRepeatDays = [...updatedRepeatDays, name];
+    } else {
+      // If checkbox is unchecked, remove the day from the array
+      updatedRepeatDays = updatedRepeatDays.filter((day) => day !== name);
+    }
+
+    // Update the state with the new array of selected days
+    setFormData({
+      ...formData,
+      repeatMonths: updatedRepeatDays,
+    });
   };
 
   return (
@@ -440,79 +576,167 @@ function AddAdaat() {
 
                     <CCol md={6}>
                       <CFormCheck
-                        id="flexCheckDefault"
+                        id="flexCheckDefaultYesNo"
                         label="yes/no tab"
                         name="yesno"
-                        checked={
-                          formData.responseType === "yesno" ? true : false
-                        }
+                        checked={formData.responseType.includes("yesno")}
                         onChange={handleChange}
                       />
 
                       <CFormCheck
-                        id="flexCheckDefault"
+                        id="flexCheckDefaultCustom"
                         label="custom"
                         name="custom"
-                        checked={
-                          showCustomOptions &&
-                          formData.responseType === "custom"
-                            ? true
-                            : false
-                        }
-                        onChange={handleCheckboxChange}
+                        checked={formData.responseType.includes("custom")}
+                        onChange={handleChange}
                       />
-                      {showCustomOptions && (
-                        <div className=" card p-2 mt-2">
-                          <CFormInput
-                            type="text"
-                            id="labelName"
-                            placeholder="Please enter name"
-                          />
-                          <div className="d-flex flex-column p-2">
-                            <CFormCheck
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios2"
-                              value="option2"
-                              label="for boys"
+                      {showCustomOptions &&
+                        formData.responsetypeCustomField.map((field, index) => (
+                          <div className=" card p-2 mt-2">
+                            <CFormInput
+                              type="text"
+                              id="labelName"
+                              placeholder="Please enter name"
+                              onChange={(e) => {
+                                setFormData((prevFormData) => ({
+                                  ...prevFormData,
+                                  responsetypeCustomField: [
+                                    {
+                                      ...prevFormData.responsetypeCustomField[
+                                        index
+                                      ],
+                                      cusresTitle: e.target.value,
+                                    },
+                                  ],
+                                }));
+                              }}
                             />
-                            <CFormCheck
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios2"
-                              value="option2"
-                              label="for girls"
-                            />
-                            <CFormCheck
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios2"
-                              value="option2"
-                              label="for both"
-                            />
+                            <div className="d-flex flex-column p-2">
+                              <CFormCheck
+                                type="radio"
+                                name="exampleRadios"
+                                id="exampleRadios21"
+                                value="male"
+                                label="for boys"
+                                checked={
+                                  formData.responsetypeCustomField[index]
+                                    .cusresType === "male"
+                                }
+                                onChange={(e) => {
+                                  setFormData((prevFormData) => ({
+                                    ...prevFormData,
+                                    responsetypeCustomField: [
+                                      {
+                                        ...prevFormData.responsetypeCustomField[
+                                          index
+                                        ],
+                                        cusresType: e.target.value,
+                                      },
+                                    ],
+                                  }));
+                                }}
+                              />
+                              <CFormCheck
+                                type="radio"
+                                name="exampleRadios"
+                                id="exampleRadios22"
+                                value="female"
+                                label="for girls"
+                                checked={
+                                  formData.responsetypeCustomField[index]
+                                    .cusresType === "female"
+                                }
+                                onChange={(e) => {
+                                  setFormData((prevFormData) => ({
+                                    ...prevFormData,
+                                    responsetypeCustomField: [
+                                      {
+                                        ...prevFormData.responsetypeCustomField[
+                                          index
+                                        ],
+                                        cusresType: e.target.value,
+                                      },
+                                    ],
+                                  }));
+                                }}
+                              />
+                              <CFormCheck
+                                type="radio"
+                                name="exampleRadios"
+                                id="exampleRadios23"
+                                value="both"
+                                label="for both"
+                                checked={
+                                  formData.responsetypeCustomField[index]
+                                    .cusresType === "both"
+                                }
+                                onChange={(e) => {
+                                  setFormData((prevFormData) => ({
+                                    ...prevFormData,
+                                    responsetypeCustomField: [
+                                      {
+                                        ...prevFormData.responsetypeCustomField[
+                                          index
+                                        ],
+                                        cusresType: e.target.value,
+                                      },
+                                    ],
+                                  }));
+                                }}
+                              />
+
+                              {formData.responsetypeCustomField[
+                                index
+                              ].cusresValue.map((option, optionIndex) => (
+                                <div className="pt-3" key={optionIndex}>
+                                  <CFormInput
+                                    type="text"
+                                    placeholder={`value ${optionIndex + 1}`}
+                                    value={option}
+                                    onChange={(e) => {
+                                      const updatedresponsetypeCustomField = [
+                                        ...formData.responsetypeCustomField,
+                                      ];
+
+                                      updatedresponsetypeCustomField[
+                                        index
+                                      ].cusresValue[optionIndex] =
+                                        e.target.value;
+
+                                      setFormData({
+                                        ...formData,
+                                        responsetypeCustomField:
+                                          updatedresponsetypeCustomField,
+                                      });
+                                    }}
+                                  />
+                                </div>
+                              ))}
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-primary float-right"
+                                onClick={() => addMoreOptionsRes()}
+                              >
+                                add more
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        ))}
+
                       <CFormCheck
-                        id="flexCheckDefault"
+                        id="flexCheckDefaultRemarkBox"
                         label="remark box"
                         name="remarkbox"
-                        checked={
-                          formData.responseType === "remarkbox" ? true : false
-                        }
+                        checked={formData.responseType.includes("remarkbox")}
                         onChange={handleChange}
                       />
 
                       <CFormCheck
-                        id="flexCheckDefault"
+                        id="flexCheckDefaultImage"
                         label="image"
                         name="image"
-                        checked={
-                          pop1 && formData.responseType === "image"
-                            ? true
-                            : false
-                        }
-                        onChange={handleimage}
+                        checked={formData.responseType.includes("image")}
+                        onChange={handleChange}
                         className="mb-2"
                       />
 
@@ -523,6 +747,13 @@ function AddAdaat() {
                             feedbackInvalid="Please select number."
                             id="imageNo"
                             name="imageNo"
+                            onChange={(event) => {
+                              const selectedValue = event.target.value;
+                              setFormData((prevFormData) => ({
+                                ...prevFormData,
+                                isImageUpload: selectedValue,
+                              }));
+                            }}
                           >
                             <option selected="" disabled="" value="">
                               Please select number
@@ -549,7 +780,7 @@ function AddAdaat() {
                         checked={
                           formData.applicableTo === "male" ? true : false
                         }
-                        onChange={handleChange}
+                        onChange={handleChange2}
                       />
                       <CFormCheck
                         id="flexCheckDefault"
@@ -558,7 +789,7 @@ function AddAdaat() {
                         checked={
                           formData.applicableTo === "female" ? true : false
                         }
-                        onChange={handleChange}
+                        onChange={handleChange2}
                       />
                       <CFormCheck
                         id="flexCheckDefault"
@@ -567,7 +798,7 @@ function AddAdaat() {
                         checked={
                           formData.applicableTo === "both" ? true : false
                         }
-                        onChange={handleChange}
+                        onChange={handleChange2}
                       />
                     </CCol>
                   </CRow>
@@ -603,14 +834,14 @@ function AddAdaat() {
                         label="yes"
                         name="isCompulsoryYes"
                         checked={formData.isCompulsory === true ? true : false}
-                        onChange={handleChange}
+                        onChange={handleChange2}
                       />
                       <CFormCheck
                         id="flexCheckDefault"
                         label="no"
                         name="isCompulsoryNo"
                         checked={formData.isCompulsory === false ? true : false}
-                        onChange={handleChange}
+                        onChange={handleChange2}
                       />
                     </CCol>
                   </CRow>
@@ -699,7 +930,7 @@ function AddAdaat() {
                             <option>checkbox</option>
                           </CFormSelect>
                           <div className="pt-3">
-                            <CFormInput
+                            {/* <CFormInput
                               type="text"
                               id="value1option"
                               placeholder="value 1"
@@ -710,9 +941,25 @@ function AddAdaat() {
                                   e.target.value
                                 )
                               }
-                            />
+                            /> */}
+                            {field.options.map((option, optionIndex) => (
+                              <div className="pt-3" key={optionIndex}>
+                                <CFormInput
+                                  type="text"
+                                  placeholder={`value ${optionIndex + 1}`}
+                                  value={option}
+                                  onChange={(e) =>
+                                    handleOptionChange(
+                                      index,
+                                      optionIndex,
+                                      e.target.value
+                                    )
+                                  }
+                                />
+                              </div>
+                            ))}
                           </div>
-                          <div className="pt-3">
+                          {/* <div className="pt-3">
                             <CFormInput
                               type="text"
                               id="value2option"
@@ -725,7 +972,7 @@ function AddAdaat() {
                                 )
                               }
                             />
-                          </div>
+                          </div> */}
 
                           <button
                             className="btn btn-sm btn-danger"
@@ -734,8 +981,9 @@ function AddAdaat() {
                             Remove
                           </button>
                           <button
+                            type="button"
                             className="btn btn-sm btn-primary float-right"
-                            onClick={addMoreOptions}
+                            onClick={() => addMoreOptions(index)}
                           >
                             add more
                           </button>
@@ -743,6 +991,7 @@ function AddAdaat() {
                       ))}
                       <div className="pt-2">
                         <button
+                          type="button"
                           className="btn btn-sm btn-dark float-right"
                           onClick={addCustomField}
                         >
@@ -782,6 +1031,9 @@ function AddAdaat() {
                         endDate: date,
                       })
                     }
+                    disabled={
+                      formData.repetation && formData.repetation === "custom"
+                    }
                     customInput={<CustomInput labelName={"End date"} />}
                   />
                 </CCol>
@@ -791,7 +1043,7 @@ function AddAdaat() {
                     aria-describedby="validationCustom07Feedback"
                     feedbackInvalid="Please select a valid Mentor."
                     id="validationCustom07"
-                    label="repetation"
+                    label="repetition"
                     name="repetation"
                     required
                     value={formData.repetation}
@@ -802,12 +1054,343 @@ function AddAdaat() {
                     </option>
                     <option value="norepeat">Does not repeat</option>
                     <option value="daily">Daily</option>
-                    <option value="weekly">Weekly on Thursday</option>
-                    <option value="monthly">Monthly on fourth Thursday</option>
-                    <option value="yearly">Anually on June 22</option>
-                    <option value="everyweekday">Every weekday</option>
-                    <option>Custom</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Anually</option>
+
+                    <option value="custom">Custom</option>
                   </CFormSelect>
+                </CCol>
+
+                {formData.repetation === "monthly" && (
+                  <CCol className="pt-4">
+                    <DatePicker
+                      locale="sa"
+                      label="Repeat day for the month/months"
+                      dateFormat="dd"
+                      selected={formData.repeatDateForMonth}
+                      popperPlacement="top-end"
+                      onChange={(date) =>
+                        setFormData({
+                          ...formData,
+                          repeatDateForMonth: date,
+                        })
+                      }
+                      customInput={
+                        <CustomInput
+                          labelName={"Repeat date for the month/months"}
+                        />
+                      }
+                    />
+                  </CCol>
+                )}
+                {formData.repetation === "yearly" && (
+                  <CCol className="pt-4">
+                    <DatePicker
+                      locale="sa"
+                      label="Repeat date for the years"
+                      dateFormat="dd/MM"
+                      selected={formData.repeatDateForYear}
+                      popperPlacement="top-end"
+                      onChange={(date) =>
+                        setFormData({
+                          ...formData,
+                          repeatDateForYear: date,
+                        })
+                      }
+                      customInput={
+                        <CustomInput labelName={"Repeat date for the years"} />
+                      }
+                    />
+                  </CCol>
+                )}
+
+                {formData.repetation === "custom" && (
+                  <CCol className="pt-4">
+                    <DatePicker
+                      locale="sa"
+                      label="Custom Date!"
+                      dateFormat="dd/MM/yyyy"
+                      selected={formData.customDate}
+                      popperPlacement="top-end"
+                      onChange={(date) =>
+                        setFormData({
+                          ...formData,
+                          customDate: date,
+                        })
+                      }
+                      customInput={
+                        <CustomInput labelName={"Customized Date!"} />
+                      }
+                    />
+                  </CCol>
+                )}
+
+                <CCol className="pt-4">
+                  <CCol md={6}>
+                    <p>Repeat days:</p>
+                  </CCol>
+
+                  <CCol md={6}>
+                    <CFormCheck
+                      id="flexCheckDefaultSun"
+                      label="Sunday"
+                      name="sunday"
+                      onChange={handleRepChange}
+                      checked={formData.repeatDays.includes("sunday")}
+                      disabled={
+                        formData.repetation &&
+                        (formData.repetation === "daily" ||
+                          formData.repetation === "monthly" ||
+                          formData.repetation === "yearly" ||
+                          formData.repetation === "custom")
+                          ? true
+                          : false
+                      }
+                    />
+                    <CFormCheck
+                      id="flexCheckDefaultMon"
+                      label="Monday"
+                      name="monday"
+                      onChange={handleRepChange}
+                      checked={formData.repeatDays.includes("monday")}
+                      disabled={
+                        formData.repetation &&
+                        (formData.repetation === "daily" ||
+                          formData.repetation === "monthly" ||
+                          formData.repetation === "yearly" ||
+                          formData.repetation === "custom")
+                          ? true
+                          : false
+                      }
+                    />
+                    <CFormCheck
+                      id="flexCheckDefaultTue"
+                      label="Tuesday"
+                      name="tuesday"
+                      onChange={handleRepChange}
+                      checked={formData.repeatDays.includes("tuesday")}
+                      disabled={
+                        formData.repetation &&
+                        (formData.repetation === "daily" ||
+                          formData.repetation === "monthly" ||
+                          formData.repetation === "yearly" ||
+                          formData.repetation === "custom")
+                          ? true
+                          : false
+                      }
+                    />
+                    <CFormCheck
+                      id="flexCheckDefaultSWed"
+                      label="Wednesday"
+                      name="wednesday"
+                      onChange={handleRepChange}
+                      checked={formData.repeatDays.includes("wednesday")}
+                      disabled={
+                        formData.repetation &&
+                        (formData.repetation === "daily" ||
+                          formData.repetation === "monthly" ||
+                          formData.repetation === "yearly" ||
+                          formData.repetation === "custom")
+                          ? true
+                          : false
+                      }
+                    />
+                    <CFormCheck
+                      id="flexCheckDefaultThu"
+                      label="Thursday"
+                      name="thursday"
+                      onChange={handleRepChange}
+                      checked={formData.repeatDays.includes("thursday")}
+                      disabled={
+                        formData.repetation &&
+                        (formData.repetation === "daily" ||
+                          formData.repetation === "monthly" ||
+                          formData.repetation === "yearly" ||
+                          formData.repetation === "custom")
+                          ? true
+                          : false
+                      }
+                    />
+                    <CFormCheck
+                      id="flexCheckDefaultFri"
+                      label="Friday"
+                      name="friday"
+                      onChange={handleRepChange}
+                      checked={formData.repeatDays.includes("friday")}
+                      disabled={
+                        formData.repetation &&
+                        (formData.repetation === "daily" ||
+                          formData.repetation === "monthly" ||
+                          formData.repetation === "yearly" ||
+                          formData.repetation === "custom")
+                          ? true
+                          : false
+                      }
+                    />
+                    <CFormCheck
+                      id="flexCheckDefaultSat"
+                      label="Saturday"
+                      name="saturday"
+                      onChange={handleRepChange}
+                      checked={formData.repeatDays.includes("saturday")}
+                      disabled={
+                        formData.repetation &&
+                        (formData.repetation === "daily" ||
+                          formData.repetation === "monthly" ||
+                          formData.repetation === "yearly" ||
+                          formData.repetation === "custom")
+                          ? true
+                          : false
+                      }
+                    />
+                  </CCol>
+                </CCol>
+                <CCol className="pt-4">
+                  <CCol md={6}>
+                    <p>Repeat months:</p>
+                  </CCol>
+
+                  <CCol md={6}>
+                    <CRow>
+                      <CCol md={6}>
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="January"
+                          name="january"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("january")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="February"
+                          name="february"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("february")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="March"
+                          name="march"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("march")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="April"
+                          name="april"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("april")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="May"
+                          name="may"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("may")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="June"
+                          name="june"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("june")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                      </CCol>
+                      <CCol md={6}>
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="July"
+                          name="july"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("july")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="August"
+                          name="august"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("august")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="September"
+                          name="september"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("september")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="October"
+                          name="october"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("october")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="November"
+                          name="november"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("november")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                        <CFormCheck
+                          id="flexCheckDefaultSun"
+                          label="December"
+                          name="december"
+                          onChange={handleRepmonthChange}
+                          checked={formData.repeatMonths.includes("december")}
+                          disabled={
+                            formData.repetation &&
+                            formData.repetation === "custom"
+                          }
+                        />
+                      </CCol>
+                    </CRow>
+                  </CCol>
                 </CCol>
               </CCol>
             </CRow>

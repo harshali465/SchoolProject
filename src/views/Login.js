@@ -53,7 +53,16 @@ const Login = () => {
       setAuthState({
         role: response.data.data.user.role,
         id: response.data.data.user._id,
-        // name: response.data.data.user.firstName,
+        name: response.data.data.user.firstName,
+        lastname: response.data.data.user.lastName,
+        // fatherName:
+        //   response.data.data.user.familyDetails.fatherFirstName !== undefined
+        //     ? response.data.data.user.familyDetails.fatherFirstName
+        //     : null,
+        // fatherLastName:
+        //   response.data.data.user.familyDetails.fatherFirstName !== undefined
+        //     ? response.data.data.user.familyDetails.fatherLastName
+        //     : null,
         // class: response.data.data.user.class,
       });
       const token = response.data.token;
