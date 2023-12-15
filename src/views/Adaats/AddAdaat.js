@@ -233,6 +233,7 @@ function AddAdaat() {
         repeatDateForMonth: formData.repeatDateForMonth,
         repeatDateForYear: formData.repeatDateForYear,
         customDate: formData.customDate,
+        isSurat: false,
       },
       {
         headers: {
@@ -263,23 +264,37 @@ function AddAdaat() {
     setFormData({
       name: "",
       category: "",
-      responseType: "",
-      customField: [],
+      responseType: [],
+      customField: [
+        {
+          fieldTitle: "",
+          fieldType: "",
+          options: ["", ""],
+        },
+      ],
       isSurat: "",
       isRemark: "",
       isImageUpload: "",
       applicableTo: "",
       isCompulsory: "",
-      startDate: "",
+      startDate: new Date(),
       endDate: "",
+      class: "",
       repetation: "",
+      isImageUpload: "",
       repeatDays: [],
-      responsetypeCustomField: [],
+      responsetypeCustomField: [
+        {
+          cusresTitle: "",
+          cusresType: "",
+          cusresValue: [""],
+        },
+      ],
       repeatDays: [],
       repeatMonths: [],
-      repeatDateForMonth: "",
-      repeatDateForYear: "",
-      customDate: "",
+      repeatDateForMonth: new Date(),
+      repeatDateForYear: new Date(),
+      customDate: new Date(),
     });
   };
 
