@@ -647,6 +647,7 @@ function StudentView() {
     const allAadats = await fetchData();
     // Set the combined aadats to the displayAadats state after clearing the previous data
     console.log("Display adaats->", allAadats);
+    console.log("hi");
     setDisplayAdaats(allAadats);
   };
 
