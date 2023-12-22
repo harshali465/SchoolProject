@@ -599,28 +599,58 @@ function StudentView() {
 
   // effects
 
+  // useEffect(() => {
+  //   const fetchAllAadats = async () => {
+  //     setDisplayAdaats([]);
+  //     const customAadats = await getAadatsforStudentCustom();
+  //     const yearlyAadats = await getAadatsforStudentYearly();
+  //     const weeklyAadats = await getAadatsforStudentweekly();
+  //     const monthlyAadats = await getAadatsforStudentMonthly();
+  //     const dailyAadats = await getAadatsforStudentDaily();
+
+  //     // Combine all the fetched aadats
+  //     const allAadats = [
+  //       ...(customAadats || []), // Check if falsy or empty
+  //       ...(yearlyAadats || []),
+  //       ...(weeklyAadats || []),
+  //       ...(monthlyAadats || []),
+  //       ...(dailyAadats || []),
+  //     ];
+  //     // Set the combined aadats to the displayAadats state
+  //     console.log("Display adaats->", allAadats);
+  //     setDisplayAdaats(allAadats);
+  //   };
+
+  //   fetchAllAadats();
+  // }, [authState.id, authState.role]);
+  const fetchData = async () => {
+    const customAadats = await getAadatsforStudentCustom();
+    const yearlyAadats = await getAadatsforStudentYearly();
+    const weeklyAadats = await getAadatsforStudentweekly();
+    const monthlyAadats = await getAadatsforStudentMonthly();
+    const dailyAadats = await getAadatsforStudentDaily();
+
+    // Combine all the fetched aadats into a Set to ensure uniqueness
+    const allAadatsSet = new Set([
+      ...(customAadats || []),
+      ...(yearlyAadats || []),
+      ...(weeklyAadats || []),
+      ...(monthlyAadats || []),
+      ...(dailyAadats || []),
+    ]);
+
+    // Convert the Set back to an array
+    return Array.from(allAadatsSet);
+  };
+
+  const fetchAllAadats = async () => {
+    const allAadats = await fetchData();
+    // Set the combined aadats to the displayAadats state after clearing the previous data
+    console.log("Display adaats->", allAadats);
+    setDisplayAdaats(allAadats);
+  };
+
   useEffect(() => {
-    const fetchAllAadats = async () => {
-      setDisplayAdaats([]);
-      const customAadats = await getAadatsforStudentCustom();
-      const yearlyAadats = await getAadatsforStudentYearly();
-      const weeklyAadats = await getAadatsforStudentweekly();
-      const monthlyAadats = await getAadatsforStudentMonthly();
-      const dailyAadats = await getAadatsforStudentDaily();
-
-      // Combine all the fetched aadats
-      const allAadats = [
-        ...(customAadats || []), // Check if falsy or empty
-        ...(yearlyAadats || []),
-        ...(weeklyAadats || []),
-        ...(monthlyAadats || []),
-        ...(dailyAadats || []),
-      ];
-      // Set the combined aadats to the displayAadats state
-      console.log("Display adaats->", allAadats);
-      setDisplayAdaats(allAadats);
-    };
-
     fetchAllAadats();
   }, [authState.id, authState.role]);
 
