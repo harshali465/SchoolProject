@@ -116,7 +116,7 @@ function CategoryListing() {
   };
 
   const editStudent = (catid) => {
-    navigate("/editcategory", {
+    navigate("/editadaat", {
       state: { catid: catid },
     });
   };

@@ -7,6 +7,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useCountdown from "../../helpers/CountDownTimer";
 import "./studentview.css";
+import { CSpinner } from "@coreui/react";
+
+import Report from "./Reports";
 
 import {
   CModal,
@@ -49,6 +52,7 @@ function StudentView() {
   const [EditForm, setEditForm] = useState(false);
   const [EditIdADM, setEditIdADM] = useState("");
   const [ReadyToEdit, setReadyToEdit] = useState(false);
+  const [isLoding, setisLoding] = useState(false);
 
   const [uniqueSurahCount, setUniqueSurahCount] = useState(0);
 
@@ -58,19 +62,20 @@ function StudentView() {
     remarkBoxes: {},
     yesno: {},
     customField: [
-      {
-        fieldTitle: "",
-        fieldType: [""],
-        options: [],
-      },
+      // {
+      //   fieldTitle: "",
+      //   fieldType: [""],
+      //   options: [],
+      //   adaatId: "",
+      // },
     ],
     responsetypeCustomField: [
-      {
-        cusresTitle: "",
-        cusresValue: {},
-      },
+      // {
+      //   cusresTitle: "",
+      //   cusresValue: {},
+      // },
     ],
-    images: {},
+    images: [],
   });
 
   const [suratForm, setsuratForm] = useState({
@@ -395,7 +400,7 @@ function StudentView() {
           },
           params: {
             class: res.data.data.class,
-            repetation: "custom",
+            repetation: "custom", /// custom //// dailty, mothly
             applicableTo: res.data.data.gender,
             currentTime: new Date(),
           },
@@ -623,6 +628,7 @@ function StudentView() {
 
   //   fetchAllAadats();
   // }, [authState.id, authState.role]);
+
   const fetchData = async () => {
     const customAadats = await getAadatsforStudentCustom();
     const yearlyAadats = await getAadatsforStudentYearly();
@@ -644,11 +650,13 @@ function StudentView() {
   };
 
   const fetchAllAadats = async () => {
+    setisLoding(true);
     const allAadats = await fetchData();
     // Set the combined aadats to the displayAadats state after clearing the previous data
     console.log("Display adaats->", allAadats);
     console.log("hi");
     setDisplayAdaats(allAadats);
+    setisLoding(false);
   };
 
   useEffect(() => {
@@ -712,37 +720,65 @@ function StudentView() {
 
   useEffect(() => {
     if (student && student.suratRecord) {
-      const countUniqueEntries = () => {
+      const countUniqueEntries = async () => {
         // extracting latest surat student has read
 
-        const obj = student.suratRecord;
-        let keys = Object.keys(obj);
-        let lastKey = keys[keys.length - 1];
+        const suratRecordArray = student.suratRecord;
 
-        let lastValue = obj[lastKey];
+        // Get the last entry from the suratRecord array
+        const lastEntry = suratRecordArray[suratRecordArray.length - 1];
 
-        setsuratForm((prevSuratForm) => ({
-          ...prevSuratForm,
-          suratName: lastKey,
-          ayatNo: ayatsPerSurat[lastKey] || prevSuratForm.ayatNo, // Set ayatNo based on the selected Surat
-          selectedAyatNo: lastValue,
-        }));
+        if (lastEntry) {
+          setsuratForm((prevSuratForm) => ({
+            ...prevSuratForm,
+            suratName: lastEntry.suratName,
+            ayatNo: ayatsPerSurat[lastEntry.suratName] || prevSuratForm.ayatNo,
+            selectedAyatNo: lastEntry.selectedAyatNo,
+          }));
+        }
 
-        const uniqueEntries = new Set();
-        let count = 0;
+        // const uniqueEntries = new Set();
+        // let count = 0;
 
-        Object.entries(student.suratRecord).forEach(
-          ([suratName, selectedAyatNo]) => {
-            const combinedEntry = `${suratName}-${selectedAyatNo}`;
+        // Object.entries(student.suratRecord).forEach(
+        //   ([suratName, selectedAyatNo]) => {
+        //     const combinedEntry = `${suratName}-${selectedAyatNo}`;
 
-            if (!uniqueEntries.has(combinedEntry)) {
-              uniqueEntries.add(combinedEntry);
-              count++;
+        //     if (!uniqueEntries.has(combinedEntry)) {
+        //       uniqueEntries.add(combinedEntry);
+        //       count++;
+        //     }
+        //   }
+        // );
+        // // 6236 total ayats
+        // setUniqueSurahCount(count);
+        const token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
+
+        try {
+          const response = await axios.get(
+            "http://18.118.42.224:3001/api/v1/surat",
+            {
+              params: {
+                suratName: lastEntry.suratName,
+                ayatNo: 1,
+              },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
-          }
-        );
-        // 6236 total ayats
-        setUniqueSurahCount(count);
+          );
+
+          // Assuming the page number is available in the response data
+          const pageNumber = response.data.pageNumber;
+          // console.log(lastEntry.suratName);
+          // console.log(pageNumber);
+
+          setUniqueSurahCount(pageNumber);
+        } catch (error) {
+          console.error("Error fetching data:", error.message);
+          // Handle errors here
+        }
       };
 
       countUniqueEntries();
@@ -890,36 +926,11 @@ function StudentView() {
     const { name, value } = e.target;
 
     if (name.startsWith("image")) {
-      const files = e.target.files;
+      // const files = e.target.files;
       // If no files are selected, clear the existing state for that input
-      if (files.length === 0) {
-        const updatedImages = { ...formData.images };
-        delete updatedImages[name]; // Remove the specific image key
-        setformData({
-          ...formData,
-          images: updatedImages,
-        });
-        return; // Exit function
-      }
 
-      // Make a copy of existing images
-      const updatedImages = {
-        ...formData.images,
-      };
-
-      // Handle the selected files and update updatedImages object accordingly
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        // Process each file as needed, for instance, upload to a server, etc.
-        // Here, we are just adding files to the updatedImages object
-        updatedImages[name] = file;
-      }
-
-      // Update formData with updated images
-      setformData({
-        ...formData,
-        images: updatedImages,
-      });
+      const selectedFiles = Array.from(e.target.files);
+      setformData({ ...formData, images: selectedFiles });
     } else if (name.startsWith("yesno")) {
       console.log(name, value);
       const updatedYesNo = {
@@ -927,6 +938,8 @@ function StudentView() {
         [name]: {
           value: value,
           aadat: aadat._id,
+          aadatName: aadat.name,
+          categoryName: aadat.category.name,
         },
       };
 
@@ -955,6 +968,8 @@ function StudentView() {
         [name]: {
           value: value,
           aadat: aadat._id,
+          aadatName: aadat.name,
+          categoryName: aadat.category.name,
         },
       };
 
@@ -1028,19 +1043,42 @@ function StudentView() {
         setReadyToEdit(true);
       } else {
         // its not submitted========> submit the form ie below
+
+        const Fd = new FormData();
+
+        // Append form data fields to the FormData object
+        Fd.append("student", authState.id);
+        Fd.append("remarkBoxes", JSON.stringify(formData.remarkBoxes));
+        Fd.append("yesno", JSON.stringify(formData.yesno));
+        Fd.append("customField", JSON.stringify(formData.customField));
+        Fd.append(
+          "responsetypeCustomField",
+          JSON.stringify(formData.responsetypeCustomField)
+        );
+
+        // Append files to the FormData object
+        // Fd.append("images", formData.images[0]);
+
+        formData.images.forEach((file, index) => {
+          Fd.append(`images`, file); // Append each file as an array
+          // Fd.append(`images`, file, file.filename);
+        });
+
         const response = await axios.post(
           `http://18.118.42.224:3001/api/v1/aadatdata/sumbitresponse`,
+          Fd,
+          // {
+          //   student: authState.id,
+          //   remarkBoxes: formData.remarkBoxes,
+          //   yesno: formData.yesno,
+          //   customField: formData.customField,
+          //   responsetypeCustomField: formData.responsetypeCustomField,
+          //   images: formData.images,
+          // },
 
           {
-            student: authState.id,
-            remarkBoxes: formData.remarkBoxes,
-            yesno: formData.yesno,
-            customField: formData.customField,
-            responsetypeCustomField: formData.responsetypeCustomField,
-            images: formData.images,
-          },
-          {
             headers: {
+              // "Content-Type": "multipart/form-data", // Ensure Content-Type is set to multipart/form-data
               Authorization: `Bearer ${token}`,
             },
           }
@@ -1048,12 +1086,17 @@ function StudentView() {
 
         console.log(response);
 
+        // updating surat
         const existingSuratRecord = student.suratRecord;
 
-        existingSuratRecord[suratForm.suratName] = suratForm.selectedAyatNo;
+        existingSuratRecord.push({
+          suratName: suratForm.suratName,
+          selectedAyatNo: suratForm.selectedAyatNo,
+        });
 
+        // Creating the requestBody object with the updated suratRecord
         const requestBody = {
-          suratRecord: existingSuratRecord,
+          suratRecord: existingSuratRecord, // Converting Map back to an object
         };
 
         const response2 = await axios.patch(
@@ -1083,23 +1126,49 @@ function StudentView() {
     uniqueIndex,
     fieldTitle,
     fieldType,
-    selectedOption
+    selectedOption,
+    id
   ) => {
     const updatedCustomField = [...formData.customField];
-    const [fieldIndex, typeIndex] = uniqueIndex.split("_");
+    // const [fieldIndex, typeIndex] = uniqueIndex.split("_");
 
-    if (fieldIndex >= 0 && fieldIndex < updatedCustomField.length) {
-      updatedCustomField[fieldIndex] = {
-        fieldTitle: fieldTitle,
+    // // if (fieldIndex >= 0 && fieldIndex < updatedCustomField.length) {
+    // updatedCustomField[fieldIndex] = {
+    //   fieldTitle: fieldTitle,
+    //   fieldType: [{ type: fieldType }],
+    //   options: [selectedOption],
+    //   adaatId: id,
+    // };
+
+    // setformData({
+    //   ...formData,
+    //   customField: updatedCustomField,
+    // });
+    // // }
+    const [fieldIndex, typeIndex, uniqueFieldTitle] = uniqueIndex.split("_");
+
+    // Check if the fieldIndex exists and uniqueFieldTitle matches with fieldTitle
+    const existingField = updatedCustomField.find(
+      (cf) => cf.adaatId === id && cf.fieldTitle === uniqueFieldTitle
+    );
+
+    if (!existingField) {
+      // If the field doesn't exist, create a new entry
+      updatedCustomField.push({
+        fieldTitle: uniqueFieldTitle,
         fieldType: [{ type: fieldType }],
         options: [selectedOption],
-      };
-
-      setformData({
-        ...formData,
-        customField: updatedCustomField,
+        adaatId: id,
       });
+    } else {
+      // If the field exists, update its options array
+      existingField.options = [selectedOption];
     }
+
+    setformData({
+      ...formData,
+      customField: updatedCustomField,
+    });
   };
 
   const ayatsPerSurat = {
@@ -1163,7 +1232,7 @@ function StudentView() {
     "Al-Mujadila": "",
     "Al-Hashr": "",
     "Al-Mumtahanah": "",
-    "As-Saff": "",
+    "As-Saff": 14,
     "Al-Jumu'ah": "",
     "Al-Munafiqoon": "",
     "At-Taghabun": "",
@@ -1216,7 +1285,7 @@ function StudentView() {
     "Al-Masad": "",
     "Al-Ikhlas": "",
     "Al-Falaq": "",
-    "An-Naas": "",
+    "An-Naas": 6,
   };
   const handleSurat = (e) => {
     const selectedSuratName = e.target.value;
@@ -1250,8 +1319,32 @@ function StudentView() {
           },
         }
       );
+
+      const existingSuratRecord = student.suratRecord;
+
+      existingSuratRecord.push({
+        suratName: suratForm.suratName,
+        selectedAyatNo: suratForm.selectedAyatNo,
+      });
+
+      // Creating the requestBody object with the updated suratRecord
+      const requestBody = {
+        suratRecord: existingSuratRecord, // Converting Map back to an object
+      };
+
+      const response2 = await axios.patch(
+        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
+
+        requestBody,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       console.log(dataForToday);
-      setReadyToEdit(false);
+
       throw alert("successfully edited!");
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -1262,28 +1355,19 @@ function StudentView() {
     <div className="d-flex flex-column align-items-center">
       {/* modal */}
       <CModal
+        size="xl"
         backdrop="static"
         visible={EditForm}
         onClose={() => setEditForm(false)}
         aria-labelledby="StaticBackdropExampleLabel"
       >
         <CModalHeader>
-          <CModalTitle id="StaticBackdropExampleLabel">
-            Edit submission
-          </CModalTitle>
+          <CModalTitle id="StaticBackdropExampleLabel">Report</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          Printing already recorded data to screen. Please evaluate and Confirm
-          Edit
+          <Report displayAdaats={displayAdaats} />
         </CModalBody>
-        <CModalFooter>
-          <CButton color="secondary" onClick={() => setEditForm(false)}>
-            Go back and evaluate
-          </CButton>
-          {/* <CButton color="primary" onClick={handleEdit}>
-            Yes!
-          </CButton> */}
-        </CModalFooter>
+        <CModalFooter></CModalFooter>
       </CModal>
       <div
         className="card"
@@ -1324,6 +1408,11 @@ function StudentView() {
               class="user-image"
               src="https://laravel.cppatidar.com/myaadat/images/no_image.png"
             ></img>
+            {/* <img
+              class="user-image"
+              src={URL.createObjectURL(student.profilePic[0])}
+              alt="Profile"
+            /> */}
             <a
               href="https://laravel.cppatidar.com/myaadat/student/profile/1"
               class="btn-success edit-btn"
@@ -1351,10 +1440,14 @@ function StudentView() {
             >
               Page Submission Expires in <br />
               <span id="demo1" class="tiktiktimer">
-                {hoursLeft}h {minutesLeft}m {secondsLeft}s
+                {hoursLeft}h {minutesLeft}m {secondsLeft}
               </span>
             </h3>
-            <a href="" class="vw only-dd" style={{ marginTop: "5%" }}>
+            <a
+              class="vw only-dd"
+              style={{ marginTop: "5%" }}
+              onClick={() => setEditForm(true)}
+            >
               View Report
             </a>
           </div>
@@ -1375,9 +1468,9 @@ function StudentView() {
             <CProgress
               color="success"
               className="mb-4"
-              value={(uniqueSurahCount / 10) * 100}
+              value={(uniqueSurahCount / 604) * 100}
             >
-              {`${((uniqueSurahCount / 10) * 100).toFixed(2)}%`}
+              {`${((uniqueSurahCount / 604) * 100).toFixed(2)}%`}
             </CProgress>
           </div>
         </div>
@@ -1810,7 +1903,7 @@ function StudentView() {
                                               `yesno_${categoryIndex}_${index}_${typeIndex}`
                                             ]?.value === "yes"
                                           }
-                                          required
+                                          required={adaat.isCompulsory}
                                         />
 
                                         <CFormCheck
@@ -1842,7 +1935,7 @@ function StudentView() {
                                               `yesno_${categoryIndex}_${index}_${typeIndex}`
                                             ]?.value === "no"
                                           }
-                                          required
+                                          required={adaat.isCompulsory}
                                         />
                                       </div>
                                     );
@@ -1901,7 +1994,9 @@ function StudentView() {
                                                           ? true
                                                           : false
                                                       }
-                                                      required
+                                                      required={
+                                                        adaat.isCompulsory
+                                                      }
                                                     />
                                                   </div>
                                                 )
@@ -1949,7 +2044,7 @@ function StudentView() {
                                             onChange={(e) =>
                                               handlechange(e, adaat)
                                             }
-                                            required
+                                            required={adaat.isCompulsory}
                                           ></CFormTextarea>
                                           <label for="floatingTextarea">
                                             remark box
@@ -1993,16 +2088,33 @@ function StudentView() {
                                     <CFormSelect
                                       onChange={(e) =>
                                         updateCustomFieldDropdown(
-                                          `${fieldIndex}_${typeIndex}`,
+                                          // `${fieldIndex}_${typeIndex}`,
+                                          `${fieldIndex}_${typeIndex}_${field.fieldTitle}`,
                                           field.fieldTitle,
                                           "dropdown",
-                                          e.target.value
+                                          e.target.value,
+                                          adaat._id
                                         )
+                                      }
+                                      // value={
+                                      //   formData.customField.find(
+                                      //     (cf) => cf.adaatId === adaat._id
+                                      //   )?.options[0] || ""
+                                      // }
+                                      value={
+                                        formData.customField.find(
+                                          (cf) =>
+                                            cf.adaatId === adaat._id &&
+                                            cf.fieldTitle === field.fieldTitle
+                                        )?.options[0] || ""
                                       }
                                     >
                                       <option value="" disabled>
-                                        Select an option
+                                        {formData.customField.find(
+                                          (cf) => cf.adaatId === adaat._id
+                                        )?.options[0] || "Select an option"}
                                       </option>
+
                                       {field.options.map(
                                         (option, optionIndex) => (
                                           <option
@@ -2044,7 +2156,9 @@ function StudentView() {
               </div>
             </div>
           ))}
-
+        <div className="d-flex justify-content-center align-items-center">
+          {isLoding ? <CSpinner /> : null}
+        </div>
         {ReadyToEdit ? null : (
           <div className="text-center">
             <CButton className="btn btn-dark" type="submit">

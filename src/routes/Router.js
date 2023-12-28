@@ -46,6 +46,8 @@ const MiqaatListing = React.lazy(() =>
 
 const AddMiqaat = React.lazy(() => import("../views/Miqaats/AddMiqaat"));
 const EditMiqaat = React.lazy(() => import("../views/Miqaats/EditMiqaat"));
+const EditAdaat = React.lazy(() => import("../views/Adaats/EditAdaat"));
+const Reports = React.lazy(() => import("../views/Studentview/Reports"));
 
 const routes = [
   { path: "/addstudent", name: "Addstudent", element: Addstudent },
@@ -77,6 +79,11 @@ const routes = [
     name: "AddAdaat",
     element: AddAdaat,
   },
+  {
+    path: "/editadaat",
+    name: "EditAdaat",
+    element: EditAdaat,
+  },
 
   {
     path: "/miqaatlisting",
@@ -100,6 +107,11 @@ const routes = [
     path: "/studentview",
     name: "StudentView",
     element: StudentView,
+  },
+  {
+    path: "/reports",
+    name: "Report",
+    element: Reports,
   },
 ];
 

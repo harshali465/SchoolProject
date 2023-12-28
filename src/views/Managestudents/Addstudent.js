@@ -119,7 +119,23 @@ function Addstudent() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+
+    // if (name === "profilePic") {
+    //   // const files = e.target.files;
+    //   // If no files are selected, clear the existing state for that input
+
+    //   const selectedFiles = event.target.files[0];
+    //   setFormData({ ...formData, profilePic: selectedFiles });
+    // }
+
+    // setFormData({ ...formData, [name]: value });
+
+    if (name === "profilePic") {
+      const selectedFile = event.target.files[0];
+      setFormData({ ...formData, profilePic: selectedFile }); // Update formData directly with the selected file
+    } else {
+      setFormData({ ...formData, [name]: value }); // For other inputs, update formData as usual
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -141,42 +157,82 @@ function Addstudent() {
     setFormData({ ...formData, studentId: uId });
   };
 
+  const data = {
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    itsNo: formData.phoneNumber,
+    email: formData.fatherEmailAddress,
+    gender: "male",
+    password: formData.studentPassword,
+    studentId: formData.studentId,
+    class: formData.class,
+    house: formData.house,
+    division: formData.division,
+    mentor: formData.mentor,
+    siblings: formData.siblings,
+    familyDetails: {
+      fatherFirstName: formData.fatherFirstName,
+      fatherLastName: formData.fatherLastName,
+      fatherPhone: formData.fatherPhoneNumber,
+      fatherEmail: formData.fatherEmailAddress,
+      motherFirstName: formData.motherFirstName,
+      motherLastName: formData.motherLastName,
+      motherPhone: formData.motherPhoneNumber,
+      motherEmail: formData.motherEmailAddress,
+    },
+    behaviousPoints: {
+      positivePoints: "500",
+      negativePoints: "200",
+    },
+    year: formData.year,
+    term: formData.term,
+    profilePic: formData.profilePic,
+  };
+
+  const fd = new FormData();
+
+  // Append form fields to the FormData instance
+  Object.keys(data).forEach((key) => {
+    fd.append(key, data[key]);
+  });
+
   const handleFormSubmission = async () => {
     console.log(formData);
     const response = await axios.post(
       "http://18.118.42.224:3001/api/v1/users/student",
+      fd,
 
-      {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        itsNo: formData.phoneNumber,
-        email: formData.fatherEmailAddress,
-        photo: formData.profilePic,
-        gender: "male",
-        password: formData.studentPassword,
-        studentId: formData.studentId,
-        class: formData.class,
-        house: formData.house,
-        division: formData.division,
-        mentor: formData.mentor,
-        siblings: formData.siblings,
-        familyDetails: {
-          fatherFirstName: formData.fatherFirstName,
-          fatherLastName: formData.fatherLastName,
-          fatherPhone: formData.fatherPhoneNumber,
-          fatherEmail: formData.fatherEmailAddress,
-          motherFirstName: formData.motherFirstName,
-          motherLastName: formData.motherLastName,
-          motherPhone: formData.motherPhoneNumber,
-          motherEmail: formData.motherEmailAddress,
-        },
-        behaviousPoints: {
-          positivePoints: "500",
-          negativePoints: "200",
-        },
-        year: formData.year,
-        term: formData.term,
-      },
+      // {
+      //   firstName: formData.firstName,
+      //   lastName: formData.lastName,
+      //   itsNo: formData.phoneNumber,
+      //   email: formData.fatherEmailAddress,
+      //   gender: "male",
+      //   password: formData.studentPassword,
+      //   studentId: formData.studentId,
+      //   class: formData.class,
+      //   house: formData.house,
+      //   division: formData.division,
+      //   mentor: formData.mentor,
+      //   siblings: formData.siblings,
+      //   familyDetails: {
+      //     fatherFirstName: formData.fatherFirstName,
+      //     fatherLastName: formData.fatherLastName,
+      //     fatherPhone: formData.fatherPhoneNumber,
+      //     fatherEmail: formData.fatherEmailAddress,
+      //     motherFirstName: formData.motherFirstName,
+      //     motherLastName: formData.motherLastName,
+      //     motherPhone: formData.motherPhoneNumber,
+      //     motherEmail: formData.motherEmailAddress,
+      //   },
+      //   behaviousPoints: {
+      //     positivePoints: "500",
+      //     negativePoints: "200",
+      //   },
+      //   year: formData.year,
+      //   term: formData.term,
+      //   profilePic: formData.profilePic,
+      // },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -282,7 +338,7 @@ function Addstudent() {
                   label="Profile pic"
                   name="profilePic"
                   id="inputGroupFile02"
-                  value={formData.profilePic}
+                  // value={formData.profilePic}
                   onChange={handleChange}
                 />
               </CCol>

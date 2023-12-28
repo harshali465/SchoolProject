@@ -21,7 +21,7 @@ function EditCategory() {
   const getUser = async () => {
     try {
       const response = await axios.get(
-        `http://18.118.42.224:3001/api/v1/categories/${id}`,
+        `http://18.118.42.224:3001/api/v1/aadat/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -41,7 +41,7 @@ function EditCategory() {
 
   const handleChange = async () => {
     await axios.patch(
-      `http://18.118.42.224:3001/api/v1/categories/${id}`,
+      `http://18.118.42.224:3001/api/v1/aadat/${id}`,
       { name: catName },
       {
         headers: {
@@ -59,7 +59,7 @@ function EditCategory() {
         type="text"
         feedbackValid="Looks good!"
         id="val1"
-        label="Category Name"
+        label="Adaat Name"
         required
         value={catName}
         onChange={(e) => {
