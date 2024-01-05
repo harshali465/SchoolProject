@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 import "./assets/scss/style.scss";
 import App from "./App";
+import "./index.css";
 
 import { HashRouter } from "react-router-dom";
 import Loader from "./layouts/loader/Loader";

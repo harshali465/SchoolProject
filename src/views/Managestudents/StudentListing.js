@@ -490,8 +490,9 @@ function StudentTable() {
                 <td className="text-center align-middle">{student.class}</td>
                 <td className="text-center align-middle">{student.division}</td>
                 <td className="text-center align-middle">
-                  {student.behaviousPoints.positivePoints -
-                    student.behaviousPoints.negativePoints}
+                  {/* {student.behaviousPoints.positivePoints -
+                    student.behaviousPoints.negativePoints} */}
+                  400
                 </td>
                 <td className="text-center align-middle">
                   {student.active ? "active" : "inactive"}

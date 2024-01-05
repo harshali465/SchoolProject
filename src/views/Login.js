@@ -35,7 +35,8 @@ const Login = () => {
     return true;
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (!isFormValid()) {
       return;
     }
@@ -48,7 +49,7 @@ const Login = () => {
           password,
         }
       );
-      console.log(response.data.data.user.role);
+      console.log(response);
 
       setAuthState({
         role: response.data.data.user.role,
@@ -66,15 +67,26 @@ const Login = () => {
         // class: response.data.data.user.class,
       });
       const token = response.data.token;
+      const user = response.data.data.user.role;
+      const userId = response.data.data.user._id;
+      console.log(response);
       localStorage.setItem("accessToken", token);
+      localStorage.setItem("user", user);
+      localStorage.setItem("userId", userId);
       console.log("sucessfully logged in");
       // window.location.replace("/");
-      navigate("/");
+      navigate("*");
       setEmail("");
       setPassword("");
     } catch (error) {
-      console.error("Login failed", error);
-      // Handle login failure, show error message, etc.
+      if (error.response && error.response.data) {
+        const errorMessage = error.response.data.message;
+        console.error("Login failed:", errorMessage);
+        alert(errorMessage); // Show the error message from the backend
+      } else {
+        console.error("Login failed:", error.message);
+        alert("An error occurred. Please try again."); // Show a generic error message
+      }
     }
   };
 
@@ -86,13 +98,13 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={handleLogin}>
                     <h1>Login</h1>
                     <p className="text-medium-emphasis">
                       Sign In to your account
                     </p>
                     <CInputGroup className="mb-3">
-                      <CInputGroupText>@</CInputGroupText>
+                      <CInputGroupText></CInputGroupText>
                       <CFormInput
                         placeholder="Email"
                         autoComplete="email"
@@ -102,7 +114,7 @@ const Login = () => {
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
-                        <CIcon icon={cilLockLocked} />
+                        {/* <CIcon icon={cilLockLocked} /> */}
                       </CInputGroupText>
                       <CFormInput
                         type="password"
@@ -118,7 +130,8 @@ const Login = () => {
                         <CButton
                           color="primary"
                           className="px-4"
-                          onClick={handleLogin}
+                          // onClick={handleLogin}
+                          type="submit"
                         >
                           Login
                         </CButton>
@@ -137,7 +150,7 @@ const Login = () => {
                 style={{ width: "44%" }}
               >
                 <CCardBody className="text-center">
-                  <div>
+                  {/* <div>
                     <h2>Sign up</h2>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -154,7 +167,7 @@ const Login = () => {
                         Register Now!
                       </CButton>
                     </Link>
-                  </div>
+                  </div> */}
                 </CCardBody>
               </CCard>
             </CCardGroup>

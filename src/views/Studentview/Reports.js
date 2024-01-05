@@ -18,8 +18,7 @@ import { AuthContext } from "../../helpers/AuthContext";
 function Report() {
   // Initialize a new map to store combined values
   const combinedValuesMap = {};
-  // Object to store counts for each category and aadat
-  const categoryAadatCounts = {};
+
   const { authState } = useContext(AuthContext);
 
   const [reportState, setreportState] = useState({
@@ -28,8 +27,12 @@ function Report() {
     totalCount: "",
   });
   const [Obj, setObj] = useState({});
+  const uniqueCategories = new Set();
+  const uniqueAadats = new Set();
 
   const [data, setdata] = useState([]);
+  const [uniqueCategoriesArray, setuniqueCategoriesArray] = useState([]);
+  const [uniqueAadatsArray, setuniqueAadatsArray] = useState([]);
 
   // Function to get the last Sunday
   const getLastSunday = (date) => {
@@ -97,6 +100,9 @@ function Report() {
         const aadat = dat.yesno[key].aadatName;
         const value = dat.yesno[key].value;
 
+        // Add unique categories and aadats to respective sets
+        uniqueCategories.add(category); /// i gave categry
+        uniqueAadats.add(`${category}_${aadat}_${value}`); /// i gave category as well as aadat in 1 name
         // Combine category and aadat to form a unique key
         const combinedKey = `${category}_${aadat}_${date}_yesno`;
 
@@ -115,6 +121,10 @@ function Report() {
         const aadat = dat.remarkBoxes[key].aadatName;
         const value = dat.remarkBoxes[key].value;
 
+        // Add unique categories and aadats to respective sets
+        uniqueCategories.add(category);
+        // uniqueAadats.add(`${category}_${aadat}_${value}`); /// i gave category as well as aadat in 1 name
+
         // Combine category and aadat to form a unique key
         const combinedKey = `${category}_${aadat}_${date}_remarkboxes`;
 
@@ -128,40 +138,13 @@ function Report() {
       });
     });
 
+    setuniqueCategoriesArray([...uniqueCategories]);
+    setuniqueAadatsArray([...uniqueAadats]);
     setObj(combinedValuesMap);
-
-    // // Loop through combinedValuesMap
-    // Object.keys(combinedValuesMap).forEach((key) => {
-    //   const [category, aadat, type] = key.split("_"); // Extract category, aadat, and type
-
-    //   // Create an entry for the category if it doesn't exist
-    //   if (!categoryAadatCounts[category]) {
-    //     categoryAadatCounts[category] = {};
-    //   }
-
-    //   // Create an entry for the aadat under the category if it doesn't exist
-    //   if (!categoryAadatCounts[category][aadat]) {
-    //     categoryAadatCounts[category][aadat] = {
-    //       yes: 0,
-    //       no: 0,
-    //       remarkboxes: 0,
-    //     };
-    //   }
-
-    //   // Increment count based on type (yesno or remarkboxes)
-    //   if (type === "yesno") {
-    //     combinedValuesMap[key].value
-    //     categoryAadatCounts[category][aadat].yesno +=
-    //       combinedValuesMap[key].length;
-    //   } else if (type === "remarkboxes") {
-    //     categoryAadatCounts[category][aadat].remarkboxes +=
-    //       combinedValuesMap[key].length;
-    //   }
-    // });
-
-    // // Log the categoryAadatCounts
-    // console.log(categoryAadatCounts);
   }, [data]);
+
+  // const uniqueCategoriesArray = [...uniqueCategories];
+  // const uniqueAadatsArray = [...uniqueAadats];
 
   const CustomInput = ({ value, onClick, labelName }) => (
     <CFormInput
@@ -212,35 +195,42 @@ function Report() {
               }
             />
           </div>
-          <div className="reports">
-            {data.map((dat, index) => (
-              <>
-                <div className="createdAt pt-2 pb-2">{dat.createdAt}</div>
-                <div className="yesno card p-3">
-                  Yes/No-
-                  {Object.keys(dat.yesno).map((key) => (
-                    <div className="cat" key={key}>
-                      {dat.yesno[key].categoryName}
-                      <div className="aad">{dat.yesno[key].aadatName}</div>
-                      <div className="value">{dat.yesno[key].value}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="remarkbox card p-3">
-                  Remarkboxes-
-                  {Object.keys(dat.remarkBoxes).map((key) => (
-                    <div className="cat" key={key}>
-                      {dat.remarkBoxes[key].categoryName}
-                      <div className="aad">
-                        {dat.remarkBoxes[key].aadatName}
-                      </div>
-                      <div className="value">{dat.remarkBoxes[key].value}</div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            ))}
-          </div>
+
+          {/* {data.map((data, dataindex) => */}
+          {uniqueCategoriesArray.map((category, catindex) => (
+            <div className="div-table mt-4">
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th className="text-center">Category Name: {category}</th>
+                    <th className="text-center">Yes</th>
+                    <th className="text-center">No</th>
+                    <th className="text-center">Remarkboxes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {uniqueAadatsArray
+                    .filter((item) => {
+                      {
+                        const [innetcategory, aadat] = item.split("_");
+                        return innetcategory === category;
+                      }
+                    })
+                    .map((aadat, aindex) => (
+                      <>
+                        <tr>
+                          <td>{aadat}</td>
+                          <td className="text-center">{aadat.split("_")[2]}</td>
+                          <td className="text-center">3</td>
+                          <td>Lorem, ipsum.</td>
+                        </tr>
+                      </>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+          {/* )} */}
         </div>
       </div>
     </div>

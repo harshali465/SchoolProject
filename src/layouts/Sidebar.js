@@ -1,7 +1,7 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import Logo from "./Logo";
 import { Link, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../helpers/AuthContext";
 
 const navigationStu = [
@@ -68,6 +68,11 @@ const Sidebar = () => {
   };
   let location = useLocation();
 
+  const [user, setUsers] = useState("");
+  useEffect(() => {
+    setUsers(localStorage.getItem("user"));
+  }, []);
+
   return (
     <div className="p-3" style={{ backgroundColor: "#135F77", height: "100%" }}>
       <div
@@ -101,28 +106,11 @@ const Sidebar = () => {
       </div>
       <div className="pt-4 mt-2">
         <Nav vertical className="sidebarNav">
-          {authState.role == "admin"
-            ? navigation.map((navi, index) => (
-                <NavItem key={index} className="sidenav-bg">
-                  <Link
-                    to={navi.href}
-                    className={
-                      location.pathname === navi.href
-                        ? "text-primary nav-link py-3"
-                        : "nav-link text-secondary py-3"
-                    }
-                  >
-                    <i className={navi.icon}></i>
-                    <span className="ms-3 d-inline-block">{navi.title}</span>
-                  </Link>
-                </NavItem>
-              ))
-            : navigationStu.map((navi, index) => (
-                <>
-                  <div
-                    className="border-bottom"
-                    style={{ backgroundColor: "#dee2e62e" }}
-                  ></div>
+          {
+            // authState.role
+
+            user == "admin"
+              ? navigation.map((navi, index) => (
                   <NavItem key={index} className="sidenav-bg">
                     <Link
                       to={navi.href}
@@ -141,12 +129,39 @@ const Sidebar = () => {
                       </span>
                     </Link>
                   </NavItem>
-                  <div
-                    className="border-bottom"
-                    style={{ backgroundColor: "#dee2e62e" }}
-                  ></div>
-                </>
-              ))}
+                ))
+              : user == "student" &&
+                navigationStu.map((navi, index) => (
+                  <>
+                    <div
+                      className="border-bottom"
+                      style={{ backgroundColor: "#dee2e62e" }}
+                    ></div>
+                    <NavItem key={index} className="sidenav-bg">
+                      <Link
+                        to={navi.href}
+                        className={
+                          location.pathname === navi.href
+                            ? "text-primary nav-link py-3"
+                            : "nav-link text-secondary py-3"
+                        }
+                      >
+                        <i className={navi.icon} style={{ color: "white" }}></i>
+                        <span
+                          className="ms-3 d-inline-block"
+                          style={{ color: "white" }}
+                        >
+                          {navi.title}
+                        </span>
+                      </Link>
+                    </NavItem>
+                    <div
+                      className="border-bottom"
+                      style={{ backgroundColor: "#dee2e62e" }}
+                    ></div>
+                  </>
+                ))
+          }
         </Nav>
       </div>
     </div>

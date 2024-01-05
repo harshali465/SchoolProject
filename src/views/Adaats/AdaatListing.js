@@ -201,7 +201,7 @@ function CategoryListing() {
         </CModalFooter>
       </CModal>
       {/* Filters */}
-      <div className="mb-2">
+      {/* <div className="mb-2">
         <div className="row pb-5">
           <div className="col-md-6 ">
             <div className="display-6 pb-3 float-end">Adaat listing</div>
@@ -219,7 +219,7 @@ function CategoryListing() {
           </div>
         </div>
         {/* filters */}
-        <div className="filters d-flex">
+      {/* <div className="filters d-flex">
           <input
             className="form-control"
             type="text"
@@ -228,53 +228,92 @@ function CategoryListing() {
             onChange={(e) => setFilterKeyword(e.target.value)}
           />
         </div>
+      </div>  */}
+      <div className="mb-2">
+        <div className="row pb-5">
+          <div className="col-md-6">
+            <div className="display-6 pb-3">Adaat listing</div>
+          </div>
+
+          <div className="col-md-6 ">
+            <button
+              className="btn btn-primary float-end"
+              onClick={() => {
+                redirectto();
+              }}
+            >
+              Add Adaat
+            </button>
+          </div>
+        </div>
+        {/* filters */}
       </div>
 
       {/* buttons for action */}
 
-      <div className="pb-4 d-flex justify-content-start align-items-center">
-        <div className="p-2">
-          <CFormCheck
-            type="radio"
-            id="flexCheckDefault"
-            label="Active"
-            checked={filterActive === "" ? false : filterActive ? true : false}
-            onClick={() => {
-              setfilterActive(true);
-            }}
-          />
-        </div>
-        <div className="p-2">
-          <CFormCheck
-            type="radio"
-            id="flexCheckDefault"
-            label="Inactive"
-            checked={filterActive === "" ? false : filterActive ? false : true}
-            onClick={() => {
-              setfilterActive(false);
-            }}
-          />
+      <div className="row space_tag">
+        <div className="col-md-8">
+          <div className="new_class">
+            <div className="">
+              <CFormCheck
+                type="radio"
+                id="flexCheckDefault"
+                label="Active"
+                checked={
+                  filterActive === "" ? false : filterActive ? true : false
+                }
+                onClick={() => {
+                  setfilterActive(true);
+                }}
+              />
+            </div>
+            <div className="">
+              <CFormCheck
+                type="radio"
+                id="flexCheckDefault"
+                label="Inactive"
+                checked={
+                  filterActive === "" ? false : filterActive ? false : true
+                }
+                onClick={() => {
+                  setfilterActive(false);
+                }}
+              />
+            </div>
+
+            {filterActive !== "" && (
+              <button
+                className="btn btn-dark  float-end"
+                onClick={() => {
+                  setfilterActive("");
+                }}
+              >
+                Show all
+              </button>
+            )}
+
+            <button
+              className="btn btn-dark  float-end"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              Delete Selected
+            </button>
+          </div>
         </div>
 
-        {filterActive !== "" && (
-          <button
-            className="btn btn-dark btn-md "
-            onClick={() => {
-              setfilterActive("");
-            }}
-          >
-            Show all
-          </button>
-        )}
-
-        <button
-          className="btn btn-dark btn-md "
-          onClick={() => {
-            setVisible(!visible);
-          }}
-        >
-          Delete Selected
-        </button>
+        <div className="col-md-4">
+          <div className="filters d-flex">
+            <input
+              className="form-control search_input"
+              type="text"
+              placeholder="Search by keyword"
+              value={filterKeyword}
+              onChange={(e) => setFilterKeyword(e.target.value)}
+            />
+          </div>
+        </div>
       </div>
 
       <table className="table table-bordered">
@@ -360,20 +399,18 @@ function CategoryListing() {
             Next
           </CPaginationItem>
 
-          <div className="d-flex">
-            <CPaginationItem>Entries:</CPaginationItem>
-            <CPaginationItem>
-              <select
-                value={pageSize}
-                onChange={(e) => setpageSize(e.target.value)}
-              >
-                <option value="2">2</option>
-                <option value="4">4</option>
-                <option value={students.length}>all</option>
-                {/* Add more options as needed */}
-              </select>
-            </CPaginationItem>
-          </div>
+          {/* <CPaginationItem>Entries:</CPaginationItem> */}
+          <CPaginationItem>
+            <select
+              value={pageSize}
+              onChange={(e) => setpageSize(e.target.value)}
+            >
+              <option value="2">2</option>
+              <option value="4">4</option>
+              <option value={students.length}>all</option>
+              {/* Add more options as needed */}
+            </select>
+          </CPaginationItem>
         </CPagination>
       </div>
     </div>
@@ -381,3 +418,153 @@ function CategoryListing() {
 }
 
 export default CategoryListing;
+
+//       <div className="pb-4 d-flex justify-content-start align-items-center">
+//         <div className="p-2">
+//           <CFormCheck
+//             type="radio"
+//             id="flexCheckDefault"
+//             label="Active"
+//             checked={filterActive === "" ? false : filterActive ? true : false}
+//             onClick={() => {
+//               setfilterActive(true);
+//             }}
+//           />
+//         </div>
+//         <div className="p-2">
+//           <CFormCheck
+//             type="radio"
+//             id="flexCheckDefault"
+//             label="Inactive"
+//             checked={filterActive === "" ? false : filterActive ? false : true}
+//             onClick={() => {
+//               setfilterActive(false);
+//             }}
+//           />
+//         </div>
+
+//         {filterActive !== "" && (
+//           <button
+//             className="btn btn-dark btn-md "
+//             onClick={() => {
+//               setfilterActive("");
+//             }}
+//           >
+//             Show all
+//           </button>
+//         )}
+
+//         <button
+//           className="btn btn-dark btn-md "
+//           onClick={() => {
+//             setVisible(!visible);
+//           }}
+//         >
+//           Delete Selected
+//         </button>
+//       </div>
+
+//       <table className="table table-bordered">
+//         <thead>
+//           <tr>
+//             <th className="text-center">
+//               <input
+//                 type="checkbox"
+//                 checked={selectAll}
+//                 onChange={toggleSelectAll}
+//               />
+//             </th>
+//             <th className="text-center">Name of Adaat</th>
+//             <th className="text-center">Adaat Category</th>
+//             <th className="text-center">Status</th>
+//             <th className="text-center">Action</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {dummystudents
+//             .filter((student) => applyFilters(student))
+//             .map((student, index) => (
+//               <tr key={index}>
+//                 <td className="text-center align-middle">
+//                   <input
+//                     type="checkbox"
+//                     checked={student.selected}
+//                     onChange={() => handleSelect(index)}
+//                   />
+//                 </td>
+//                 <td className="text-center align-middle">{student.name}</td>
+//                 <td className="text-center align-middle">
+//                   {student.category.name}
+//                 </td>
+//                 <td className="text-center align-middle">
+//                   {student.active ? "active" : "inactive"}
+//                 </td>
+//                 <td className="text-center align-middle">
+//                   <button
+//                     className="btn btn-primary btn-md"
+//                     onClick={() => {
+//                       editStudent(student._id);
+//                     }}
+//                   >
+//                     Edit
+//                   </button>
+//                   <button
+//                     className="btn btn-dark btn-md"
+//                     onClick={() => {
+//                       setcollecIds([]);
+//                       setcollecIds([student._id]);
+//                       setVisible(true);
+//                     }}
+//                   >
+//                     Delete
+//                   </button>
+//                 </td>
+//               </tr>
+//             ))}
+//         </tbody>
+//       </table>
+//       <div className="pagination">
+//         <CPagination aria-label="Page navigation">
+//           <CPaginationItem
+//             onClick={() => handlePageChange(currentPage - 1)}
+//             disabled={currentPage === 1}
+//           >
+//             Previous
+//           </CPaginationItem>
+//           {Array.from({ length: numPages }, (_, i) => (
+//             <CPaginationItem
+//               key={i}
+//               active={currentPage === i + 1}
+//               onClick={() => handlePageChange(i + 1)}
+//             >
+//               {i + 1}
+//             </CPaginationItem>
+//           ))}
+//           <CPaginationItem
+//             onClick={() => handlePageChange(currentPage + 1)}
+//             disabled={currentPage === Math.ceil(students.length / pageSize)}
+//           >
+//             Next
+//           </CPaginationItem>
+
+//           <div className="d-flex">
+//             <CPaginationItem>Entries:</CPaginationItem>
+//             <CPaginationItem>
+//               <select
+//                 value={pageSize}
+//                 onChange={(e) => setpageSize(e.target.value)}
+//               >
+//                 <option value="2">2</option>
+//                 <option value="4">4</option>
+//                 <option value={students.length}>all</option>
+//                 {/* Add more options as needed */}
+//               </select>
+//             </CPaginationItem>
+//           </div>
+//         </CPagination>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default CategoryListing;

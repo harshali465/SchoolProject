@@ -414,8 +414,8 @@ function SchoolTable() {
   const applyFilters = (student) => {
     // Apply filters to the student based on filter values
     return (
-      // student.firstName.toLowerCase().includes(filterKeyword.toLowerCase()) &&
-      (filterClass === "" || student.class === filterClass) &&
+      student.schoolName.toLowerCase().includes(filterKeyword.toLowerCase()) &&
+      (filterClass === "" || student.schoolName === filterClass) &&
       (filterDivision === "" || student.division === filterDivision) &&
       (filterMinBehaviorPoints === "" ||
         student.numberOfStudents >= parseInt(filterMinBehaviorPoints)) &&
@@ -545,10 +545,13 @@ function SchoolTable() {
             value={filterClass}
             onChange={(e) => setFilterClass(e.target.value)}
           >
-            <option value="">Name of school</option>
-            <option>Grade 2</option>
+            <option value="">Show all schools</option>
+            {/* <option>Grade 2</option>
             <option>Grade 3</option>
-            <option>Grade 1</option>
+            <option>Grade 1</option> */}
+            {dummystudents.map((student) => (
+              <option>{student.schoolName}</option>
+            ))}
           </select>
 
           <input

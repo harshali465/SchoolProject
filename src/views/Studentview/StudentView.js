@@ -61,21 +61,27 @@ function StudentView() {
   const [formData, setformData] = useState({
     remarkBoxes: {},
     yesno: {},
-    customField: [
-      // {
-      //   fieldTitle: "",
-      //   fieldType: [""],
-      //   options: [],
-      //   adaatId: "",
-      // },
-    ],
-    responsetypeCustomField: [
-      // {
-      //   cusresTitle: "",
-      //   cusresValue: {},
-      // },
-    ],
+    customField: [],
+    responsetypeCustomField: [],
     images: [],
+  });
+
+  const [newformData, setnewformData] = useState({
+    images: [],
+    category: [
+      {
+        categoryName: "",
+        aadat: [
+          {
+            aadatName: "",
+            remarkBoxes: {},
+            yesno: {},
+            customField: [],
+            responsetypeCustomField: [],
+          },
+        ],
+      },
+    ],
   });
 
   const [suratForm, setsuratForm] = useState({
@@ -84,13 +90,16 @@ function StudentView() {
     selectedAyatNo: "",
   });
 
+  // console.log(newformData);
   const getAadatsforStudentweekly = async () => {
     try {
       const token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${localStorage.getItem(
+          "userId"
+        )}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -166,14 +175,24 @@ function StudentView() {
 
       const newWeeklyAadats = filtered;
 
+      // filter for checking endDate
+      const currentTime = new Date(); // Current date and time
+
+      // Convert the current date to ISO format
+      const currentTimeISO = currentTime.toISOString();
+
+      const FnewWeeklyAadats = newWeeklyAadats.filter((aadat) =>
+        aadat.endDate == null ? aadat : aadat.endDate > currentTimeISO
+      );
+
       // Check if the newDailyAadats are not already present in displayAdaats
-      const isDuplicate = newWeeklyAadats.some((newAadat) =>
+      const isDuplicate = FnewWeeklyAadats.some((newAadat) =>
         displayAdaats.some((displayAadat) => displayAadat._id === newAadat._id)
       );
 
       if (!isDuplicate) {
         // If the new data is not a duplicate, merge it into displayAdaats
-        const mergedDisplayAdaats = [...displayAdaats, ...newWeeklyAadats];
+        const mergedDisplayAdaats = [...displayAdaats, ...FnewWeeklyAadats];
         // setDisplayAdaats(mergedDisplayAdaats);
 
         //returning to usestate
@@ -194,7 +213,9 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${localStorage.getItem(
+          "userId"
+        )}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -270,14 +291,24 @@ function StudentView() {
 
       const newMonthlyAadats = filteredMonthly;
 
+      // filter for checking endDate
+      const currentTime = new Date(); // Current date and time
+
+      // Convert the current date to ISO format
+      const currentTimeISO = currentTime.toISOString();
+
+      const FnewMontlyAadats = newMonthlyAadats.filter((aadat) =>
+        aadat.endDate == null ? aadat : aadat.endDate > currentTimeISO
+      );
+
       // Check if the newDailyAadats are not already present in displayAdaats
-      const isDuplicate = newMonthlyAadats.some((newAadat) =>
+      const isDuplicate = FnewMontlyAadats.some((newAadat) =>
         displayAdaats.some((displayAadat) => displayAadat._id === newAadat._id)
       );
 
       if (!isDuplicate) {
         // If the new data is not a duplicate, merge it into displayAdaats
-        const mergedDisplayAdaats = [...displayAdaats, ...newMonthlyAadats];
+        const mergedDisplayAdaats = [...displayAdaats, ...FnewMontlyAadats];
         // setDisplayAdaats(mergedDisplayAdaats);
 
         //returning to usestate
@@ -298,7 +329,9 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${localStorage.getItem(
+          "userId"
+        )}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -353,14 +386,24 @@ function StudentView() {
 
       const newMonthlyAadats = filteredYearly;
 
+      // filter for checking endDate
+      const currentTime = new Date(); // Current date and time
+
+      // Convert the current date to ISO format
+      const currentTimeISO = currentTime.toISOString();
+
+      const FnewYearlyAadats = newMonthlyAadats.filter((aadat) =>
+        aadat.endDate == null ? aadat : aadat.endDate > currentTimeISO
+      );
+
       // Check if the newDailyAadats are not already present in displayAdaats
-      const isDuplicate = newMonthlyAadats.some((newAadat) =>
+      const isDuplicate = FnewYearlyAadats.some((newAadat) =>
         displayAdaats.some((displayAadat) => displayAadat._id === newAadat._id)
       );
 
       if (!isDuplicate) {
         // If the new data is not a duplicate, merge it into displayAdaats
-        const mergedDisplayAdaats = [...displayAdaats, ...newMonthlyAadats];
+        const mergedDisplayAdaats = [...displayAdaats, ...FnewYearlyAadats];
         // setDisplayAdaats(mergedDisplayAdaats);
 
         //returning to usestate
@@ -382,7 +425,9 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${localStorage.getItem(
+          "userId"
+        )}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -431,14 +476,24 @@ function StudentView() {
 
       const newMonthlyAadats = filteredCustom;
 
+      // filter for checking endDate
+      const currentTime = new Date(); // Current date and time
+
+      // Convert the current date to ISO format
+      const currentTimeISO = currentTime.toISOString();
+
+      const FnewCustomAadats = newMonthlyAadats.filter((aadat) =>
+        aadat.endDate == null ? aadat : aadat.endDate > currentTimeISO
+      );
+
       // Check if the newDailyAadats are not already present in displayAdaats
-      const isDuplicate = newMonthlyAadats.some((newAadat) =>
+      const isDuplicate = FnewCustomAadats.some((newAadat) =>
         displayAdaats.some((displayAadat) => displayAadat._id === newAadat._id)
       );
 
       if (!isDuplicate) {
         // If the new data is not a duplicate, merge it into displayAdaats
-        const mergedDisplayAdaats = [...displayAdaats, ...newMonthlyAadats];
+        const mergedDisplayAdaats = [...displayAdaats, ...FnewCustomAadats];
         // setDisplayAdaats(mergedDisplayAdaats);
 
         //returning to usestate
@@ -458,7 +513,9 @@ function StudentView() {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
       // this is for getting the information about the student you need to display all the adaats for
       const res = await axios.get(
-        `http://18.118.42.224:3001/api/v1/users/${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/users/${localStorage.getItem(
+          "userId"
+        )}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -491,14 +548,24 @@ function StudentView() {
 
       const newDailyAadats = response.data.data;
 
+      // filter for checking endDate
+      const currentTime = new Date(); // Current date and time
+
+      // Convert the current date to ISO format
+      const currentTimeISO = currentTime.toISOString();
+
+      const FnewDailyAadats = newDailyAadats.filter((aadat) =>
+        aadat.endDate == null ? aadat : aadat.endDate > currentTimeISO
+      );
+
       // Check if the newDailyAadats are not already present in displayAdaats
-      const isDuplicate = newDailyAadats.some((newAadat) =>
+      const isDuplicate = FnewDailyAadats.some((newAadat) =>
         displayAdaats.some((displayAadat) => displayAadat._id === newAadat._id)
       );
 
       if (!isDuplicate) {
         // If the new data is not a duplicate, merge it into displayAdaats
-        const mergedDisplayAdaats = [...displayAdaats, ...newDailyAadats];
+        const mergedDisplayAdaats = [...displayAdaats, ...FnewDailyAadats];
         // setDisplayAdaats(mergedDisplayAdaats);
 
         //returning to usestate
@@ -654,7 +721,6 @@ function StudentView() {
     const allAadats = await fetchData();
     // Set the combined aadats to the displayAadats state after clearing the previous data
     console.log("Display adaats->", allAadats);
-    console.log("hi");
     setDisplayAdaats(allAadats);
     setisLoding(false);
   };
@@ -663,14 +729,18 @@ function StudentView() {
     fetchAllAadats();
   }, [authState.id, authState.role]);
 
+  // useEffect(() => {
+  //   fetchAllAadats();
+  // }, []);
   useEffect(() => {
     const fnccc = async () => {
       // Your code here...
+      const userId = localStorage.getItem("userId");
       const token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGIzNzQxYTRlOTIyNzU1ZTEzZjUwYSIsImlhdCI6MTcwMjAyNjUyMSwiZXhwIjoxNzMzNTYyNTIxfQ.SQNoJL4HEKvUKrw6AEpCtg1hDNx26vRPz1Az2sZohz4";
 
       const dataForToday = await axios.get(
-        `http://18.118.42.224:3001/api/v1/aadatdata/sumbitresponse?student=${authState.id}`,
+        `http://18.118.42.224:3001/api/v1/aadatdata/sumbitresponse?student=${userId}`,
 
         {
           headers: {
@@ -699,12 +769,12 @@ function StudentView() {
         const [firstElement] = filteredData; // Extracting the first element
 
         // extracting data singularly
-        setformData({
-          remarkBoxes: firstElement.remarkBoxes,
-          yesno: firstElement.yesno,
-          customField: firstElement.customField,
-          responsetypeCustomField: firstElement.responsetypeCustomField,
-        });
+        // setformData({
+        //   remarkBoxes: firstElement.remarkBoxes,
+        //   yesno: firstElement.yesno,
+        //   customField: firstElement.customField,
+        //   responsetypeCustomField: firstElement.responsetypeCustomField,
+        // });
 
         // form editing should be handled here
         setEditIdADM(firstElement._id);
@@ -715,7 +785,7 @@ function StudentView() {
       // ////////////////////////////////////setting up the latest surat student has read
     };
 
-    fnccc();
+    // fnccc();
   }, []);
 
   useEffect(() => {
@@ -785,55 +855,6 @@ function StudentView() {
     }
   }, [student]);
 
-  // weekly filtering for repetition
-
-  // const remindUsersWeekly = () => {
-  //   const currentDate = new Date();
-  //   const endOfWeek = new Date(currentDate);
-  //   const startOfWeek = new Date(currentDate);
-  //   endOfWeek.setDate(currentDate.getDate() + (6 - currentDate.getDay()));
-  //   startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
-
-  //   const filteredWeekly = adaats
-  //     .map((aadat) => {
-  //       if (aadatDataModelIds.includes(aadat._id)) {
-  //         const relevantAddmt = aadatdatamodels.find(
-  //           (addmt) =>
-  //             addmt.aadat._id === aadat._id && addmt.student === authState.id
-  //         );
-  //         if (relevantAddmt) {
-  //           if (
-  //             // checking if the entry was made before this week's Saturday
-
-  //             new Date(relevantAddmt.createdAt) <= endOfWeek &&
-  //             new Date(relevantAddmt.createdAt) >= startOfWeek
-  //           ) {
-  //             // if yes then dont print the aadat
-  //             return null;
-  //           } else {
-  //             // if no print the aadat only if
-  //             return aadat;
-  //           }
-
-  //           // console.log(
-  //           //   startOfWeek,
-  //           //   new Date(relevantAddmt.createdAt),
-  //           //   endOfWeek
-  //           //   // todayEnd
-  //           // );
-  //         } else {
-  //           return aadat;
-  //         }
-  //       } else {
-  //         return aadat;
-  //       }
-
-  //       //   // new Date(relevantAddmt.createdAt) <= todayEnd
-  //     })
-  //     .filter(Boolean);
-  //   setweeklyAadats(filteredWeekly);
-  // };
-
   useEffect(() => {
     function formatDate(date) {
       const options = {
@@ -866,60 +887,88 @@ function StudentView() {
   //   updatedResponsetypeCustomField[name].cusresTitle = cusresTitle;
   //   updatedResponsetypeCustomField[name].cusresValue[val] = checked;
   // };
+  // const handlechangeCusres = (e, val, cusresTitle) => {
+  //   const { name, checked } = e.target;
+
+  //   if (name.startsWith("cusradiofortitle")) {
+  //     const [categoryIndex, index, typeIndex, resIndex, cusresindexVal] =
+  //       name.split("_");
+
+  //     if (name.startsWith("cusradiofortitle")) {
+  //       console.log(name, checked);
+
+  //       const updatedResponsetypeCustomField = [
+  //         ...formData.responsetypeCustomField,
+  //       ];
+
+  //       if (!updatedResponsetypeCustomField[index]) {
+  //         updatedResponsetypeCustomField[index] = [];
+  //       }
+
+  //       if (!updatedResponsetypeCustomField[index][resIndex]) {
+  //         updatedResponsetypeCustomField[index][resIndex] = {
+  //           cusresTitle: cusresTitle,
+  //           cusresValue: {},
+  //         };
+  //       }
+
+  //       if (!updatedResponsetypeCustomField[index][resIndex].cusresValue) {
+  //         updatedResponsetypeCustomField[index][resIndex].cusresValue = {}; // Initialize cusresValue if it's not defined
+  //       }
+  //       updatedResponsetypeCustomField[index][resIndex].cusresTitle =
+  //         cusresTitle;
+
+  //       if (
+  //         !updatedResponsetypeCustomField[index][resIndex].cusresValue[name]
+  //       ) {
+  //         updatedResponsetypeCustomField[index][resIndex].cusresValue[name] =
+  //           {}; // Initialize cusresindexVal if it's not defined
+  //       }
+
+  //       if (checked) {
+  //         updatedResponsetypeCustomField[index][resIndex].cusresValue[name][
+  //           val
+  //         ] = checked;
+  //       } else {
+  //         updatedResponsetypeCustomField[index][resIndex].cusresValue[name][
+  //           val
+  //         ] = false; // Set the value to false if checked is false
+  //       }
+
+  //       setformData({
+  //         ...formData,
+  //         responsetypeCustomField: updatedResponsetypeCustomField,
+  //       });
+  //     }
+  //   }
+  // };
+
   const handlechangeCusres = (e, val, cusresTitle) => {
-    const { name, checked } = e.target;
+    const { name } = e.target;
+    const [categoryIndex, index, typeIndex, resIndex, cusresindexVal] =
+      name.split("_");
 
-    if (name.startsWith("cusradiofortitle")) {
-      const [categoryIndex, index, typeIndex, resIndex, cusresindexVal] =
-        name.split("_");
+    // Update the selected value for the group
 
-      if (name.startsWith("cusradiofortitle")) {
-        console.log(name, checked);
+    // const updatedvalue = {
+    //   [`${categoryIndex}_${index}_${typeIndex}_${resIndex}`]: val,
+    // };
+    const existingField =
+      formData.responsetypeCustomField[
+        `${categoryIndex}_${index}_${typeIndex}_${resIndex}`
+      ];
+    const updatedValue = {
+      ...formData.responsetypeCustomField,
+      [`${categoryIndex}_${index}_${typeIndex}_${resIndex}`]: {
+        ...(existingField || {}), // If the field already exists, spread its content
+        [`${categoryIndex}_${index}_${typeIndex}_${resIndex}`]: val, // Set the new value
+      },
+    };
 
-        const updatedResponsetypeCustomField = [
-          ...formData.responsetypeCustomField,
-        ];
-
-        if (!updatedResponsetypeCustomField[index]) {
-          updatedResponsetypeCustomField[index] = [];
-        }
-
-        if (!updatedResponsetypeCustomField[index][resIndex]) {
-          updatedResponsetypeCustomField[index][resIndex] = {
-            cusresTitle: cusresTitle,
-            cusresValue: {},
-          };
-        }
-
-        if (!updatedResponsetypeCustomField[index][resIndex].cusresValue) {
-          updatedResponsetypeCustomField[index][resIndex].cusresValue = {}; // Initialize cusresValue if it's not defined
-        }
-        updatedResponsetypeCustomField[index][resIndex].cusresTitle =
-          cusresTitle;
-
-        if (
-          !updatedResponsetypeCustomField[index][resIndex].cusresValue[name]
-        ) {
-          updatedResponsetypeCustomField[index][resIndex].cusresValue[name] =
-            {}; // Initialize cusresindexVal if it's not defined
-        }
-
-        if (checked) {
-          updatedResponsetypeCustomField[index][resIndex].cusresValue[name][
-            val
-          ] = checked;
-        } else {
-          updatedResponsetypeCustomField[index][resIndex].cusresValue[name][
-            val
-          ] = false; // Set the value to false if checked is false
-        }
-
-        setformData({
-          ...formData,
-          responsetypeCustomField: updatedResponsetypeCustomField,
-        });
-      }
-    }
+    setformData({
+      ...formData,
+      responsetypeCustomField: updatedValue,
+    });
   };
 
   const handlechange = (e, aadat) => {
@@ -930,31 +979,237 @@ function StudentView() {
       // If no files are selected, clear the existing state for that input
 
       const selectedFiles = Array.from(e.target.files);
-      setformData({ ...formData, images: selectedFiles });
+      setnewformData({ ...newformData, images: selectedFiles });
     } else if (name.startsWith("yesno")) {
       console.log(name, value);
-      const updatedYesNo = {
-        ...formData.yesno,
-        [name]: {
-          value: value,
-          aadat: aadat._id,
-          aadatName: aadat.name,
-          categoryName: aadat.category.name,
-        },
-      };
 
-      setformData({
-        ...formData,
-        yesno: updatedYesNo,
+      setnewformData((prevFormData) => {
+        // Check if category already exists in the form data
+        const existingCategory = prevFormData.category.find(
+          (category) => category.categoryName === aadat.category.name
+        );
+
+        // If category exists, update the existing category's 'aadat' array
+        if (existingCategory) {
+          const updatedCategories = prevFormData.category.map((category) => {
+            if (category.categoryName === aadat.category.name) {
+              // Check if aadat already exists in the category
+              const existingAadat = category.aadat.find(
+                (item) => item.aadatName === aadat.name
+              );
+
+              // If aadat exists, update its 'yesno' object
+              if (existingAadat) {
+                const updatedAadats = category.aadat.map((item) => {
+                  if (item.aadatName === aadat.name) {
+                    return {
+                      ...item,
+                      yesno: {
+                        ...item.yesno,
+                        [name]: {
+                          value: value,
+                        },
+                      },
+                    };
+                  }
+                  return item;
+                });
+
+                return {
+                  ...category,
+                  aadat: updatedAadats,
+                };
+              } else {
+                // If aadat doesn't exist, add a new one
+                return {
+                  ...category,
+                  aadat: [
+                    ...category.aadat,
+                    {
+                      aadatName: aadat.name,
+                      yesno: {
+                        [name]: {
+                          value: value,
+                        },
+                      },
+                    },
+                  ],
+                };
+              }
+            }
+            return category;
+          });
+
+          return {
+            ...prevFormData,
+            category: updatedCategories,
+          };
+        } else {
+          // If category doesn't exist, add a new one along with the aadat
+          return {
+            ...prevFormData,
+            category: [
+              ...prevFormData.category,
+              {
+                categoryName: aadat.category.name,
+                aadat: [
+                  {
+                    aadatName: aadat.name,
+                    yesno: {
+                      [name]: {
+                        value: value,
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          };
+        }
       });
-    } else if (name.startsWith("remarkbox")) {
-      // const index = parseInt(name.replace("remarkbox", ""));
 
+      // {
+      //   category: [
+      //     {
+      //       categoryName: "",
+      //       aadat: [
+      //         {
+      //           aadatName: "",
+      //           remarkBoxes: {},
+      //           yesno: {},
+      //           customField: [],
+      //           responsetypeCustomField: [],
+      //           images: [],
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // }
+
+      // const updatedYesNo = {
+      //   ...newformData,
+      //   // [name]: {
+      //   //   value: value,
+      //   //   aadat: aadat._id,
+      //   //   aadatName: aadat.name,
+      //   //   categoryName: aadat.category.name,
+      //   // },
+      //   category: [
+      //     {
+      //       categoryName: aadat.category.name,
+      //       aadat: [
+      //         {
+      //           aadatName: aadat.name,
+
+      //           yesno: {
+      //             [name]: {
+      //               value: value,
+      //             },
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // };
+
+      // setnewformData({
+      //   ...newformData,
+      //   category: updatedYesNo,
+      // });
+    } else if (name.startsWith("remarkbox")) {
+      setnewformData((prevFormData) => {
+        // Check if category already exists in the form data
+        const existingCategory = prevFormData.category.find(
+          (category) => category.categoryName === aadat.category.name
+        );
+
+        // If category exists, update the existing category's 'aadat' array
+        if (existingCategory) {
+          const updatedCategories = prevFormData.category.map((category) => {
+            if (category.categoryName === aadat.category.name) {
+              // Check if aadat already exists in the category
+              const existingAadat = category.aadat.find(
+                (item) => item.aadatName === aadat.name
+              );
+
+              // If aadat exists, update its 'yesno' object
+              if (existingAadat) {
+                const updatedAadats = category.aadat.map((item) => {
+                  if (item.aadatName === aadat.name) {
+                    return {
+                      ...item,
+                      remarkBoxes: {
+                        ...item.remarkBoxes,
+                        [name]: {
+                          value: value,
+                        },
+                      },
+                    };
+                  }
+                  return item;
+                });
+
+                return {
+                  ...category,
+                  aadat: updatedAadats,
+                };
+              } else {
+                // If aadat doesn't exist, add a new one
+                return {
+                  ...category,
+                  aadat: [
+                    ...category.aadat,
+                    {
+                      aadatName: aadat.name,
+                      remarkBoxes: {
+                        [name]: {
+                          value: value,
+                        },
+                      },
+                    },
+                  ],
+                };
+              }
+            }
+            return category;
+          });
+
+          return {
+            ...prevFormData,
+            category: updatedCategories,
+          };
+        } else {
+          // If category doesn't exist, add a new one along with the aadat
+          return {
+            ...prevFormData,
+            category: [
+              ...prevFormData.category,
+              {
+                categoryName: aadat.category.name,
+                aadat: [
+                  {
+                    aadatName: aadat.name,
+                    yesno: {
+                      [name]: {
+                        value: value,
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          };
+        }
+      });
+
+      // console.log(name, value);
       // const updatedRemarkBoxes = {
       //   ...formData.remarkBoxes,
-      //   [index]: {
+      //   [name]: {
       //     value: value,
       //     aadat: aadat._id,
+      //     aadatName: aadat.name,
+      //     categoryName: aadat.category.name,
       //   },
       // };
 
@@ -962,21 +1217,6 @@ function StudentView() {
       //   ...formData,
       //   remarkBoxes: updatedRemarkBoxes,
       // });
-      console.log(name, value);
-      const updatedRemarkBoxes = {
-        ...formData.remarkBoxes,
-        [name]: {
-          value: value,
-          aadat: aadat._id,
-          aadatName: aadat.name,
-          categoryName: aadat.category.name,
-        },
-      };
-
-      setformData({
-        ...formData,
-        remarkBoxes: updatedRemarkBoxes,
-      });
     }
   };
 
@@ -1130,21 +1370,7 @@ function StudentView() {
     id
   ) => {
     const updatedCustomField = [...formData.customField];
-    // const [fieldIndex, typeIndex] = uniqueIndex.split("_");
 
-    // // if (fieldIndex >= 0 && fieldIndex < updatedCustomField.length) {
-    // updatedCustomField[fieldIndex] = {
-    //   fieldTitle: fieldTitle,
-    //   fieldType: [{ type: fieldType }],
-    //   options: [selectedOption],
-    //   adaatId: id,
-    // };
-
-    // setformData({
-    //   ...formData,
-    //   customField: updatedCustomField,
-    // });
-    // // }
     const [fieldIndex, typeIndex, uniqueFieldTitle] = uniqueIndex.split("_");
 
     // Check if the fieldIndex exists and uniqueFieldTitle matches with fieldTitle
@@ -1197,94 +1423,94 @@ function StudentView() {
     "Al-Mu'minun": 118,
     "An-Nur": 64,
     "Al-Furqan": 77,
-    "Ash-Shu'ara": "",
-    "An-Naml": "",
-    "Al-Qasas": "",
-    "Al-Ankabut": "",
-    "Ar-Rum": "",
-    Luqmaan: "",
-    "As-Sajdah": "",
-    "Al-Ahzaab": "",
-    "Saba (surah)": "",
-    Faatir: "",
-    "Ya-Sin": "",
-    "As-Saaffaat": "",
-    Saad: "",
-    "Az-Zumar": "",
-    Ghafir: "",
-    Fussilat: "",
-    "Ash-Shura": "",
-    "Az-Zukhruf": "",
-    "Ad-Dukhaan": "",
-    "Al-Jaathiyah": "",
-    "Al-Ahqaaf": "",
-    Muhammad: "",
-    "Al-Fath": "",
-    "Al-Hujuraat": "",
-    Qaaf: "",
-    "Adh-Dhaariyaat": "",
-    "At-Toor": "",
-    "An-Najm": "",
-    "Al-Qamar": "",
-    "Ar-Rahman": "",
-    "Al-Waqi'ah": "",
-    "Al-Hadeed": "",
-    "Al-Mujadila": "",
-    "Al-Hashr": "",
-    "Al-Mumtahanah": "",
+    "Ash-Shu'ara": 227,
+    "An-Naml": 93,
+    "Al-Qasas": 88,
+    "Al-Ankabut": 69,
+    "Ar-Rum": 60,
+    Luqmaan: 34,
+    "As-Sajdah": 30,
+    "Al-Ahzaab": 73,
+    "Saba (surah)": 54,
+    Faatir: 45,
+    "Ya-Sin": 83,
+    "As-Saaffaat": 182,
+    Saad: 88,
+    "Az-Zumar": 75,
+    Ghafir: 85,
+    Fussilat: 54,
+    "Ash-Shura": 53,
+    "Az-Zukhruf": 89,
+    "Ad-Dukhaan": 59,
+    "Al-Jaathiyah": 37,
+    "Al-Ahqaaf": 35,
+    Muhammad: 38,
+    "Al-Fath": 29,
+    "Al-Hujuraat": 18,
+    Qaaf: 45,
+    "Adh-Dhaariyaat": 60,
+    "At-Toor": 49,
+    "An-Najm": 62,
+    "Al-Qamar": 55,
+    "Ar-Rahman": 78,
+    "Al-Waqi'ah": 96,
+    "Al-Hadeed": 29,
+    "Al-Mujadila": 22,
+    "Al-Hashr": 24,
+    "Al-Mumtahanah": 13,
     "As-Saff": 14,
-    "Al-Jumu'ah": "",
-    "Al-Munafiqoon": "",
-    "At-Taghabun": "",
-    "At-Talaq": "",
-    "At-Tahreem": "",
-    "Al-Mulk": "",
-    "Al-Qalam": "",
-    "Al-Haaqqa": "",
-    "Al-Ma'aarij": "",
-    Nuh: "",
-    "Al-Jinn": "",
-    "Al-Muzzammil": "",
-    "Al-Muddaththir": "",
-    "Al-Qiyamah": "",
-    "Al-Insaan": "",
-    "Al-Mursalaat": "",
-    "An-Naba'": "",
-    "An-Naazi'aat": "",
-    Abasa: "",
-    "At-Takweer": "",
-    "Al-Infitar": "",
-    "Al-Mutaffifeen": "",
-    "Al-Inshiqaaq": "",
-    "Al-Burooj": "",
-    "At-Taariq": "",
-    "Al-A'la": "",
-    "Al-Ghaashiyah": "",
-    "Al-Fajr": "",
-    "Al-Balad": "",
-    "Ash-Shams": "",
-    "Al-Layl": "",
-    "Ad-Dhuha": "",
-    "Ash-Sharh�(Al-Inshirah)": "",
-    "At-Tin": "",
-    "Al-Alaq": "",
-    "Al-Qadr": "",
-    "Al-Bayyinah": "",
-    "Az-Zalzalah": "",
-    "Al-'Aadiyat": "",
-    "Al-Qaari'ah": "",
-    "At-Takaathur": "",
-    "Al-'Asr": "",
-    "Al-Humazah": "",
-    "Al-Feel": "",
-    Quraish: "",
-    "Al-Maa'oon": "",
-    "Al-Kawthar": "",
-    "Al-Kaafiroon": "",
-    "An-Nasr": "",
-    "Al-Masad": "",
-    "Al-Ikhlas": "",
-    "Al-Falaq": "",
+    "Al-Jumu'ah": 11,
+    "Al-Munafiqoon": 11,
+    "At-Taghabun": 18,
+    "At-Talaq": 12,
+    "At-Tahreem": 12,
+    "Al-Mulk": 30,
+    "Al-Qalam": 52,
+    "Al-Haaqqa": 52,
+    "Al-Ma'aarij": 44,
+    Nuh: 28,
+    "Al-Jinn": 28,
+    "Al-Muzzammil": 20,
+    "Al-Muddaththir": 56,
+    "Al-Qiyamah": 40,
+    "Al-Insaan": 31,
+    "Al-Mursalaat": 50,
+    "An-Naba'": 40,
+    "An-Naazi'aat": 46,
+    Abasa: 42,
+    "At-Takweer": 29,
+    "Al-Infitar": 19,
+    "Al-Mutaffifeen": 36,
+    "Al-Inshiqaaq": 25,
+    "Al-Burooj": 22,
+    "At-Taariq": 17,
+    "Al-A'la": 19,
+    "Al-Ghaashiyah": 26,
+    "Al-Fajr": 30,
+    "Al-Balad": 20,
+    "Ash-Shams": 15,
+    "Al-Layl": 21,
+    "Ad-Dhuha": 11,
+    "Ash-Sharh�(Al-Inshirah)": 8,
+    "At-Tin": 8,
+    "Al-Alaq": 19,
+    "Al-Qadr": 5,
+    "Al-Bayyinah": 8,
+    "Az-Zalzalah": 8,
+    "Al-'Aadiyat": 11,
+    "Al-Qaari'ah": 11,
+    "At-Takaathur": 8,
+    "Al-'Asr": 3,
+    "Al-Humazah": 9,
+    "Al-Feel": 5,
+    Quraish: 4,
+    "Al-Maa'oon": 7,
+    "Al-Kawthar": 6,
+    "Al-Kaafiroon": 6,
+    "An-Nasr": 2,
+    "Al-Masad": 5,
+    "Al-Ikhlas": 4,
+    "Al-Falaq": 5,
     "An-Naas": 6,
   };
   const handleSurat = (e) => {
@@ -1404,10 +1630,7 @@ function StudentView() {
               position: "relative",
             }}
           >
-            <img
-              class="user-image"
-              src="https://laravel.cppatidar.com/myaadat/images/no_image.png"
-            ></img>
+            <img class="user-image" src=""></img>
             {/* <img
               class="user-image"
               src={URL.createObjectURL(student.profilePic[0])}
@@ -1878,8 +2101,31 @@ function StudentView() {
                                           button={{
                                             color: "success",
                                             variant:
-                                              formData.yesno &&
-                                              formData.yesno[
+                                              // newformData.map(
+                                              //   (newform) =>
+                                              //     newform.categoryName ===
+                                              //       category &&
+                                              //     newform.aadat.map((aad) =>
+                                              //       aad.aadatName ===
+                                              //         adaat.name &&
+                                              //       aad.yesno &&
+                                              //       aad.yesno[
+                                              //         `yesno_${categoryIndex}_${index}_${typeIndex}`
+                                              //       ]?.value === "yes"
+                                              //         ? ""
+                                              //         : "outline"
+                                              //     )
+                                              // ),
+                                              // shape: "round-1",
+                                              // size: "sm",
+                                              newformData.category
+                                                .categoryName === category &&
+                                              newformData.category.aadat
+                                                .aadatName === adaat.name &&
+                                              newformData.category.aadat
+                                                .yesno &&
+                                              newformData.yesno &&
+                                              newformData.yesno[
                                                 `yesno_${categoryIndex}_${index}_${typeIndex}`
                                               ]?.value === "yes"
                                                 ? ""
@@ -1892,14 +2138,22 @@ function StudentView() {
                                           type="radio"
                                           label="yes"
                                           value="yes"
-                                          // name={`yesno${index}`}
                                           name={`yesno_${categoryIndex}_${index}_${typeIndex}`} // Unique name
                                           onChange={(e) =>
                                             handlechange(e, adaat)
                                           }
                                           checked={
-                                            formData.yesno &&
-                                            formData.yesno[
+                                            // formData.yesno &&
+                                            // formData.yesno[
+                                            //   `yesno_${categoryIndex}_${index}_${typeIndex}`
+                                            // ]?.value === "yes"
+                                            newformData.category
+                                              .categoryName === category &&
+                                            newformData.category.aadat
+                                              .aadatName === adaat.name &&
+                                            newformData.category.aadat.yesno &&
+                                            newformData.yesno &&
+                                            newformData.yesno[
                                               `yesno_${categoryIndex}_${index}_${typeIndex}`
                                             ]?.value === "yes"
                                           }
@@ -1910,8 +2164,14 @@ function StudentView() {
                                           button={{
                                             color: "danger",
                                             variant:
-                                              formData.yesno &&
-                                              formData.yesno[
+                                              newformData.category
+                                                .categoryName === category &&
+                                              newformData.category.aadat
+                                                .aadatName === adaat.name &&
+                                              newformData.category.aadat
+                                                .yesno &&
+                                              newformData.yesno &&
+                                              newformData.yesno[
                                                 `yesno_${categoryIndex}_${index}_${typeIndex}`
                                               ]?.value === "no"
                                                 ? ""
@@ -1930,8 +2190,13 @@ function StudentView() {
                                             handlechange(e, adaat)
                                           }
                                           checked={
-                                            formData.yesno &&
-                                            formData.yesno[
+                                            newformData.category
+                                              .categoryName === category &&
+                                            newformData.category.aadat
+                                              .aadatName === adaat.name &&
+                                            newformData.category.aadat.yesno &&
+                                            newformData.yesno &&
+                                            newformData.yesno[
                                               `yesno_${categoryIndex}_${index}_${typeIndex}`
                                             ]?.value === "no"
                                           }
@@ -1955,6 +2220,46 @@ function StudentView() {
                                                 (val, cusresindexVal) => (
                                                   <div>
                                                     <CFormCheck
+                                                      // button={{
+                                                      //   color: "success",
+                                                      //   // variant:
+                                                      //   //   formData.yesno &&
+                                                      //   //   formData.yesno[
+                                                      //   //     `yesno_${categoryIndex}_${index}_${typeIndex}`
+                                                      //   //   ]?.value === "yes"
+                                                      //   //     ? ""
+                                                      //   //     : "outline",
+
+                                                      //   variant:
+                                                      //     formData
+                                                      //       .responsetypeCustomField
+                                                      //       .cusradiofortitle1_1_0_0_0 ===
+                                                      //     val
+                                                      //       ? ""
+                                                      //       : "outline",
+                                                      //   shape: "round-1",
+                                                      //   size: "sm",
+                                                      // }}
+
+                                                      button={{
+                                                        color: "success",
+                                                        variant:
+                                                          formData.responsetypeCustomField &&
+                                                          formData
+                                                            .responsetypeCustomField[
+                                                            `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}`
+                                                          ] &&
+                                                          formData
+                                                            .responsetypeCustomField[
+                                                            `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}`
+                                                          ][
+                                                            `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}`
+                                                          ] === val
+                                                            ? ""
+                                                            : "outline",
+                                                        shape: "round-1",
+                                                        size: "sm",
+                                                      }}
                                                       id={`cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}_${cusresindexVal}`}
                                                       label={val}
                                                       name={`cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}_${cusresindexVal}`}
@@ -1966,36 +2271,44 @@ function StudentView() {
                                                         )
                                                       }
                                                       checked={
+                                                        // formData
+                                                        //   .responsetypeCustomField[
+                                                        //   index
+                                                        // ] &&
+                                                        // formData
+                                                        //   .responsetypeCustomField[
+                                                        //   index
+                                                        // ][resIndex] &&
+                                                        // formData
+                                                        //   .responsetypeCustomField[
+                                                        //   index
+                                                        // ][resIndex]
+                                                        //   .cusresValue &&
+                                                        // formData
+                                                        //   .responsetypeCustomField[
+                                                        //   index
+                                                        // ][resIndex].cusresValue[
+                                                        //   `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}_${cusresindexVal}`
+                                                        // ] &&
+                                                        // formData
+                                                        //   .responsetypeCustomField[
+                                                        //   index
+                                                        // ][resIndex].cusresValue[
+                                                        //   `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}_${cusresindexVal}`
+                                                        // ][val]
+                                                        formData.responsetypeCustomField &&
                                                         formData
                                                           .responsetypeCustomField[
-                                                          index
+                                                          `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}`
                                                         ] &&
                                                         formData
                                                           .responsetypeCustomField[
-                                                          index
-                                                        ][resIndex] &&
-                                                        formData
-                                                          .responsetypeCustomField[
-                                                          index
-                                                        ][resIndex]
-                                                          .cusresValue &&
-                                                        formData
-                                                          .responsetypeCustomField[
-                                                          index
-                                                        ][resIndex].cusresValue[
-                                                          `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}_${cusresindexVal}`
-                                                        ] &&
-                                                        formData
-                                                          .responsetypeCustomField[
-                                                          index
-                                                        ][resIndex].cusresValue[
-                                                          `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}_${cusresindexVal}`
-                                                        ][val]
+                                                          `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}`
+                                                        ][
+                                                          `cusradiofortitle${categoryIndex}_${index}_${typeIndex}_${resIndex}`
+                                                        ] === val
                                                           ? true
                                                           : false
-                                                      }
-                                                      required={
-                                                        adaat.isCompulsory
                                                       }
                                                     />
                                                   </div>
@@ -2110,9 +2423,10 @@ function StudentView() {
                                       }
                                     >
                                       <option value="" disabled>
-                                        {formData.customField.find(
+                                        {/* {formData.customField.find(
                                           (cf) => cf.adaatId === adaat._id
-                                        )?.options[0] || "Select an option"}
+                                        )?.options[0] || "Select an option"} */}
+                                        Select an option
                                       </option>
 
                                       {field.options.map(

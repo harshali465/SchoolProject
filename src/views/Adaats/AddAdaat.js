@@ -75,7 +75,7 @@ function AddAdaat() {
     isCompulsory: "",
     startDate: new Date(),
     endDate: "",
-    class: "",
+    classes: [],
     repetation: "",
     isImageUpload: "",
     repeatDays: [],
@@ -135,6 +135,46 @@ function AddAdaat() {
         ...prevFormData,
         isCompulsory: false,
       }));
+    }
+  };
+
+  const handleChangeE = (event) => {
+    const { name, checked, value } = event.target;
+
+    if (name === "class") {
+      const selectedClass = event.target.id;
+
+      if (selectedClass === "selectAll") {
+        if (checked) {
+          // If checkbox is checked, add the day to the array
+          setFormData({
+            ...formData,
+            classes: ["Grade 1", "Grade 2", "Grade 3"],
+          });
+        } else {
+          // If checkbox is unchecked, remove the day from the array
+          setFormData({
+            ...formData,
+            classes: [],
+          });
+        }
+      } else {
+        let updatedClasses = [...formData.classes]; // Create a copy of repeatDays array
+
+        if (checked) {
+          // If checkbox is checked, add the day to the array
+          updatedClasses = [...updatedClasses, selectedClass];
+        } else {
+          // If checkbox is unchecked, remove the day from the array
+          updatedClasses = updatedClasses.filter((clx) => clx !== name);
+        }
+
+        // Update the state with the new array of selected days
+        setFormData({
+          ...formData,
+          classes: updatedClasses,
+        });
+      }
     }
   };
 
@@ -226,7 +266,7 @@ function AddAdaat() {
         endDate: formData.endDate,
         repetation: formData.repetation,
         repeatDays: formData.repeatDays,
-        class: formData.class,
+        classes: formData.classes,
         responsetypeCustomField: formData.responsetypeCustomField,
         repeatDays: formData.repeatDays,
         repeatMonths: formData.repeatMonths,
@@ -242,15 +282,15 @@ function AddAdaat() {
       }
     );
     // retrieving all the students to make a new aadatData instance
-    const res = await axios.get("http://18.118.42.224:3001/api/v1/users", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: {
-        role: "student",
-        class: formData.class,
-      },
-    });
+    // const res = await axios.get("http://18.118.42.224:3001/api/v1/users", {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   params: {
+    //     role: "student",
+    //     class: formData.class,
+    //   },
+    // });
 
     // making aadatData model instance
 
@@ -279,7 +319,7 @@ function AddAdaat() {
       isCompulsory: "",
       startDate: new Date(),
       endDate: "",
-      class: "",
+      classes: [],
       repetation: "",
       isImageUpload: "",
       repeatDays: [],
@@ -486,21 +526,49 @@ function AddAdaat() {
   // repeat months
   const handleRepmonthChange = (e) => {
     const { name, checked } = e.target;
-    let updatedRepeatDays = [...formData.repeatMonths]; // Create a copy of repeatDays array
 
-    if (checked) {
-      // If checkbox is checked, add the day to the array
-      updatedRepeatDays = [...updatedRepeatDays, name];
+    if (name === "selectAll") {
+      if (checked) {
+        setFormData({
+          ...formData,
+          repeatMonths: [
+            "january",
+            "february",
+            "march",
+            "april",
+            "may",
+            "june",
+            "july",
+            "august",
+            "september",
+            "october",
+            "november",
+            "december",
+          ],
+        });
+      } else {
+        setFormData({
+          ...formData,
+          repeatMonths: [],
+        });
+      }
     } else {
-      // If checkbox is unchecked, remove the day from the array
-      updatedRepeatDays = updatedRepeatDays.filter((day) => day !== name);
-    }
+      let updatedRepeatDays = [...formData.repeatMonths]; // Create a copy of repeatDays array
 
-    // Update the state with the new array of selected days
-    setFormData({
-      ...formData,
-      repeatMonths: updatedRepeatDays,
-    });
+      if (checked) {
+        // If checkbox is checked, add the day to the array
+        updatedRepeatDays = [...updatedRepeatDays, name];
+      } else {
+        // If checkbox is unchecked, remove the day from the array
+        updatedRepeatDays = updatedRepeatDays.filter((day) => day !== name);
+      }
+
+      // Update the state with the new array of selected days
+      setFormData({
+        ...formData,
+        repeatMonths: updatedRepeatDays,
+      });
+    }
   };
 
   return (
@@ -592,7 +660,7 @@ function AddAdaat() {
                     <CCol md={6}>
                       <CFormCheck
                         id="flexCheckDefaultYesNo"
-                        label="yes/no tab"
+                        label="Yes/No"
                         name="yesno"
                         checked={formData.responseType.includes("yesno")}
                         onChange={handleChange}
@@ -600,7 +668,7 @@ function AddAdaat() {
 
                       <CFormCheck
                         id="flexCheckDefaultCustom"
-                        label="custom"
+                        label="Custom"
                         name="custom"
                         checked={formData.responseType.includes("custom")}
                         onChange={handleChange}
@@ -608,7 +676,7 @@ function AddAdaat() {
                       {showCustomOptions &&
                         formData.responsetypeCustomField.map((field, index) => (
                           <div className=" card p-2 mt-2">
-                            <CFormInput
+                            {/* <CFormInput
                               type="text"
                               id="labelName"
                               placeholder="Please enter name"
@@ -625,14 +693,14 @@ function AddAdaat() {
                                   ],
                                 }));
                               }}
-                            />
+                            /> */}
                             <div className="d-flex flex-column p-2">
                               <CFormCheck
                                 type="radio"
                                 name="exampleRadios"
                                 id="exampleRadios21"
                                 value="male"
-                                label="for boys"
+                                label="For boys"
                                 checked={
                                   formData.responsetypeCustomField[index]
                                     .cusresType === "male"
@@ -656,7 +724,7 @@ function AddAdaat() {
                                 name="exampleRadios"
                                 id="exampleRadios22"
                                 value="female"
-                                label="for girls"
+                                label="For girls"
                                 checked={
                                   formData.responsetypeCustomField[index]
                                     .cusresType === "female"
@@ -680,7 +748,7 @@ function AddAdaat() {
                                 name="exampleRadios"
                                 id="exampleRadios23"
                                 value="both"
-                                label="for both"
+                                label="For both"
                                 checked={
                                   formData.responsetypeCustomField[index]
                                     .cusresType === "both"
@@ -740,7 +808,7 @@ function AddAdaat() {
 
                       <CFormCheck
                         id="flexCheckDefaultRemarkBox"
-                        label="remark box"
+                        label="Remark box"
                         name="remarkbox"
                         checked={formData.responseType.includes("remarkbox")}
                         onChange={handleChange}
@@ -748,7 +816,7 @@ function AddAdaat() {
 
                       <CFormCheck
                         id="flexCheckDefaultImage"
-                        label="image"
+                        label="Image"
                         name="image"
                         checked={formData.responseType.includes("image")}
                         onChange={handleChange}
@@ -790,7 +858,7 @@ function AddAdaat() {
                     <CCol md={6}>
                       <CFormCheck
                         id="flexCheckDefault"
-                        label="boys only"
+                        label="Boys only"
                         name="male"
                         checked={
                           formData.applicableTo === "male" ? true : false
@@ -799,7 +867,7 @@ function AddAdaat() {
                       />
                       <CFormCheck
                         id="flexCheckDefault"
-                        label="girls only"
+                        label="Girls only"
                         name="female"
                         checked={
                           formData.applicableTo === "female" ? true : false
@@ -808,7 +876,7 @@ function AddAdaat() {
                       />
                       <CFormCheck
                         id="flexCheckDefault"
-                        label="boys and girls"
+                        label="Boys and Girls"
                         name="both"
                         checked={
                           formData.applicableTo === "both" ? true : false
@@ -820,15 +888,15 @@ function AddAdaat() {
                 </CCol>
 
                 <CCol className="pt-4">
-                  <CFormSelect
+                  {/* <CFormSelect
                     aria-describedby="validationCustom07Feedback"
-                    feedbackInvalid="Please select a valid Mentor."
                     id="validationCustom07"
                     label="Class"
                     name="class"
                     required
-                    value={formData.class}
+                    value={formData.classes}
                     onChange={handleChange}
+                    multiple
                   >
                     <option selected="" disabled="" value="">
                       Choose...
@@ -836,7 +904,42 @@ function AddAdaat() {
                     <option>Grade 1</option>
                     <option>Grade 2</option>
                     <option>Grade 3</option>
-                  </CFormSelect>
+                  </CFormSelect> */}
+                  <CRow>
+                    <CCol md={6}>
+                      <p>Select classes</p>
+                    </CCol>
+                    <CCol md={6}>
+                      <CFormCheck
+                        id="Grade 1"
+                        label="Grade 1"
+                        name="class"
+                        onChange={handleChangeE}
+                        checked={formData.classes.includes("Grade 1")}
+                      />
+                      <CFormCheck
+                        id="Grade 2"
+                        label="Grade 2"
+                        name="class"
+                        onChange={handleChangeE}
+                        checked={formData.classes.includes("Grade 2")}
+                      />
+                      <CFormCheck
+                        id="Grade 3"
+                        label="Grade 3"
+                        name="class"
+                        onChange={handleChangeE}
+                        checked={formData.classes.includes("Grade 3")}
+                      />
+                      <CFormCheck
+                        id="selectAll"
+                        label="Select All"
+                        name="class"
+                        onChange={handleChangeE}
+                        checked={formData.classes.length === 3}
+                      />
+                    </CCol>
+                  </CRow>
                 </CCol>
                 <CCol className="pt-4">
                   <CRow>
@@ -1018,7 +1121,6 @@ function AddAdaat() {
                 </CCol>
                 <CCol className="">
                   <DatePicker
-                    locale="sa"
                     label="Start date"
                     name="startDate"
                     dateFormat="dd/MM/yyyy"
@@ -1035,7 +1137,6 @@ function AddAdaat() {
                 </CCol>
                 <CCol className="">
                   <DatePicker
-                    locale="sa"
                     label="End date"
                     dateFormat="dd/MM/yyyy"
                     selected={formData.endDate}
@@ -1058,7 +1159,7 @@ function AddAdaat() {
                     aria-describedby="validationCustom07Feedback"
                     feedbackInvalid="Please select a valid Mentor."
                     id="validationCustom07"
-                    label="repetition"
+                    label="Repetition"
                     name="repetation"
                     required
                     value={formData.repetation}
@@ -1405,6 +1506,16 @@ function AddAdaat() {
                         />
                       </CCol>
                     </CRow>
+                    <CFormCheck
+                      id="flexCheckDefaultSuns"
+                      label="Select all"
+                      name="selectAll"
+                      onChange={handleRepmonthChange}
+                      checked={formData.repeatMonths.includes("december")}
+                      disabled={
+                        formData.repetation && formData.repetation === "custom"
+                      }
+                    />
                   </CCol>
                 </CCol>
               </CCol>

@@ -41,7 +41,8 @@ const Header = () => {
 
   const logout = () => {
     localStorage.removeItem("accessToken");
-    navigate("/login");
+    localStorage.removeItem("user");
+    navigate("/");
   };
   const [siblings, setSiblings] = useState([]);
   useEffect(() => {
@@ -149,6 +150,7 @@ const Header = () => {
                       name: sib.firstName,
                       lastname: sib.lastName,
                     });
+                    localStorage.setItem("userId", sib._id);
                   }}
                 >
                   {sib.firstName + " " + sib.lastName}
