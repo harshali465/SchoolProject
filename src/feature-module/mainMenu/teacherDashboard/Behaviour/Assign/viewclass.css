@@ -1,0 +1,195 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 25px;
+  }
+  .grid-containers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 8px;
+  }
+  .grid-container-singleView {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .grid-containers-singleView {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  
+  .student-box {
+    position: relative;
+  }
+  
+  .student-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  
+  .datail_cont {
+    width: 100%;
+    max-width: 50%;
+  }
+  
+  .hidden-checkboxs {
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 5%;
+    /* height: 100%; */
+    /* opacity: ; */
+    /* Hide checkbox */
+    cursor: pointer;
+    /* Make the box clickable */
+  }
+
+  .hidden-checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    
+  }
+  /* .hidden-checkbox:checked {
+    background-color: aliceblue;
+
+  } */
+  .hidden-checkbox:checked+.student-label {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    /* Gray shadow */
+    transform: scale(1.05);
+    border: 1px solid #ccc;
+    /* Optional border when selected */
+  }
+  .hidden-checkboxs:checked+.student-labels {
+
+    background-color: aliceblue;
+   
+  }
+
+  
+
+
+ 
+.student-box:has(.hidden-checkboxs:checked) {
+  background-color: aliceblue;
+}
+  .student-label {
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+  .student-labels {
+    display: block;
+    /* border: 1px solid #ddd;
+    border-radius: 8px; */
+    /* padding: 10px; */
+    text-align: center;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+  .student-img {
+    width: 100%;
+    max-width: 100px;
+    height: 80px;
+    border-radius: 5px;
+    object-fit: cover;
+    /* border-radius: 50%; */
+  }
+  
+  .text-content {
+    font-size: small;
+  }
+  .student-border {
+    border-bottom: 1px solid #b3b3b3; /* Apply border bottom */
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+
+/* .student-border:last-child {
+    border-bottom: none;
+} */
+
+  .text-date {
+    font-size: smaller;
+  }
+  
+  .student-img-singleView {
+    width: 90%;
+    height: 50%;
+    object-fit: cover;
+  
+    border-radius: 10px;
+  }
+  
+  .point {
+    padding: 5px 40px;
+    margin: 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+  
+  }
+  .border-box-student{
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+
+
+  .ml-2 {
+     margin-left: 20px !important;
+     width: 15px;
+  }
+  .scores {
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  .score {
+    /* padding: 5px 10px; */
+    /* margin: 0 5px; */
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    max-width: 50%;
+    border-radius: 5px;
+  
+  }
+  
+  .score.green {
+    background-color: #28a745;
+    color: white;
+    padding: 2px 0px;
+  }
+  
+  .score.red {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  
+  .w-60 {
+    width: 60%;
+  }
+  
+  .w-40 {
+    width: 40%;
+  }

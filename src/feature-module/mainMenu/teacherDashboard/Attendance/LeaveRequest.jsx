@@ -1,0 +1,431 @@
+import CommonSelect from "../../../../core/common/commonSelect";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { CFormTextarea, CFormInput } from "@coreui/react";
+import { Checkbox, notification , Table } from "antd";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+import { AuthContext } from "../../../helper/AuthState";
+const LeaveRequestteacher = () => {
+
+    const [selectAll, setSelectAll] = useState(false);
+    const [collecIds, setCollecIds] = useState([]);
+    const [data,setData]  = useState([])
+  
+
+  const toggleSelectAll = () => {
+    setCollecIds(selectAll ? [] : data.map((student) => student.id));
+    setSelectAll(!selectAll);
+  };
+
+  const handleCheckboxChange = (id) => {
+    setCollecIds((prev) =>
+      prev.includes(id)
+        ? prev.filter((selectedId) => selectedId !== id)
+        : [...prev, id]
+    );
+  };
+  const columns = [
+    {
+      title: (
+        <input type="checkbox" checked={selectAll} onChange={toggleSelectAll} />
+      ),
+      render: (_, record) => (
+        <input
+          type="checkbox"
+          checked={collecIds.includes(record.id)}
+          onChange={() => handleCheckboxChange(record.id)}
+        />
+      ),
+    },
+    {
+      title: "Day",
+      dataIndex: "day",
+    },
+
+    {
+      title: "Time",
+      dataIndex: "time",
+    },
+    {
+      title: "Subject",
+      dataIndex: "subject",
+    },
+  ];
+  const academicYearIddata = localStorage.getItem("academicYearId");
+
+  const [formData, setFormData] = useState({
+    reason: "",
+    type: "",
+    time: "",
+    startDate: "",
+    endDate: "",
+  });
+  const [timetableShow, setTimeTableShow] = useState([]);
+  console.log("this is a show" , timetableShow)
+    const [timeTableData, setTimeTableData] = useState([]);
+  const [error, setError] = useState(false);
+  const [reason, setReason] = useState("");
+  const token = localStorage.getItem("accessToken");
+  const [visible, setVisible] = useState(false);
+  const [validated, setValidated] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const academicYearId = localStorage.getItem("academicYearId");
+  const upcomingyear = localStorage.getItem("upcomingyear");
+  const { authState } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [dateRange, setdateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+
+  const [startTime, setStartTime] = useState("");
+  const [leaveType, setLeaveType] = useState("");
+  const [eventType, setEventType] = useState('')
+
+
+  const transformData = (dataArray) => {
+    return dataArray.flatMap(item => {
+      // For each timetable record in the current item
+      return item.timeTable.flatMap(timeRec => {
+        // For each slot in the current timetable record, return the desired object
+        return timeRec.slots.map(slot => {
+          return {
+            day: item.day, 
+            time: `${slot.startTime} - ${slot.endTime}`,
+            id: slot._id,
+            subject: slot.subjectId.subject,
+          };
+        });
+      });
+    });
+  };
+  
+  const getTimeTableList = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${
+          process.env.REACT_APP_DEV_BASE_URL
+        }/api/v1/time-table/teacher/${localStorage.getItem("userId")}?startDate=${startDate ? moment(startDate).format("YYYY-MM-DD") : ''}&endDate=${endDate ? moment(endDate).format("YYYY-MM-DD") : ''}&academicYearId=${
+          academicYearId == authState?.startYearId
+            ? academicYearId
+            : authState?.startYearId
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("this is a response", response);
+      const formattedData = transformData(response?.data?.data);
+      console.log("formattedData" ,formattedData)
+    setData(formattedData)
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      setLoading(false);
+    }
+  };
+
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      getTimeTableList()
+      }
+  },[startDate , endDate])
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!formData?.startDate || !formData?.endDate || !formData?.time) {
+      setError(true);
+    }
+
+    if (form.checkValidity() === false) {
+      setValidated(true);
+    } else {
+      setVisible(true);
+    }
+  };
+
+  const handleFormSubmission = async (e) => {
+    // setLoading(true);
+ e.preventDefault()
+  if (!startDate || !endDate) {
+       return notification.error({ message: "Please select a date range" });
+     }
+     if (!leaveType) {
+       return notification.error({ message: "Please select a leave type" });
+     }
+   
+    //  if (leaveType === "early-release" && !startTime) {
+    //    return notification.error({
+    //      message: "Please add the early release time",
+    //    });
+    //  }
+    if (leaveType === "half-day" && (!collecIds || collecIds.length === 0)) {
+      return notification.error({
+        message: "Please select a lecture which you will skip",
+      });
+    }
+    
+    
+   
+     if (!reason || reason.trim() === "") {
+       return notification.error({ message: "Please enter a reason for leave" });
+     }
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_DEV_BASE_URL}/api/v1/attendance/leave-request`,
+        {
+          requestedBy: localStorage.getItem("userId"),
+          leaveType: leaveType,
+          startDate: moment(startDate).format("DD/MM/YYYY"),
+          endDate: moment(endDate).format("DD/MM/YYYY"),
+          reason: reason,
+          academicYearId: academicYearIddata,
+          lectureId: collecIds,
+          eventType:eventType
+        },
+    
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+      if(res?.data?.status === "error") {
+               notification.error({ message: "error", description:res?.data?.message });
+               return;
+             }
+      notification.success({ message: "success" , description:"Request a Leave Successfully" });
+      navigate(-1);
+    } catch (error) {
+      console.error("Error fetching day type:", error.message || error);
+      notification.error({ message: "Error Submitting form" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+      ...(name === "type" && { time: "" }),
+    }));
+  };
+  const options = [
+    { value: "", label: "Leave Type" },
+    { value: "full-day", label: "Full Day" },
+    { value: "half-day", label: "Half Day" },
+    // { value: "early-release", label: "Early Release" },
+  ];
+  return (
+    <div>
+      <>
+        <div className="page-wrapper">
+          <div className="content">
+            <div className="d-md-flex d-block mt-3  justify-content-center">
+              <div className="settings-right-sidebar me-md-3 border-0"></div>
+              <div className="attendance-container gap-5 ps-0 border-0 ">
+                <form>
+                  <div className="d-md-flex">
+                    <div className="flex-fill">
+                      <div className="card">
+                        <div className="card-header d-flex justify-content-between align-items-center">
+                          <h5>Create New Leave Request</h5>
+                        </div>
+                        <div className="card-body pb-0">
+                          <div className="row">
+
+                          <div className="col-md-12">
+                              {" "}
+                              <div className="mb-3">
+                                <label className="form-label">
+                                   Event Type
+                                </label>
+                                <div className="input-group w-100-select">
+                                  <input type="text" className="form-control" value={eventType} onChange={(e)=>setEventType(e.target.value)} />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="col-md-12">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  Select Date<span className="text-red">*</span>
+                                </label>
+                                <div className="input-group w-100-select">
+                                  <DatePicker
+                                    className="date_input w-100"
+                                    selectsRange={true}
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    onChange={(update) => {
+                                      setdateRange(update);
+                                    }}
+                                    required
+                                    style={{ width: "100%" }}
+                                    isClearable={true}
+                                    dateFormat="dd/MM/yyyy"
+                                    placeholderText="Select Date Range"
+                                    minDate={new Date(Date.now() + 48 * 60 * 60 * 1000)}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="col-md-12">
+                              {" "}
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  Select Leave Type<span className="text-red">*</span>
+                                </label>
+                                <div className="input-group w-100-select">
+                                  {/* <CommonSelect
+                                    
+                                    className="select"
+                                    options={[
+                                      { value: "", label: "Leave Type" },
+                                      { value: "full-day", label: "Full Day" },
+                                      { value: "half-day", label: "Half Day" },
+                                      {
+                                        value: "early-release",
+                                        label: "Early Release",
+                                      },
+                                    ]}
+                                    value={
+                                      leaveType
+                                        ? {
+                                            value: leaveType,
+                                            label: leaveType.replace("-", " "),
+                                          }
+                                        : { value: "", label: "Leave Type" }
+                                    }
+                                    onChange={(e) =>
+                                      setLeaveType(e ? e.value : "")
+                                    }
+                                 
+                                  /> */}
+
+<select
+                          className="form-control form-select"
+
+        value={leaveType}
+        onChange={(e) => setLeaveType(e.target.value)}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+                                </div>
+                              </div>
+                            </div>
+                            {
+                              leaveType === 'early-release' &&<div className="col-md-12">
+                              <div className="mb-3">
+                                <label className="form-label">
+                                  Early Release Time<span className="text-red">*</span>
+                                </label>
+                                <div className="input-group">
+                                  <CFormInput
+                                    type="time"
+                                    name="startTime"
+                                    value={startTime}
+                                    onChange={(date) => {
+                                      setStartTime(date.target.value);
+                                    }}
+                                    className={" w-100 "}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+}
+
+                            <div className="col-md-12">
+                              <div className="mb-3">
+                              <label className="form-label">
+                                Reason of Leave<span className="text-red">*</span>
+                                </label>
+                                <div className="input-group">
+
+                                  <CFormTextarea
+                                    id="validationCustom01"
+                                    
+                                    placeholder="Please Enter Reason of Leave"
+                                    required
+                                    className="form-control"
+                                    rows={4}
+                                    name="reason"
+                                    value={reason}
+                                    onChange={(e) => setReason(e.target.value)}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div className="text-center d-flex gap-2 justify-content-center mb-5">
+                          <button
+                        className="btn btn-light"
+                          onClick={() => navigate(-1)}
+                        >
+                          Back
+                        </button>    
+                        <button
+                              className="btn btn-primary"
+                          onClick={(e) => handleFormSubmission(e)}
+                        >
+                          Save
+                        </button>
+                      </div>
+                        </div>
+                      </div>
+
+                    
+                    </div>
+                  </div>
+                </form>
+{ leaveType === "half-day" && 
+ <div className="d-flex flex-column gap-2">
+   <h1 style={{fontSize:"20px"}}>Select Lectures for Leave</h1>
+
+   
+                    <div className="d-flex flex-column width-box border gap-5  border-1 rounded p-4">
+                   <Table
+                     rowKey="_id"
+                     columns={columns}
+                     className="bordered-table"
+                     dataSource={data}
+                     pagination={false}
+                   />
+       
+                
+                 </div>
+
+ </div>}
+              
+
+              
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    </div>
+  );
+};
+
+export default LeaveRequestteacher;
